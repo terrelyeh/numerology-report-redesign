@@ -546,6 +546,31 @@ DON'T:
 
 ## 8. Attributes 教育頁優化
 
+### 8.0 頁面拆分架構
+
+> **重要**：現行的 `/attributes` 單頁應拆分為 11 個獨立頁面，每個命理主題一頁。
+> 這樣做可以改善 SEO、降低頁面載入時間，並讓每篇文章有獨立的 CTA 轉換路徑。
+
+**建議 URL 結構**：
+```
+/attributes-birth-chart
+/attributes-identity
+/attributes-ego
+/attributes-superego
+/attributes-isolated
+/attributes-connections
+/attributes-life-path
+/attributes-attitude
+/attributes-day-of-birth
+/attributes-key-life-ages
+/attributes-personal-year
+```
+
+**原型參考**：以下 3 個已完成的原型頁面可作為團隊開發其餘 8 頁的範本：
+- `attributes-life-path.html` — https://terrelyeh.github.io/numerology-report-redesign/attributes-life-path.html
+- `attributes-ego.html` — https://terrelyeh.github.io/numerology-report-redesign/attributes-ego.html
+- `attributes-key-life-ages.html` — https://terrelyeh.github.io/numerology-report-redesign/attributes-key-life-ages.html
+
 ### 8.1 頁面說明
 
 `/attributes` 是一個命理名詞百科頁，包含 11 篇教育文章。目前風格太像字典，使用者讀完就離開，沒有被引導進轉換漏斗。
@@ -678,6 +703,9 @@ DON'T:
 | 免費�� | https://terrelyeh.github.io/numerology-report-redesign/free.html |
 | 付費�� | https://terrelyeh.github.io/numerology-report-redesign/ |
 | 優化指南 | https://terrelyeh.github.io/numerology-report-redesign/guide.html |
+| Attributes: Life Path | https://terrelyeh.github.io/numerology-report-redesign/attributes-life-path.html |
+| Attributes: Ego Number | https://terrelyeh.github.io/numerology-report-redesign/attributes-ego.html |
+| Attributes: Key Life Ages | https://terrelyeh.github.io/numerology-report-redesign/attributes-key-life-ages.html |
 
 ### 色彩快速對照
 | 用途 | 色碼 |

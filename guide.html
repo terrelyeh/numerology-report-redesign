@@ -107,6 +107,8 @@
           <a href="#biz-ltv" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">9.3 LTV 提升路徑</a>
           <a href="#biz-quick" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">9.4 低成本快速改動</a>
           <a href="#attributes" class="toc-link block py-1 text-warmgray/60">十、Attributes 教育頁</a>
+          <a href="#attributes" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">10.1 拆頁架構</a>
+          <a href="#attributes" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">10.2-10.5 內容改寫 + CTA + SEO</a>
           <a href="#links" class="toc-link block py-1 text-warmgray/60">十一、原型連結</a>
         </nav>
       </div>
@@ -1161,9 +1163,40 @@
           <code>/attributes</code> 頁面目前是一個命理名詞百科，11 篇教育文章全擠在同一頁。核心問題：太像字典、使用者讀完就走、一頁放 11 個 CTA 太突兀。<strong>建議拆成 11 個獨立頁面</strong>，每頁一個主題 + 一個底部 CTA，對 SEO 和導流都更有利。已建立 3 個示範頁面作為團隊改寫範本。
         </p>
 
-        <!-- 現況 -->
+        <!-- 架構建議 -->
         <div class="mb-10">
-          <h3 class="text-lg font-bold mb-4">10.1 現況問題</h3>
+          <h3 class="text-lg font-bold mb-4">10.1 架構建議：拆成獨立頁面</h3>
+
+          <div class="callout-warning rounded-xl p-5 mb-4">
+            <p class="text-sm text-warmgray/70 leading-relaxed">
+              <strong class="text-orange">關鍵問題：</strong>11 個主題全擠在同一頁，如果每個主題後面都加 CTA，一頁就有 11 個 CTA，使用者會覺得「這頁一直在叫我去算」，反而降低信任感。拆成獨立頁面後，每頁只有一個底部 CTA，非常自然。
+            </p>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-4 mb-4">
+            <div class="bg-red/5 rounded-xl p-5 border border-red/10">
+              <p class="text-xs text-red font-bold uppercase tracking-wider mb-3">現況（一頁）</p>
+              <code class="text-xs text-warmgray/60">/attributes</code>
+              <p class="text-xs text-warmgray/50 mt-2">11 個主題混在一起，SEO 關鍵字互相稀釋，CTA 放 11 個太多、放 1 個太少</p>
+            </div>
+            <div class="bg-sagelight rounded-xl p-5 border border-sage/20">
+              <p class="text-xs text-sage font-bold uppercase tracking-wider mb-3">建議（11 頁）</p>
+              <div class="text-xs text-warmgray/60 space-y-0.5">
+                <code>/attributes/life-path-number</code><br>
+                <code>/attributes/ego-number</code><br>
+                <code>/attributes/key-life-ages</code><br>
+                <code class="text-warmgray/30">...（共 11 頁）</code>
+              </div>
+              <p class="text-xs text-warmgray/50 mt-2">每頁針對一個關鍵字，每頁底部一個自然的 CTA</p>
+            </div>
+          </div>
+
+          <p class="text-xs text-warmgray/50 mb-4">已建立 3 個示範頁面（Life Path / Ego / Key Life Ages），可作為團隊改寫其餘 8 個主題的範本。</p>
+        </div>
+
+        <!-- 現況內容問題 -->
+        <div class="mb-10">
+          <h3 class="text-lg font-bold mb-4">10.2 內容問題</h3>
           <div class="grid sm:grid-cols-2 gap-3 mb-4">
             <div class="bg-gray-50 rounded-xl p-5">
               <p class="font-bold text-sm mb-2">太像名詞解釋</p>
@@ -1186,7 +1219,7 @@
 
         <!-- 改寫方向 -->
         <div class="mb-10">
-          <h3 class="text-lg font-bold mb-4">10.2 改寫方向</h3>
+          <h3 class="text-lg font-bold mb-4">10.3 改寫方向</h3>
 
           <div class="bg-warmgray rounded-2xl p-8 text-white mb-6">
             <p class="text-white/40 text-xs tracking-widest uppercase mb-4">文章結構：從「名詞解釋」→「讓人想算自己的」</p>
@@ -1225,7 +1258,7 @@
 
         <!-- 導流 CTA -->
         <div class="mb-10">
-          <h3 class="text-lg font-bold mb-4">10.3 每篇文章底部加導流 CTA</h3>
+          <h3 class="text-lg font-bold mb-4">10.4 每篇文章底部加導流 CTA（拆頁後適用）</h3>
 
           <div class="bg-cream rounded-xl p-6 border border-warmgray/10 mb-4">
             <p class="text-sage text-xs tracking-widest uppercase font-medium mb-2">CTA 範例（Ego Number 文章底部）</p>
@@ -1256,7 +1289,7 @@
 
         <!-- SEO -->
         <div class="mb-4">
-          <h3 class="text-lg font-bold mb-4">10.4 SEO 價值</h3>
+          <h3 class="text-lg font-bold mb-4">10.5 SEO 價值</h3>
           <div class="callout-info rounded-xl p-5">
             <p class="text-sm text-warmgray/70 leading-relaxed mb-3">
               <strong class="text-blue">策略：</strong>這 11 篇文章經過擴充後（各 800-1200 字），可以成為自然流量入口。搜尋「what is life path number」「numerology birth chart meaning」的人會透過 Google 進到這些頁面，然後被底部 CTA 導入轉換漏斗。
