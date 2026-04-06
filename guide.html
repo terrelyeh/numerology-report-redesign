@@ -76,6 +76,7 @@
         <a href="https://terrelyeh.github.io/numerology-report-redesign/home-v2.html" target="_blank" class="text-sage hover:underline">首頁V2 ↗</a>
         <a href="https://terrelyeh.github.io/numerology-report-redesign/free.html" target="_blank" class="text-sage hover:underline">免費版原型 ↗</a>
         <a href="https://terrelyeh.github.io/numerology-report-redesign/" target="_blank" class="text-sage hover:underline">付費版原型 ↗</a>
+        <a href="https://terrelyeh.github.io/numerology-report-redesign/ai-requirements.html" target="_blank" class="text-sage hover:underline">AI 需求文件 ↗</a>
       </div>
     </div>
   </nav>
@@ -101,16 +102,15 @@
           <a href="#free-page" class="toc-link block py-1 text-warmgray/60">五、免費版頁面優化</a>
           <a href="#paid-page" class="toc-link block py-1 text-warmgray/60">六、付費版頁面優化</a>
           <a href="#tech" class="toc-link block py-1 text-warmgray/60">七、技術實作建議</a>
-          <a href="#roadmap" class="toc-link block py-1 text-warmgray/60">八、執行路線圖</a>
-          <a href="#business" class="toc-link block py-1 text-warmgray/60">九、商業模式優化</a>
-          <a href="#biz-current" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">9.1 現行模式分析</a>
-          <a href="#biz-compat" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">9.2 配對報告（重點）</a>
-          <a href="#biz-ltv" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">9.3 LTV 提升路徑</a>
-          <a href="#biz-quick" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">9.4 低成本快速改動</a>
-          <a href="#attributes" class="toc-link block py-1 text-warmgray/60">十、Attributes 教育頁</a>
-          <a href="#attributes" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">10.1 拆頁架構</a>
-          <a href="#attributes" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">10.2-10.5 內容改寫 + CTA + SEO</a>
-          <a href="#links" class="toc-link block py-1 text-warmgray/60">十一、原型連結</a>
+          <a href="#business" class="toc-link block py-1 text-warmgray/60">八、商業模式優化</a>
+          <a href="#biz-current" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">8.1 現行模式分析</a>
+          <a href="#biz-compat" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">8.2 配對報告（重點）</a>
+          <a href="#biz-ltv" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">8.3 LTV 提升路徑</a>
+          <a href="#biz-quick" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">8.4 低成本快速改動</a>
+          <a href="#attributes" class="toc-link block py-1 text-warmgray/60">九、Attributes 教育頁</a>
+          <a href="#attributes" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">9.1 拆頁架構</a>
+          <a href="#attributes" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">9.2-9.5 內容改寫 + CTA + SEO</a>
+          <a href="#links" class="toc-link block py-1 text-warmgray/60">十、原型連結</a>
         </nav>
       </div>
     </aside>
@@ -876,91 +876,19 @@
         </div>
       </section>
 
-      <!-- ======== 八、路線圖 ======== -->
-      <section id="roadmap" class="mb-20 page-break">
-        <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-          <span class="w-8 h-8 rounded-lg bg-warmgray text-white flex items-center justify-center text-sm font-bold">8</span>
-          優先級與執行路線圖
-        </h2>
-
-        <!-- P0 -->
-        <div class="mb-8">
-          <div class="flex items-center gap-3 mb-4">
-            <span class="badge-p0 px-3 py-1.5 rounded-lg text-sm font-bold">P0</span>
-            <div>
-              <h3 class="font-bold">立即修復（今日/明日）</h3>
-              <p class="text-xs text-warmgray/50">這些問題正在持續損失營收</p>
-            </div>
-          </div>
-          <div class="space-y-2 pl-2">
-            <label class="flex items-start gap-3 text-sm"><input type="checkbox" class="mt-1 accent-red"><span>移除 Email 驗證碼流程（改為付款時收集）</span></label>
-            <label class="flex items-start gap-3 text-sm"><input type="checkbox" class="mt-1 accent-red"><span>修正「FRUSTRATI」截斷 / 「engery」拼字 / S.L. 重複</span></label>
-          </div>
-        </div>
-
-        <!-- P1 -->
-        <div class="mb-8">
-          <div class="flex items-center gap-3 mb-4">
-            <span class="badge-p1 px-3 py-1.5 rounded-lg text-sm font-bold">P1</span>
-            <div>
-              <h3 class="font-bold">本週完成</h3>
-              <p class="text-xs text-warmgray/50">重新設計的核心頁面，直接影響轉換率</p>
-            </div>
-          </div>
-          <div class="space-y-2 pl-2">
-            <label class="flex items-start gap-3 text-sm"><input type="checkbox" class="mt-1"><span>免費頁面重新設計（依 free.html 原型）</span></label>
-            <label class="flex items-start gap-3 text-sm"><input type="checkbox" class="mt-1"><span>新增 Action Insight 到付費報告</span></label>
-            <label class="flex items-start gap-3 text-sm"><input type="checkbox" class="mt-1"><span>新增浮動底部 CTA 列 + 信任標誌</span></label>
-            <label class="flex items-start gap-3 text-sm"><input type="checkbox" class="mt-1"><span>價格錨定（~~$19.90~~ → $9.90）</span></label>
-          </div>
-        </div>
-
-        <!-- P2 -->
-        <div class="mb-8">
-          <div class="flex items-center gap-3 mb-4">
-            <span class="badge-p2 px-3 py-1.5 rounded-lg text-sm font-bold">P2</span>
-            <div>
-              <h3 class="font-bold">本月完成</h3>
-              <p class="text-xs text-warmgray/50">增強付費體驗的感知價值</p>
-            </div>
-          </div>
-          <div class="space-y-2 pl-2">
-            <label class="flex items-start gap-3 text-sm"><input type="checkbox" class="mt-1"><span>PDF 下載功能（伺服器端生成 + 三處入口）</span></label>
-            <label class="flex items-start gap-3 text-sm"><input type="checkbox" class="mt-1"><span>分享功能 + 閱讀進度條 + 頁籤切換</span></label>
-            <label class="flex items-start gap-3 text-sm"><input type="checkbox" class="mt-1"><span>報告完成區塊 + 手機版優化</span></label>
-          </div>
-        </div>
-
-        <!-- P3 -->
-        <div>
-          <div class="flex items-center gap-3 mb-4">
-            <span class="badge-p3 px-3 py-1.5 rounded-lg text-sm font-bold">P3</span>
-            <div>
-              <h3 class="font-bold">下月完成</h3>
-              <p class="text-xs text-warmgray/50">數據驅動的持續優化</p>
-            </div>
-          </div>
-          <div class="space-y-2 pl-2">
-            <label class="flex items-start gap-3 text-sm"><input type="checkbox" class="mt-1"><span>A/B 測試框架建立</span></label>
-            <label class="flex items-start gap-3 text-sm"><input type="checkbox" class="mt-1"><span>漏斗分析追蹤（GA4 / Mixpanel）</span></label>
-            <label class="flex items-start gap-3 text-sm"><input type="checkbox" class="mt-1"><span>Email / CTA / 定價 A/B 測試</span></label>
-          </div>
-        </div>
-      </section>
-
-      <!-- ======== 九、商業模式優化 ======== -->
+      <!-- ======== 八、商業模式優化 ======== -->
       <section id="business" class="mb-20 page-break">
         <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-          <span class="w-8 h-8 rounded-lg bg-gold text-white flex items-center justify-center text-sm font-bold">9</span>
+          <span class="w-8 h-8 rounded-lg bg-gold text-white flex items-center justify-center text-sm font-bold">8</span>
           商業模式優化
         </h2>
         <p class="text-warmgray/70 text-sm leading-relaxed mb-8">
           目前的單次購買模式讓客戶終身價值（LTV）天花板很低。以下方向可在不大改架構的前提下，有效拉高每位使用者的營收貢獻。
         </p>
 
-        <!-- 9.1 現行模式 -->
+        <!-- 8.1 現行模式 -->
         <div id="biz-current" class="mb-12">
-          <h3 class="text-lg font-bold mb-4">9.1 現行模式分析</h3>
+          <h3 class="text-lg font-bold mb-4">8.1 現行模式分析</h3>
 
           <div class="bg-gray-50 rounded-xl p-6 mb-4">
             <div class="flex items-center gap-3 mb-4">
@@ -988,9 +916,9 @@
           </div>
         </div>
 
-        <!-- 9.2 配對報告 -->
+        <!-- 8.2 配對報告 -->
         <div id="biz-compat" class="mb-12">
-          <h3 class="text-lg font-bold mb-4">9.2 關係配對報告 <span class="inline-flex items-center bg-gold/20 text-gold text-xs px-2 py-0.5 rounded ml-2">最推薦方向</span></h3>
+          <h3 class="text-lg font-bold mb-4">8.2 關係配對報告 <span class="inline-flex items-center bg-gold/20 text-gold text-xs px-2 py-0.5 rounded ml-2">最推薦方向</span></h3>
 
           <div class="bg-warmgray rounded-2xl p-8 text-white mb-6">
             <p class="text-white/40 text-xs tracking-widest uppercase mb-3">為什麼配對報告是最有潛力的新產品線</p>
@@ -1047,9 +975,9 @@
           </div>
         </div>
 
-        <!-- 9.3 LTV 路徑 -->
+        <!-- 8.3 LTV 路徑 -->
         <div id="biz-ltv" class="mb-12">
-          <h3 class="text-lg font-bold mb-4">9.3 LTV 提升路徑</h3>
+          <h3 class="text-lg font-bold mb-4">8.3 LTV 提升路徑</h3>
 
           <div class="bg-gray-50 rounded-xl p-6 mb-4">
             <p class="font-medium text-sm mb-4">理想的營收漏斗：</p>
@@ -1100,9 +1028,9 @@
           </div>
         </div>
 
-        <!-- 9.4 低成本快速改動 -->
+        <!-- 8.4 低成本快速改動 -->
         <div id="biz-quick" class="mb-4">
-          <h3 class="text-lg font-bold mb-4">9.4 低成本快速改動（不需改後端）</h3>
+          <h3 class="text-lg font-bold mb-4">8.4 低成本快速改動（不需改後端）</h3>
 
           <div class="space-y-3">
             <div class="bg-white rounded-xl p-5 border border-warmgray/10">
@@ -1157,7 +1085,7 @@
       <!-- ======== 十、Attributes 教育頁 ======== -->
       <section id="attributes" class="mb-20 page-break">
         <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-          <span class="w-8 h-8 rounded-lg bg-sage text-white flex items-center justify-center text-sm font-bold">10</span>
+          <span class="w-8 h-8 rounded-lg bg-sage text-white flex items-center justify-center text-sm font-bold">9</span>
           Attributes 教育頁優化
         </h2>
         <p class="text-warmgray/70 text-sm leading-relaxed mb-8">
@@ -1305,7 +1233,7 @@
       <!-- ======== 十一、連結 ======== -->
       <section id="links" class="mb-20">
         <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-          <span class="w-8 h-8 rounded-lg bg-warmgray text-white flex items-center justify-center text-sm font-bold">11</span>
+          <span class="w-8 h-8 rounded-lg bg-warmgray text-white flex items-center justify-center text-sm font-bold">10</span>
           原型預覽連結
         </h2>
 
@@ -1329,6 +1257,10 @@
           <a href="https://terrelyeh.github.io/numerology-report-redesign/guide.html" target="_blank" class="block bg-gray-50 rounded-xl p-6 border border-warmgray/10 hover:border-warmgray/20 transition-all group">
             <p class="font-bold text-sm mb-1 group-hover:text-warmgray transition-all">優化指南（本頁）↗</p>
             <p class="text-xs text-warmgray/50">guide.html — 中文優化說明文件網頁版</p>
+          </a>
+          <a href="https://terrelyeh.github.io/numerology-report-redesign/ai-requirements.html" target="_blank" class="block bg-orange/10 rounded-xl p-6 border border-orange/20 hover:border-orange/40 transition-all group">
+            <p class="font-bold text-sm mb-1 group-hover:text-orange transition-all">AI 需求交付文件 ↗</p>
+            <p class="text-xs text-warmgray/50">ai-requirements.html — AI 執行內容頁改版的完整需求規格</p>
           </a>
         </div>
 

@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 內容頁優化需求交付文件 — Numerology Within</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: '#EDE8E0',
+            warmgray: '#2C3345',
+            sage: '#3A6B5E',
+            sagelight: '#E8F0ED',
+            sagemid: '#D0E2DB',
+            gold: '#B8964E',
+            goldlight: '#FBF6EE',
+            rose: '#E8D5D0',
+            rosedark: '#8B6B62',
+            red: '#C0392B',
+            orange: '#E67E22',
+            blue: '#2980B9',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Noto Sans TC', 'DM Sans', sans-serif; }
+    h1, h2, h3 { font-family: 'Noto Sans TC', sans-serif; font-weight: 700; }
+    .font-serif { font-family: 'Instrument Serif', Georgia, serif; }
+    html { scroll-behavior: smooth; }
+    .toc-link { transition: all 0.2s; }
+    .toc-link:hover { color: #3A6B5E; padding-left: 4px; }
+    .toc-link.active { color: #3A6B5E; font-weight: 500; border-left: 2px solid #3A6B5E; padding-left: 12px; }
+    table { border-collapse: collapse; width: 100%; }
+    th { text-align: left; font-weight: 500; }
+    .code-block { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.82rem; line-height: 1.6; background: #1e1e2e; color: #cdd6f4; border-radius: 0.75rem; padding: 1.25rem; overflow-x: auto; }
+    .code-block .comment { color: #6c7086; }
+    .code-block .keyword { color: #cba6f7; }
+    .code-block .string { color: #a6e3a1; }
+    .code-block .prop { color: #89b4fa; }
+    section[id] { scroll-margin-top: 80px; }
+    .callout-info { border-left: 4px solid #2980B9; background: #EBF5FB; }
+    .callout-success { border-left: 4px solid #3A6B5E; background: #E8F0ED; }
+    .callout-warning { border-left: 4px solid #E67E22; background: #FEF5E7; }
+    .callout-critical { border-left: 4px solid #C0392B; background: #FDEDEB; }
+    @media print {
+      .no-print { display: none !important; }
+      body { font-size: 11pt; }
+    }
+  </style>
+</head>
+<body class="bg-white text-warmgray">
+
+  <!-- Top Bar -->
+  <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 no-print">
+    <div class="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span class="font-serif text-lg text-sage">NW</span>
+        <span class="text-sm text-warmgray/40">|</span>
+        <span class="text-sm font-medium">AI 需求交付文件</span>
+      </div>
+      <div class="flex items-center gap-4 text-sm">
+        <a href="https://terrelyeh.github.io/numerology-report-redesign/guide.html" target="_blank" class="text-sage hover:underline">優化指南 ↗</a>
+        <a href="https://terrelyeh.github.io/numerology-report-redesign/free.html" target="_blank" class="text-sage hover:underline">免費版原型 ↗</a>
+        <a href="https://terrelyeh.github.io/numerology-report-redesign/" target="_blank" class="text-sage hover:underline">付費版原型 ↗</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="max-w-6xl mx-auto px-6 flex gap-8">
+
+    <!-- Sidebar TOC -->
+    <aside class="hidden lg:block w-64 flex-shrink-0 no-print">
+      <div class="sticky top-16 py-8 max-h-[calc(100vh-4rem)] overflow-y-auto">
+        <p class="text-xs text-warmgray/40 tracking-widest uppercase mb-4">目錄</p>
+        <nav class="space-y-1 text-sm">
+          <a href="#usage" class="toc-link block py-1 text-warmgray/60">如何使用這份文件</a>
+          <a href="#sec1" class="toc-link block py-1 text-warmgray/60">1. 專案背景</a>
+          <a href="#sec2" class="toc-link block py-1 text-warmgray/60">2. 視覺設計系統</a>
+          <a href="#sec2-1" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">2.1 色彩系統</a>
+          <a href="#sec2-2" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">2.2 字體系統</a>
+          <a href="#sec2-3" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">2.3 圓角與間距</a>
+          <a href="#sec3" class="toc-link block py-1 text-warmgray/60">3. 免費報告頁需求</a>
+          <a href="#sec3-1" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">3.1 好奇缺口理論</a>
+          <a href="#sec3-2" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">3.2 頁面結構</a>
+          <a href="#sec3-3" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">3.3 觸發文案</a>
+          <a href="#sec3-4" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">3.4 CSS 模糊鎖定</a>
+          <a href="#sec3-5" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">3.5 FAQ</a>
+          <a href="#sec4" class="toc-link block py-1 text-warmgray/60">4. 付費報告頁需求</a>
+          <a href="#sec4-3" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">4.3 Action Insight</a>
+          <a href="#sec4-4" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">4.4 內容框架</a>
+          <a href="#sec4-5" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">4.5 特殊區塊</a>
+          <a href="#sec5" class="toc-link block py-1 text-warmgray/60">5. 內容生成指引</a>
+          <a href="#sec6" class="toc-link block py-1 text-warmgray/60">6. 技術注意事項</a>
+          <a href="#sec8" class="toc-link block py-1 text-warmgray/60">8. Attributes 教育頁</a>
+          <a href="#sec9" class="toc-link block py-1 text-warmgray/60">9. 驗收標準</a>
+          <a href="#appendix" class="toc-link block py-1 text-warmgray/60">附錄：快速參考</a>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 min-w-0 py-12">
+
+      <!-- Title -->
+      <header class="mb-16">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="bg-sage/10 text-sage px-3 py-1 rounded-full text-xs font-medium tracking-wide">AI Handoff Document</span>
+          <span class="text-warmgray/30 text-xs">2026-04-06</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-warmgray leading-tight mb-4">Numerology Within<br>AI 內容頁優化需求文件</h1>
+        <p class="text-warmgray/50 text-lg max-w-2xl">交付給 AI（Claude / ChatGPT / Cursor 等）執行網站內容頁改版<br>適用範圍：免費報告頁、付費報告頁的內容結構與呈現</p>
+        <p class="text-warmgray/40 text-sm mt-2">不含：首頁（Homepage）、後端 API、金流串接</p>
+      </header>
+
+      <!-- ======== 如何使用 ======== -->
+      <section id="usage" class="mb-20">
+        <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+          <span class="w-8 h-8 rounded-lg bg-sage text-white flex items-center justify-center text-sm">?</span>
+          如何使用這份文件
+        </h2>
+        <p class="text-warmgray/80 leading-relaxed mb-4">將這份文件整份貼入 AI 對話的第一則訊息，然後在下方補充你的具體指令，例如：</p>
+        <div class="space-y-2 mb-4">
+          <div class="bg-gray-50 rounded-lg px-4 py-3 text-sm text-warmgray/70">
+            「請根據這份需求，幫我重寫免費報告頁的前端程式碼」
+          </div>
+          <div class="bg-gray-50 rounded-lg px-4 py-3 text-sm text-warmgray/70">
+            「請根據 Section 4 的 Action Insight 框架，幫我為 Life Path Number 7 撰寫 Action Insight 內容」
+          </div>
+          <div class="bg-gray-50 rounded-lg px-4 py-3 text-sm text-warmgray/70">
+            「請根據這份需求，幫我產生付費報告的 Vue component 結構」
+          </div>
+        </div>
+      </section>
+
+      <!-- ======== 1. 專案背景 ======== -->
+      <section id="sec1" class="mb-20">
+        <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+          <span class="w-8 h-8 rounded-lg bg-warmgray text-white flex items-center justify-center text-sm font-bold">1</span>
+          專案背景
+        </h2>
+
+        <h3 class="text-lg font-bold mb-4" id="sec1-1">1.1 網站資訊</h3>
+        <div class="overflow-x-auto mb-8">
+          <table class="text-sm">
+            <tbody class="text-warmgray/70">
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-6 font-medium text-warmgray">網站</td><td class="py-2.5">numerologywithin.net（正式站）/ test.numerologywithin.net（測試站）</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-6 font-medium text-warmgray">技術架構</td><td class="py-2.5">Vue.js SPA（Single Page Application）</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-6 font-medium text-warmgray">目標市場</td><td class="py-2.5">美國（全英文）</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-6 font-medium text-warmgray">定價</td><td class="py-2.5">$9.90 USD / 份（一個生日 = 一份報告）</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-6 font-medium text-warmgray">商業模式</td><td class="py-2.5">使用者輸入生日 → 看免費報告 → 付費解鎖完整報告</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="text-lg font-bold mb-4" id="sec1-2">1.2 核心問題（為什麼要改版）</h3>
+        <div class="space-y-3 mb-8">
+          <div class="flex gap-3 items-start"><span class="w-6 h-6 rounded-full bg-red/10 text-red flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</span><div><p class="text-sm text-warmgray/80"><strong>轉換率低</strong>：免費 → 付費的轉換率不理想</p></div></div>
+          <div class="flex gap-3 items-start"><span class="w-6 h-6 rounded-full bg-red/10 text-red flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</span><div><p class="text-sm text-warmgray/80"><strong>免費版給太多</strong>：完整的 Daily Number 解讀讓使用者覺得「夠了」，沒有升級動機</p></div></div>
+          <div class="flex gap-3 items-start"><span class="w-6 h-6 rounded-full bg-red/10 text-red flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</span><div><p class="text-sm text-warmgray/80"><strong>付費版缺乏差異化</strong>：付費後視覺、功能、內容都跟免費版「感覺差不多」</p></div></div>
+          <div class="flex gap-3 items-start"><span class="w-6 h-6 rounded-full bg-red/10 text-red flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">4</span><div><p class="text-sm text-warmgray/80"><strong>沒有行動建議</strong>：報告只告訴使用者「你是什麼樣的人」，不告訴你「接下來該怎麼做」</p></div></div>
+          <div class="flex gap-3 items-start"><span class="w-6 h-6 rounded-full bg-red/10 text-red flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">5</span><div><p class="text-sm text-warmgray/80"><strong>缺乏感知價值功能</strong>：無 PDF 下載、無進度條、無分享功能</p></div></div>
+        </div>
+
+        <h3 class="text-lg font-bold mb-4" id="sec1-3">1.3 設計原型參考</h3>
+        <div class="callout-info rounded-xl p-5 mb-4">
+          <p class="text-sm text-warmgray/70">以下 HTML 原型是本次改版的視覺與結構參考，AI 應以這些原型為標準：</p>
+        </div>
+        <div class="grid sm:grid-cols-3 gap-3">
+          <a href="https://terrelyeh.github.io/numerology-report-redesign/free.html" target="_blank" class="block bg-sagelight rounded-xl p-4 border border-sage/20 hover:border-sage/40 transition-all group">
+            <p class="font-bold text-xs mb-1 group-hover:text-sage transition-all">免費版原型 ↗</p>
+            <p class="text-xs text-warmgray/40">free.html</p>
+          </a>
+          <a href="https://terrelyeh.github.io/numerology-report-redesign/" target="_blank" class="block bg-warmgray rounded-xl p-4 hover:opacity-90 transition-all group">
+            <p class="font-bold text-xs text-white mb-1">付費版原型 ↗</p>
+            <p class="text-xs text-white/50">index.html</p>
+          </a>
+          <a href="https://terrelyeh.github.io/numerology-report-redesign/guide.html" target="_blank" class="block bg-gray-50 rounded-xl p-4 border border-warmgray/10 hover:border-warmgray/20 transition-all group">
+            <p class="font-bold text-xs mb-1 group-hover:text-warmgray transition-all">完整優化指南 ↗</p>
+            <p class="text-xs text-warmgray/40">guide.html</p>
+          </a>
+        </div>
+      </section>
+
+      <!-- ======== 2. 視覺設計系統 ======== -->
+      <section id="sec2" class="mb-20">
+        <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+          <span class="w-8 h-8 rounded-lg bg-warmgray text-white flex items-center justify-center text-sm font-bold">2</span>
+          視覺設計系統
+        </h2>
+
+        <!-- 2.1 色彩 -->
+        <h3 class="text-lg font-bold mb-4" id="sec2-1">2.1 色彩系統</h3>
+        <div class="code-block mb-4">
+<pre><span class="keyword">:root</span> {
+  <span class="prop">--cream</span>: <span class="string">#EDE8E0</span>;       <span class="comment">/* 頁面背景 */</span>
+  <span class="prop">--warmgray</span>: <span class="string">#2C3345</span>;    <span class="comment">/* 主要文字、深色區塊 */</span>
+  <span class="prop">--sage</span>: <span class="string">#3A6B5E</span>;        <span class="comment">/* 主要強調色（CTA、標籤、進度條） */</span>
+  <span class="prop">--sagelight</span>: <span class="string">#E8F0ED</span>;   <span class="comment">/* Action Insight 區塊背景 */</span>
+  <span class="prop">--sagemid</span>: <span class="string">#D0E2DB</span>;     <span class="comment">/* 中間色調、hover 狀態 */</span>
+  <span class="prop">--gold</span>: <span class="string">#B8964E</span>;        <span class="comment">/* 次要強調色（星星、Connection Pattern） */</span>
+  <span class="prop">--goldlight</span>: <span class="string">#FBF6EE</span>;   <span class="comment">/* 金色背景 */</span>
+  <span class="prop">--rose</span>: <span class="string">#E8D5D0</span>;        <span class="comment">/* Frustration Connection 標籤背景 */</span>
+  <span class="prop">--rosedark</span>: <span class="string">#8B6B62</span>;    <span class="comment">/* Frustration Connection 標籤文字 */</span>
+}</pre>
+        </div>
+        <div class="grid grid-cols-4 sm:grid-cols-9 gap-2 mb-4">
+          <div><div class="h-10 rounded-lg border border-warmgray/10" style="background:#EDE8E0"></div><p class="text-xs text-warmgray/40 mt-1 text-center">cream</p></div>
+          <div><div class="h-10 rounded-lg" style="background:#2C3345"></div><p class="text-xs text-warmgray/40 mt-1 text-center">warmgray</p></div>
+          <div><div class="h-10 rounded-lg" style="background:#3A6B5E"></div><p class="text-xs text-warmgray/40 mt-1 text-center">sage</p></div>
+          <div><div class="h-10 rounded-lg border border-warmgray/10" style="background:#E8F0ED"></div><p class="text-xs text-warmgray/40 mt-1 text-center">sagelight</p></div>
+          <div><div class="h-10 rounded-lg border border-warmgray/10" style="background:#D0E2DB"></div><p class="text-xs text-warmgray/40 mt-1 text-center">sagemid</p></div>
+          <div><div class="h-10 rounded-lg" style="background:#B8964E"></div><p class="text-xs text-warmgray/40 mt-1 text-center">gold</p></div>
+          <div><div class="h-10 rounded-lg border border-warmgray/10" style="background:#FBF6EE"></div><p class="text-xs text-warmgray/40 mt-1 text-center">goldlight</p></div>
+          <div><div class="h-10 rounded-lg border border-warmgray/10" style="background:#E8D5D0"></div><p class="text-xs text-warmgray/40 mt-1 text-center">rose</p></div>
+          <div><div class="h-10 rounded-lg" style="background:#8B6B62"></div><p class="text-xs text-warmgray/40 mt-1 text-center">rosedark</p></div>
+        </div>
+        <div class="callout-critical rounded-xl p-4 mb-8">
+          <p class="text-sm text-warmgray/70"><strong>規則：</strong>禁止使用純黑 <code>#000000</code>，主要深色一律用 <code>--warmgray</code>（<code>#2C3345</code>）。頁面背景一律 <code>--cream</code>。數字用 <code>font-variant-numeric: tabular-nums</code>，不用 <code>font-family: monospace</code>。</p>
+        </div>
+
+        <!-- 2.2 字體 -->
+        <h3 class="text-lg font-bold mb-4" id="sec2-2">2.2 字體系統</h3>
+        <div class="code-block mb-4">
+<pre><span class="keyword">body</span> { <span class="prop">font-family</span>: <span class="string">'DM Sans'</span>, sans-serif; }
+<span class="keyword">h1, h2, h3, .font-serif</span> { <span class="prop">font-family</span>: <span class="string">'Instrument Serif'</span>, Georgia, serif; }</pre>
+        </div>
+        <div class="overflow-x-auto mb-8">
+          <table class="text-sm">
+            <tbody class="text-warmgray/70">
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-6 font-medium text-warmgray">Google Fonts</td><td class="py-2.5"><code>Instrument Serif:ital@0;1</code> + <code>DM Sans:wght@300;400;500;700</code></td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-6 font-medium text-warmgray">標題 / 數字 / 裝飾</td><td class="py-2.5">Instrument Serif</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-6 font-medium text-warmgray">內文 / 按鈕 / UI</td><td class="py-2.5">DM Sans</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 2.3 圓角 -->
+        <h3 class="text-lg font-bold mb-4" id="sec2-3">2.3 圓角與間距</h3>
+        <div class="overflow-x-auto mb-4">
+          <table class="text-sm">
+            <tbody class="text-warmgray/70">
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-6 font-medium text-warmgray">卡片</td><td class="py-2.5"><code>border-radius: 1rem</code>（16px）到 <code>1.5rem</code>（24px）</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-6 font-medium text-warmgray">按鈕</td><td class="py-2.5"><code>border-radius: 9999px</code>（pill）或 <code>0.75rem</code>（12px）</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-6 font-medium text-warmgray">區塊間距</td><td class="py-2.5"><code>padding: 3rem</code>（48px）到 <code>6rem</code>（96px）</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ======== 3. 免費報告頁 ======== -->
+      <section id="sec3" class="mb-20">
+        <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+          <span class="w-8 h-8 rounded-lg bg-warmgray text-white flex items-center justify-center text-sm font-bold">3</span>
+          免費報告頁（Hook Page）需求
+        </h2>
+
+        <!-- 3.1 -->
+        <h3 class="text-lg font-bold mb-4" id="sec3-1">3.1 核心策略：好奇缺口理論（Curiosity Gap）</h3>
+        <div class="callout-success rounded-xl p-5 mb-6">
+          <p class="text-sm text-warmgray/70"><strong>原則：</strong>展示「你的數字是什麼」（What），鎖住「這對你意味著什麼」（How）和「你該怎麼做」（Action）。</p>
+        </div>
+        <p class="text-sm text-warmgray/60 mb-2">使用者讀完免費版後，應該要有的感覺：</p>
+        <div class="space-y-2 mb-8">
+          <div class="flex items-center gap-2 text-sm"><span class="text-sage">&#10003;</span><span class="text-warmgray/70">「這份報告確實是根據我的生日計算的」（建立信任）</span></div>
+          <div class="flex items-center gap-2 text-sm"><span class="text-sage">&#10003;</span><span class="text-warmgray/70">「我的 Ego Number 9 的描述很準」（建立認同）</span></div>
+          <div class="flex items-center gap-2 text-sm"><span class="text-red">&#10007;</span><span class="text-warmgray/70">「但我好想知道 out of balance 會怎樣...」（好奇缺口）</span></div>
+          <div class="flex items-center gap-2 text-sm"><span class="text-red">&#10007;</span><span class="text-warmgray/70">「那個 Action Insight 到底寫了什麼？」（購買衝動）</span></div>
+        </div>
+
+        <!-- 3.2 -->
+        <h3 class="text-lg font-bold mb-4" id="sec3-2">3.2 頁面結構</h3>
+        <div class="bg-gray-50 rounded-xl p-6 mb-8 text-sm text-warmgray/70 space-y-4">
+          <div class="flex gap-3"><span class="bg-sage text-white text-xs px-2 py-0.5 rounded font-medium flex-shrink-0">Header</span><span>個人化問候 + 出生日期 + 命理語錄 hook</span></div>
+          <div class="flex gap-3"><span class="bg-sage text-white text-xs px-2 py-0.5 rounded font-medium flex-shrink-0">Section 1</span><span>Birth Chart（完全免費）— 3x3 格線圖 + 4 張數字快速卡片 + 「Included Free」標記</span></div>
+          <div class="flex gap-3"><span class="bg-gold text-white text-xs px-2 py-0.5 rounded font-medium flex-shrink-0">Section 2</span><span>Ego Number 部分解讀（部分免費）— 第一段免費 → 後續段落 CSS 模糊化 + Action Insight 模糊可見</span></div>
+          <div class="flex gap-3"><span class="bg-warmgray text-white text-xs px-2 py-0.5 rounded font-medium flex-shrink-0">Section 3</span><span>鎖定預覽卡片（全部鎖定）— 6 張卡片 × 好奇觸發文案 + 鎖頭圖示</span></div>
+          <div class="flex gap-3"><span class="bg-warmgray/50 text-white text-xs px-2 py-0.5 rounded font-medium flex-shrink-0">Section 4</span><span>Social Proof — 3 則五星推薦語（對應付費功能）</span></div>
+          <div class="flex gap-3"><span class="bg-warmgray text-white text-xs px-2 py-0.5 rounded font-medium flex-shrink-0">Section 5</span><span>主要 CTA 區塊（bg-warmgray）— ~~$19.90~~ → $9.90 + 脈衝 CTA + 信任標誌</span></div>
+          <div class="flex gap-3"><span class="bg-warmgray/50 text-white text-xs px-2 py-0.5 rounded font-medium flex-shrink-0">Section 6</span><span>FAQ 手風琴 — 4 個可展開問答</span></div>
+          <div class="flex gap-3"><span class="bg-red text-white text-xs px-2 py-0.5 rounded font-medium flex-shrink-0">浮動</span><span>固定底部 CTA 列 — 滾動超過 800px 後滑入</span></div>
+        </div>
+
+        <!-- 3.3 -->
+        <h3 class="text-lg font-bold mb-4" id="sec3-3">3.3 鎖定卡片的好奇觸發文案</h3>
+        <p class="text-sm text-warmgray/60 mb-3"><strong>公式：</strong>展示「是什麼」+ 暗示「還有更多」+ 不揭露「具體答案」</p>
+        <div class="overflow-x-auto mb-6">
+          <table class="text-sm">
+            <thead><tr class="border-b-2 border-warmgray/10"><th class="py-3 pr-4">卡片</th><th class="py-3">文案範例（需根據使用者數字動態調整）</th></tr></thead>
+            <tbody class="text-warmgray/70">
+              <tr class="border-b border-warmgray/10"><td class="py-3 pr-4 font-medium text-warmgray whitespace-nowrap">Superego {X}</td><td class="py-3">"Discover why your intuition works best in [情境], and what happens when {X}'s [特質] turns into [負面]."</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-3 pr-4 font-medium text-warmgray whitespace-nowrap">Identity {X}</td><td class="py-3">"Why [某件事] doesn't come naturally to you — and why that gap creates [影響] in your closest relationships."</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-3 pr-4 font-medium text-warmgray whitespace-nowrap">Connection Patterns</td><td class="py-3">"Your chart has {N} connection patterns that reveal hidden strengths and recurring friction points."</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-3 pr-4 font-medium text-warmgray whitespace-nowrap">Life Path {X}</td><td class="py-3">"[正面特質] is your superpower — but without direction, it becomes [負面]."</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-3 pr-4 font-medium text-warmgray whitespace-nowrap">Key Life Ages</td><td class="py-3">"{N} pivotal ages mapped to your chart. At {當前最近的 Peak}, you're in your [第幾] Pyramid — a [主題] phase."</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-3 pr-4 font-medium text-warmgray whitespace-nowrap">Monthly Forecast</td><td class="py-3">"{年份} is your Personal Year {X} — a year of [主題]. Get month-by-month guidance."</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout-warning rounded-xl p-4 mb-8">
+          <p class="text-sm text-warmgray/70"><strong>寫作風格規則：</strong>第二人稱（you / your）；語氣溫暖但直接；不要用「amazing」「incredible」等空洞形容詞；每句話要有跟數字相關的具體細節；製造「未完成感」。</p>
+        </div>
+
+        <!-- 3.4 -->
+        <h3 class="text-lg font-bold mb-4" id="sec3-4">3.4 CSS 模糊鎖定技術規格</h3>
+        <div class="code-block mb-4">
+<pre><span class="keyword">.content-locked</span> {
+  <span class="prop">position</span>: relative;
+  <span class="prop">user-select</span>: none;
+}
+
+<span class="keyword">.content-locked::before</span> {
+  <span class="prop">content</span>: <span class="string">''</span>;
+  <span class="prop">position</span>: absolute;
+  <span class="prop">top</span>: 0; <span class="prop">left</span>: 0; <span class="prop">right</span>: 0; <span class="prop">bottom</span>: 0;
+  <span class="prop">backdrop-filter</span>: <span class="string">blur(6px)</span>;
+  <span class="prop">-webkit-backdrop-filter</span>: <span class="string">blur(6px)</span>;
+  <span class="prop">background</span>: <span class="string">linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--cream) 100%
+  )</span>;
+  <span class="prop">z-index</span>: 10;
+}</pre>
+        </div>
+        <div class="callout-critical rounded-xl p-4 mb-8">
+          <p class="text-sm text-warmgray/70"><strong>重要：</strong>模糊區域內的文字必須是真實內容（不是 lorem ipsum），讓使用者隱約看到「裡面有東西」但讀不清楚。</p>
+        </div>
+
+        <!-- 3.5 -->
+        <h3 class="text-lg font-bold mb-4" id="sec3-5">3.5 FAQ 內容</h3>
+        <div class="overflow-x-auto mb-4">
+          <table class="text-sm">
+            <thead><tr class="border-b-2 border-warmgray/10"><th class="py-3 pr-4">問題</th><th class="py-3">回答重點</th></tr></thead>
+            <tbody class="text-warmgray/70">
+              <tr class="border-b border-warmgray/10"><td class="py-3 pr-4">How is this different from free numerology sites?</td><td class="py-3">強調 Action Insights（行動建議）是獨家功能</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-3 pr-4">What are 'Action Insights'?</td><td class="py-3">解釋每個數字解讀末尾都有具體的、本週可執行的行動建議</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-3 pr-4">Can I access my report later?</td><td class="py-3">永久存取 + PDF 下載</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-3 pr-4">What if I don't find it valuable?</td><td class="py-3">30 天退款保證</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ======== 4. 付費報告頁 ======== -->
+      <section id="sec4" class="mb-20">
+        <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+          <span class="w-8 h-8 rounded-lg bg-warmgray text-white flex items-center justify-center text-sm font-bold">4</span>
+          付費報告頁需求
+        </h2>
+
+        <h3 class="text-lg font-bold mb-4">4.1 整體架構</h3>
+        <p class="text-sm text-warmgray/60 mb-4">付費報告分為兩個主要頁籤（Tab）：</p>
+        <div class="bg-gray-50 rounded-xl p-6 mb-8 text-sm text-warmgray/70 space-y-3">
+          <div class="flex gap-3"><span class="bg-sage/20 text-sage text-xs px-2 py-0.5 rounded font-medium flex-shrink-0">進度條</span><span>固定在最頂部，3px，sage 綠色</span></div>
+          <div class="flex gap-3"><span class="bg-sage/20 text-sage text-xs px-2 py-0.5 rounded font-medium flex-shrink-0">導航列</span><span>左：Logo ｜ 右：Share + Save PDF</span></div>
+          <div class="flex gap-3"><span class="bg-sage/20 text-sage text-xs px-2 py-0.5 rounded font-medium flex-shrink-0">Hero</span><span>個人化標題 + 出生日期 + 雙頁籤切換</span></div>
+          <div class="border-t border-warmgray/10 pt-3">
+            <p class="text-xs text-sage font-bold mb-2">Tab 1：Inner Blueprint — 內在藍圖</p>
+            <p class="text-xs text-warmgray/50 ml-4">Birth Chart → Ego → Superego → Identity → Isolated → Enquirer Connection → Frustration Connection（每個含 Action Insight）</p>
+          </div>
+          <div class="border-t border-warmgray/10 pt-3">
+            <p class="text-xs text-gold font-bold mb-2">Tab 2：Outer Path — 外在路徑</p>
+            <p class="text-xs text-warmgray/50 ml-4">Life Path → Attitude → Day of Birth → Key Life Ages（時間線）→ Monthly Forecast（12 月卡）（每個含 Action Insight）</p>
+          </div>
+          <div class="border-t border-warmgray/10 pt-3 flex gap-3"><span class="bg-warmgray/10 text-warmgray text-xs px-2 py-0.5 rounded font-medium flex-shrink-0">完成區</span><span>完成圖示 + 鼓勵文案 + 兩張 Next Step CTA 卡片</span></div>
+        </div>
+
+        <h3 class="text-lg font-bold mb-4">4.2 頁籤切換機制</h3>
+        <div class="code-block mb-4">
+<pre><span class="keyword">function</span> <span class="prop">switchTab</span>(tab) {
+  document.getElementById(<span class="string">'content-inner'</span>).classList.toggle(<span class="string">'hidden'</span>, tab !== <span class="string">'inner'</span>);
+  document.getElementById(<span class="string">'content-outer'</span>).classList.toggle(<span class="string">'hidden'</span>, tab !== <span class="string">'outer'</span>);
+  <span class="comment">// 切換 tab button 的 active/inactive 樣式</span>
+  <span class="comment">// 滾動到頁面頂部（y: 200 左右，跳過 hero）</span>
+}</pre>
+        </div>
+        <div class="overflow-x-auto mb-8">
+          <table class="text-sm">
+            <tbody class="text-warmgray/70">
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-6 font-medium text-warmgray">固定位置</td><td class="py-2.5"><code>position: sticky; top: 65px</code>（在導航列下方）</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-6 font-medium text-warmgray">Active tab</td><td class="py-2.5"><code>bg-sage text-white</code></td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-6 font-medium text-warmgray">Inactive tab</td><td class="py-2.5"><code>bg-transparent text-warmgray/50 hover:text-warmgray</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 4.3 Action Insight -->
+        <h3 class="text-lg font-bold mb-4" id="sec4-3">4.3 Action Insight 機制（最重要的差異化元素）</h3>
+        <div class="callout-success rounded-xl p-5 mb-4">
+          <p class="text-sm text-warmgray/70"><strong>每一個數字解讀的末尾都必須附帶一個 Action Insight 區塊。</strong></p>
+        </div>
+        <p class="text-sm text-warmgray/60 mb-3">HTML 結構：</p>
+        <div class="code-block mb-6">
+<pre><span class="keyword">&lt;div</span> <span class="prop">class</span>=<span class="string">"bg-sagelight rounded-xl p-6 border border-sage/20 mt-6"</span><span class="keyword">&gt;</span>
+  <span class="keyword">&lt;p</span> <span class="prop">class</span>=<span class="string">"text-sage text-xs tracking-widest uppercase font-medium mb-3"</span><span class="keyword">&gt;</span>
+    YOUR ACTION INSIGHT
+  <span class="keyword">&lt;/p&gt;</span>
+  <span class="keyword">&lt;p</span> <span class="prop">class</span>=<span class="string">"text-warmgray/80 text-sm leading-relaxed mb-4"</span><span class="keyword">&gt;</span>
+    {個人化洞察段落}
+  <span class="keyword">&lt;/p&gt;</span>
+  <span class="keyword">&lt;div</span> <span class="prop">class</span>=<span class="string">"border-t border-sage/10 pt-4"</span><span class="keyword">&gt;</span>
+    <span class="keyword">&lt;p</span> <span class="prop">class</span>=<span class="string">"text-sage text-xs font-bold uppercase tracking-wider mb-1"</span><span class="keyword">&gt;</span>Try this:<span class="keyword">&lt;/p&gt;</span>
+    <span class="keyword">&lt;p</span> <span class="prop">class</span>=<span class="string">"text-warmgray/70 text-sm leading-relaxed"</span><span class="keyword">&gt;</span>
+      {一句話的具體微行動}
+    <span class="keyword">&lt;/p&gt;</span>
+  <span class="keyword">&lt;/div&gt;</span>
+<span class="keyword">&lt;/div&gt;</span></pre>
+        </div>
+
+        <p class="text-sm text-warmgray/60 mb-3"><strong>寫作框架：</strong></p>
+        <div class="grid sm:grid-cols-2 gap-4 mb-6">
+          <div class="bg-sagelight rounded-xl p-5 border border-sage/10">
+            <p class="text-sage font-medium text-sm mb-2">1. 個人化洞察（2-3 句）</p>
+            <ul class="text-warmgray/60 text-sm space-y-1">
+              <li>- 把抽象含義翻譯成日常體驗</li>
+              <li>- 不要重複解讀段落已說過的</li>
+              <li>- 語氣像聰明朋友在跟你喝咖啡</li>
+            </ul>
+          </div>
+          <div class="bg-sagelight rounded-xl p-5 border border-sage/10">
+            <p class="text-sage font-medium text-sm mb-2">2. Try this 微行動（1 句）</p>
+            <ul class="text-warmgray/60 text-sm space-y-1">
+              <li>- 本週可立刻執行</li>
+              <li>- 低門檻（5-10 分鐘可完成）</li>
+              <li>- 跟數字含義直接相關</li>
+              <li>- 非常具體（不是「be more mindful」）</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="text-sm text-warmgray/60 mb-3"><strong>範例：</strong></p>
+        <div class="space-y-4 mb-8">
+          <div class="bg-sagelight rounded-xl p-5 border border-sage/10">
+            <p class="text-sage text-xs font-bold mb-2">Ego Number 9</p>
+            <p class="text-sm text-warmgray/70 mb-3 italic">Your 9 energy drives you to take responsibility for everything — but not everything is yours to carry. The gap between your idealism and reality isn't a flaw; it's the tension that makes you effective.</p>
+            <p class="text-sage text-xs font-bold mb-1">Try this:</p>
+            <p class="text-sm text-warmgray/60 italic">Write down one thing you're currently carrying that isn't yours to hold. Then consciously set it down this week.</p>
+          </div>
+          <div class="bg-sagelight rounded-xl p-5 border border-sage/10">
+            <p class="text-sage text-xs font-bold mb-2">Superego Number 8</p>
+            <p class="text-sm text-warmgray/70 mb-3 italic">Your intuition doesn't speak in words — it speaks in gut feelings, sudden clarity, and quiet knowing. But it works best when you're not rushing.</p>
+            <p class="text-sage text-xs font-bold mb-1">Try this:</p>
+            <p class="text-sm text-warmgray/60 italic">Before your next important decision, take 10 minutes of complete silence — no phone, no music, no input. Just sit with the question.</p>
+          </div>
+          <div class="bg-sagelight rounded-xl p-5 border border-sage/10">
+            <p class="text-sage text-xs font-bold mb-2">Identity Number 1</p>
+            <p class="text-sm text-warmgray/70 mb-3 italic">Expressing deep emotion doesn't come naturally to you, but that doesn't mean those feelings aren't there. Your 1 processes internally first, and by the time you're ready to share, the moment has often passed.</p>
+            <p class="text-sage text-xs font-bold mb-1">Try this:</p>
+            <p class="text-sm text-warmgray/60 italic">This week, tell one person something you appreciate about them — something you'd normally keep to yourself.</p>
+          </div>
+        </div>
+
+        <!-- 4.4 -->
+        <h3 class="text-lg font-bold mb-4" id="sec4-4">4.4 各數字解讀的內容框架</h3>
+        <div class="bg-gray-50 rounded-xl p-6 mb-4 text-sm text-warmgray/70 space-y-3">
+          <div class="flex gap-3"><span class="font-mono text-xs bg-warmgray/10 px-2 py-0.5 rounded">段落 1</span><span><strong>核心能量</strong> — 這個數字的基本含義、代表的能量與傾向，2-3 個核心特質關鍵字</span></div>
+          <div class="flex gap-3"><span class="font-mono text-xs bg-warmgray/10 px-2 py-0.5 rounded">段落 2</span><span><strong>平衡狀態</strong> — 當能量健康平衡時的具體行為描述</span></div>
+          <div class="flex gap-3"><span class="font-mono text-xs bg-warmgray/10 px-2 py-0.5 rounded">段落 3</span><span><strong>失衡狀態</strong> — 能量失衡時的行為模式或困境</span></div>
+          <div class="flex gap-3"><span class="font-mono text-xs bg-warmgray/10 px-2 py-0.5 rounded">段落 4</span><span><strong>與其他數字互動</strong>（如適用）— 例：「Your 9 Ego and 1 Identity create a push-pull...」</span></div>
+          <div class="flex gap-3"><span class="font-mono text-xs bg-sage/20 text-sage px-2 py-0.5 rounded">末尾</span><span><strong>Action Insight 區塊</strong>（見 4.3）</span></div>
+        </div>
+        <div class="callout-warning rounded-xl p-4 mb-8">
+          <p class="text-sm text-warmgray/70"><strong>寫作風格：</strong>全程第二人稱（you / your）；溫暖、直接、有深度但不故弄玄虛；避免空洞形容詞；每段有可辨識的行為描述；長度 200-400 字英文（不含 Action Insight）。</p>
+        </div>
+
+        <!-- 4.5 -->
+        <h3 class="text-lg font-bold mb-4" id="sec4-5">4.5 特殊區塊規格</h3>
+
+        <h4 class="font-bold text-sm mb-3 text-warmgray/80">Connection Patterns</h4>
+        <div class="flex gap-3 mb-4">
+          <span class="bg-gold/20 text-gold text-xs px-3 py-1 rounded-full font-medium">Enquirer Connection</span>
+          <span class="bg-rose text-rosedark text-xs px-3 py-1 rounded-full font-medium">Frustration Connection</span>
+        </div>
+        <p class="text-sm text-warmgray/60 mb-6">每個 Connection 需要：標籤 + 標題、2-3 段解讀、Action Insight。</p>
+
+        <h4 class="font-bold text-sm mb-3 text-warmgray/80">Key Life Ages（視覺時間線）</h4>
+        <p class="text-sm text-warmgray/60 mb-6">4 個 Peak Pyramid 年齡以圓形 + 箭頭連接，圓形：<code>bg-sage text-white w-16 h-16 rounded-full</code>，標示使用者目前處於哪個 Pyramid。</p>
+
+        <h4 class="font-bold text-sm mb-3 text-warmgray/80">Monthly Forecast（月度預測）</h4>
+        <p class="text-sm text-warmgray/60 mb-4">年度概述（Personal Year 主題）+ 12 張月卡，<code>grid sm:grid-cols-2 lg:grid-cols-3</code>。每張卡片含月份名稱 + 2-3 句能量概述，hover 效果 <code>translateY(-2px)</code>，當月卡片以不同邊框色強調。</p>
+
+        <h4 class="font-bold text-sm mb-3 text-warmgray/80">4.6 報告完成區塊（Next Step CTAs）</h4>
+        <div class="grid sm:grid-cols-2 gap-4 mb-8">
+          <div class="bg-sagelight rounded-xl p-5 border border-sage/10">
+            <p class="text-sage font-medium text-sm mb-2">卡片 A：幫別人買報告</p>
+            <p class="text-xs text-warmgray/60 mb-1"><strong>標題：</strong>Get a Reading for Someone Else</p>
+            <p class="text-xs text-warmgray/60 mb-1"><strong>說明：</strong>Enter a family member's or friend's birthday and discover their unique numerology blueprint.</p>
+            <p class="text-xs text-sage font-medium">Start their reading →</p>
+          </div>
+          <div class="bg-goldlight rounded-xl p-5 border border-gold/10">
+            <p class="text-gold font-medium text-sm mb-2">卡片 B：配對報告</p>
+            <p class="text-xs text-warmgray/60 mb-1"><strong>標題：</strong>Compatibility Reading</p>
+            <p class="text-xs text-warmgray/60 mb-1"><strong>說明：</strong>See how your numbers interact with a partner, family member, or friend — discover your dynamic together.</p>
+            <p class="text-xs text-gold font-medium">Explore your connection →</p>
+          </div>
+        </div>
+
+        <h4 class="font-bold text-sm mb-3 text-warmgray/80">4.7 功能規格</h4>
+        <p class="text-sm font-medium text-warmgray/70 mb-2">閱讀進度條：</p>
+        <div class="code-block mb-4">
+<pre>window.addEventListener(<span class="string">'scroll'</span>, () => {
+  <span class="keyword">const</span> scrollTop = window.scrollY;
+  <span class="keyword">const</span> docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  <span class="keyword">const</span> progress = (scrollTop / docHeight) * 100;
+  document.getElementById(<span class="string">'progress-bar'</span>).style.width = progress + <span class="string">'%'</span>;
+});</pre>
+        </div>
+        <p class="text-sm text-warmgray/60 mb-4">固定在最頂部，<code>position: fixed; top: 0; z-index: 9999</code>，高度 3px，顏色 <code>var(--sage)</code>。</p>
+
+        <p class="text-sm font-medium text-warmgray/70 mb-2">PDF 下載：</p>
+        <ul class="text-sm text-warmgray/60 space-y-1 mb-4">
+          <li>- 原型中使用 <code>window.print()</code> 作為 placeholder</li>
+          <li>- 正式版建議 Puppeteer 或 wkhtmltopdf 伺服器端生成</li>
+          <li>- 桌面版：導航列右側 ｜ 手機版：Hero 下方 ｜ 底部：Save & Share 區塊</li>
+        </ul>
+
+        <p class="text-sm font-medium text-warmgray/70 mb-2">分享功能：</p>
+        <div class="code-block mb-4">
+<pre><span class="keyword">function</span> <span class="prop">shareReport</span>() {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    <span class="comment">// 顯示 Toast：「Link copied to clipboard!」</span>
+    <span class="comment">// Toast 從底部滑入，2.5 秒後自動消失</span>
+  });
+}</pre>
+        </div>
+      </section>
+
+      <!-- ======== 5. 內容生成指引 ======== -->
+      <section id="sec5" class="mb-20">
+        <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+          <span class="w-8 h-8 rounded-lg bg-warmgray text-white flex items-center justify-center text-sm font-bold">5</span>
+          內容生成指引（給 AI 寫命理內容時使用）
+        </h2>
+
+        <h3 class="text-lg font-bold mb-4">5.1 語氣與風格</h3>
+        <div class="grid sm:grid-cols-2 gap-4 mb-8">
+          <div class="bg-sagelight rounded-xl p-5 border border-sage/10">
+            <p class="text-sage font-medium text-sm mb-3">DO</p>
+            <ul class="text-warmgray/60 text-sm space-y-2">
+              <li>- 像一個聰明的、有洞察力的朋友在跟你說話</li>
+              <li>- 用具體的行為描述，不用抽象概念</li>
+              <li>- 承認複雜性（「this creates tension」）</li>
+              <li>- 用「you」直接對話</li>
+              <li>- 每句話都要有資訊量</li>
+            </ul>
+          </div>
+          <div class="bg-red/5 rounded-xl p-5 border border-red/10">
+            <p class="text-red font-medium text-sm mb-3">DON'T</p>
+            <ul class="text-warmgray/60 text-sm space-y-2">
+              <li>- 不要用「amazing」「incredible」「powerful」「magical」等空洞詞</li>
+              <li>- 不要寫成百科全書式的解說</li>
+              <li>- 不要用「Dear one」「Beautiful soul」等 New Age 口吻</li>
+              <li>- 不要每段都以「Your number X means...」開頭</li>
+              <li>- 不要寫超過 400 字一個數字解讀</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 class="text-lg font-bold mb-4">5.2 Action Insight 生成提示詞</h3>
+        <div class="bg-gray-50 rounded-xl p-6 mb-6">
+          <p class="text-xs text-warmgray/40 tracking-widest uppercase mb-3">Prompt Template</p>
+          <div class="text-sm text-warmgray/70 space-y-2">
+            <p>請為 Numerology Within 的付費報告撰寫一個 Action Insight。</p>
+            <p class="text-warmgray/50">數字：{數字名稱} {數字值}（例：Ego Number 9）<br>
+            數字含義摘要：{一句話的含義}<br>
+            使用者的其他核心數字：Ego {X}, Superego {X}, Identity {X}, Life Path {X}</p>
+            <p class="font-medium text-warmgray">要求：</p>
+            <ol class="space-y-1 ml-4 text-warmgray/60">
+              <li>1. 洞察段落（2-3 句英文）：把含義翻譯成日常生活體驗、不重複解讀段落、語氣像聰明朋友</li>
+              <li>2. Try this 微行動（1 句英文）：本週可立刻執行、5-10 分鐘可完成、跟數字含義直接相關、非常具體</li>
+            </ol>
+          </div>
+        </div>
+
+        <h3 class="text-lg font-bold mb-4">5.3 好奇觸發文案生成提示詞</h3>
+        <div class="bg-gray-50 rounded-xl p-6 mb-4">
+          <p class="text-xs text-warmgray/40 tracking-widest uppercase mb-3">Prompt Template</p>
+          <div class="text-sm text-warmgray/70 space-y-2">
+            <p>請為 Numerology Within 的免費版鎖定卡片撰寫好奇觸發文案。</p>
+            <p class="text-warmgray/50">數字：{數字名稱} {數字值}<br>
+            這張卡片在付費版中會展示：{付費版中這個數字解讀的核心主題}</p>
+            <p class="font-medium text-warmgray">公式：展示「是什麼」+ 暗示「還有更多」+ 不揭露「具體答案」</p>
+            <p class="text-warmgray/60">要求：1-2 句英文、包含具體數字、製造未完成感、不用空洞形容詞</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======== 6. 技術注意事項 ======== -->
+      <section id="sec6" class="mb-20">
+        <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+          <span class="w-8 h-8 rounded-lg bg-warmgray text-white flex items-center justify-center text-sm font-bold">6</span>
+          技術注意事項
+        </h2>
+
+        <h3 class="text-lg font-bold mb-4">6.1 前端修正清單（現有 bug）</h3>
+        <div class="overflow-x-auto mb-8">
+          <table class="text-sm">
+            <thead><tr class="border-b-2 border-warmgray/10"><th class="py-3 pr-4">Bug</th><th class="py-3">修正</th></tr></thead>
+            <tbody class="text-warmgray/70">
+              <tr class="border-b border-warmgray/10"><td class="py-3 pr-4">「FRUSTRATI Connection」標題截斷</td><td class="py-3">完整顯示「Frustration Connection」，檢查容器 overflow</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-3 pr-4">S.L. 推薦語重複出現</td><td class="py-3">推薦語去重，確保不重複</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-3 pr-4">「engery」拼字錯誤</td><td class="py-3">全站搜尋替換為「energy」</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="text-lg font-bold mb-4">6.2 Email 驗證碼流程（P0 優先修復）</h3>
+        <div class="grid sm:grid-cols-2 gap-4 mb-8">
+          <div class="callout-critical rounded-xl p-5">
+            <p class="text-xs text-red font-bold mb-2">現行流程（問題）</p>
+            <p class="text-sm text-warmgray/60">點擊購買 → 輸入 Email → 去信箱找驗證碼 → 回來輸入 → 才看到付款頁</p>
+          </div>
+          <div class="callout-success rounded-xl p-5">
+            <p class="text-xs text-sage font-bold mb-2">建議新流程</p>
+            <p class="text-sm text-warmgray/60">點擊購買 → 直接進入付款頁面（Email 作為表單欄位）→ 付款完成 → 報告顯示</p>
+          </div>
+        </div>
+
+        <h3 class="text-lg font-bold mb-4">6.3 響應式設計斷點</h3>
+        <div class="overflow-x-auto mb-8">
+          <table class="text-sm">
+            <tbody class="text-warmgray/70">
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-6 font-medium text-warmgray">手機版</td><td class="py-2.5"><code>&lt; 640px</code> → 單欄</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-6 font-medium text-warmgray">平板（sm）</td><td class="py-2.5"><code>≥ 640px</code> → 2 欄</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-6 font-medium text-warmgray">桌面（md）</td><td class="py-2.5"><code>≥ 768px</code> → 導航列完整顯示</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-6 font-medium text-warmgray">大桌面（lg）</td><td class="py-2.5"><code>≥ 1024px</code> → 3 欄格線</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="text-lg font-bold mb-4">6.4 效能考量</h3>
+        <ul class="text-sm text-warmgray/60 space-y-2 mb-4">
+          <li>- Birth Chart 用 CSS Grid 實作，不要用 canvas 或 SVG</li>
+          <li>- 月度預測 12 張卡片先全部渲染（量不大）</li>
+          <li>- 頁籤切換用 <code>display: none / block</code>，不要用路由切換</li>
+          <li>- 進度條的 scroll event 用 <code>requestAnimationFrame</code> 或 <code>passive: true</code></li>
+        </ul>
+      </section>
+
+      <!-- ======== 8. Attributes 教育頁 ======== -->
+      <section id="sec8" class="mb-20">
+        <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+          <span class="w-8 h-8 rounded-lg bg-warmgray text-white flex items-center justify-center text-sm font-bold">8</span>
+          Attributes 教育頁優化
+        </h2>
+
+        <h3 class="text-lg font-bold mb-4">8.0 頁面拆分架構</h3>
+        <div class="callout-warning rounded-xl p-5 mb-4">
+          <p class="text-sm text-warmgray/70"><strong>重要：</strong>現行的 <code>/attributes</code> 單頁應拆分為 11 個獨立頁面。改善 SEO、降低載入時間、讓每篇文章有獨立 CTA 轉換路徑。</p>
+        </div>
+        <div class="code-block mb-4">
+<pre><span class="comment">/* 建議 URL 結構 */</span>
+/attributes-birth-chart
+/attributes-identity
+/attributes-ego
+/attributes-superego
+/attributes-isolated
+/attributes-connections
+/attributes-life-path
+/attributes-attitude
+/attributes-day-of-birth
+/attributes-key-life-ages
+/attributes-personal-year</pre>
+        </div>
+        <p class="text-sm text-warmgray/60 mb-3"><strong>已完成的原型頁面</strong>（可作為其餘 8 頁的範本）：</p>
+        <div class="grid sm:grid-cols-3 gap-3 mb-8">
+          <a href="https://terrelyeh.github.io/numerology-report-redesign/attributes-life-path.html" target="_blank" class="block bg-gray-50 rounded-xl p-4 border border-warmgray/10 hover:border-sage/30 transition-all group">
+            <p class="font-bold text-xs mb-1 group-hover:text-sage transition-all">Life Path Number ↗</p>
+          </a>
+          <a href="https://terrelyeh.github.io/numerology-report-redesign/attributes-ego.html" target="_blank" class="block bg-gray-50 rounded-xl p-4 border border-warmgray/10 hover:border-sage/30 transition-all group">
+            <p class="font-bold text-xs mb-1 group-hover:text-sage transition-all">Ego Number ↗</p>
+          </a>
+          <a href="https://terrelyeh.github.io/numerology-report-redesign/attributes-key-life-ages.html" target="_blank" class="block bg-gray-50 rounded-xl p-4 border border-warmgray/10 hover:border-sage/30 transition-all group">
+            <p class="font-bold text-xs mb-1 group-hover:text-sage transition-all">Key Life Ages ↗</p>
+          </a>
+        </div>
+
+        <h3 class="text-lg font-bold mb-4">8.1-8.2 改寫方向</h3>
+        <p class="text-sm text-warmgray/60 mb-4"><code>/attributes</code> 是命理名詞百科頁。目前風格太像字典，使用者讀完就離開。每篇文章從「名詞解釋」改寫為「讓人想算自己的」：</p>
+        <div class="bg-gray-50 rounded-xl p-6 mb-6 text-sm text-warmgray/70 space-y-2">
+          <div class="flex gap-3 items-center"><span class="font-mono text-xs bg-warmgray/10 px-2 py-0.5 rounded">1</span><span>概念介紹（精簡保留現有內容）</span></div>
+          <div class="text-warmgray/30 pl-6">↓</div>
+          <div class="flex gap-3 items-center"><span class="font-mono text-xs bg-sage/20 text-sage px-2 py-0.5 rounded">2</span><span>生活化範例（新增：這個數字在日常中如何表現？）</span></div>
+          <div class="text-warmgray/30 pl-6">↓</div>
+          <div class="flex gap-3 items-center"><span class="font-mono text-xs bg-gold/20 text-gold px-2 py-0.5 rounded">3</span><span>數字差異預告（新增：「Number 3 和 9 截然不同...」但不完整揭露）</span></div>
+          <div class="text-warmgray/30 pl-6">↓</div>
+          <div class="flex gap-3 items-center"><span class="font-mono text-xs bg-red/10 text-red px-2 py-0.5 rounded">4</span><span>個人化 CTA（新增：「Get My Free Report →」）</span></div>
+        </div>
+
+        <h3 class="text-lg font-bold mb-4">8.3 寫作規則</h3>
+        <ul class="text-sm text-warmgray/60 space-y-2 mb-8">
+          <li>- 每篇擴充到 <strong>800-1200 字</strong>（目前 250-830 字）</li>
+          <li>- 新增 2-3 個生活化範例（「想像你在團隊會議中...」）</li>
+          <li>- 暗示不同數字的差異但不完整揭露（保留好奇）</li>
+          <li>- 提及跟其他數字的互動關係</li>
+          <li>- 語氣溫暖但直接，像在跟朋友解釋</li>
+        </ul>
+
+        <h3 class="text-lg font-bold mb-4">8.4 每篇文章底部 CTA</h3>
+        <div class="code-block mb-4">
+<pre><span class="keyword">&lt;div</span> <span class="prop">class</span>=<span class="string">"cta-block"</span><span class="keyword">&gt;</span>
+  <span class="keyword">&lt;p</span> <span class="prop">class</span>=<span class="string">"cta-title"</span><span class="keyword">&gt;</span>Curious about YOUR {主題名稱}?<span class="keyword">&lt;/p&gt;</span>
+  <span class="keyword">&lt;p</span> <span class="prop">class</span>=<span class="string">"cta-desc"</span><span class="keyword">&gt;</span>{個人化引導文案}<span class="keyword">&lt;/p&gt;</span>
+  <span class="keyword">&lt;a</span> <span class="prop">href</span>=<span class="string">"/"</span> <span class="prop">class</span>=<span class="string">"cta-button"</span><span class="keyword">&gt;</span>Get My Free Report &rarr;<span class="keyword">&lt;/a&gt;</span>
+<span class="keyword">&lt;/div&gt;</span></pre>
+        </div>
+        <div class="overflow-x-auto mb-8">
+          <table class="text-sm">
+            <thead><tr class="border-b-2 border-warmgray/10"><th class="py-3 pr-4">主題</th><th class="py-3">CTA 副標</th></tr></thead>
+            <tbody class="text-warmgray/70">
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-4 whitespace-nowrap font-medium text-warmgray">Birth Chart</td><td class="py-2.5">See how your birth date maps onto the 9-space grid — your unique pattern might surprise you.</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-4 whitespace-nowrap font-medium text-warmgray">Identity</td><td class="py-2.5">Your Identity Number reveals your instinctive reactions. Find out what drives you beneath the surface.</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-4 whitespace-nowrap font-medium text-warmgray">Ego</td><td class="py-2.5">Your Ego Number shapes every decision you make. Discover yours in 10 seconds.</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-4 whitespace-nowrap font-medium text-warmgray">Superego</td><td class="py-2.5">Your Superego Number guides your deepest values. What's yours telling you?</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-4 whitespace-nowrap font-medium text-warmgray">Isolated</td><td class="py-2.5">Do you have an Isolated Number? It could explain a growth pattern you've been experiencing.</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-4 whitespace-nowrap font-medium text-warmgray">Connections</td><td class="py-2.5">Your birth chart might contain hidden connections. See what patterns your numbers form.</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-4 whitespace-nowrap font-medium text-warmgray">Life Path</td><td class="py-2.5">Your Life Path Number is the single most important number in your chart. Calculate yours now.</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-4 whitespace-nowrap font-medium text-warmgray">Attitude</td><td class="py-2.5">First impressions start with your Attitude Number. See how others perceive you.</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-4 whitespace-nowrap font-medium text-warmgray">Day of Birth</td><td class="py-2.5">Your natural talents are encoded in your Day of Birth Number. What's yours?</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-4 whitespace-nowrap font-medium text-warmgray">Key Life Ages</td><td class="py-2.5">4 pivotal ages are written in your chart. Find out when your next turning point arrives.</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-4 whitespace-nowrap font-medium text-warmgray">Personal Year</td><td class="py-2.5">2026 has a specific energy for YOU. Discover your Personal Year Number.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="text-lg font-bold mb-4">8.5 AI 改寫提示詞模板</h3>
+        <div class="bg-gray-50 rounded-xl p-6 mb-4">
+          <p class="text-xs text-warmgray/40 tracking-widest uppercase mb-3">Prompt Template</p>
+          <div class="text-sm text-warmgray/70 space-y-2">
+            <p>請改寫 Numerology Within 的 Attributes 教育頁文章。</p>
+            <p class="text-warmgray/50">主題：{主題名稱}（例：The Ego Number）<br>現有內容：{貼入現有文字}</p>
+            <p class="font-medium text-warmgray">改寫要求：</p>
+            <ol class="space-y-1 ml-4 text-warmgray/60">
+              <li>1. 保留核心概念，從「字典式解說」改為「引發好奇的介紹」</li>
+              <li>2. 擴充到 800-1200 字</li>
+              <li>3. 新增 2-3 個生活化範例</li>
+              <li>4. 暗示不同數字在這個位置的差異（但不完整揭露）</li>
+              <li>5. 提及這個數字跟其他數字的互動</li>
+              <li>6. 結尾段落自然引導到「想知道你的是什麼？」</li>
+              <li>7. 語氣：溫暖、直接，像聰明朋友在解釋</li>
+              <li>8. 全英文</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======== 9. 驗收標準 ======== -->
+      <section id="sec9" class="mb-20">
+        <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+          <span class="w-8 h-8 rounded-lg bg-warmgray text-white flex items-center justify-center text-sm font-bold">9</span>
+          驗收標準
+        </h2>
+
+        <h3 class="text-lg font-bold mb-4">免費版</h3>
+        <div class="space-y-2 mb-6">
+          <div class="flex items-start gap-2 text-sm"><span class="w-5 h-5 rounded border-2 border-warmgray/20 flex-shrink-0 mt-0.5"></span><span class="text-warmgray/70">Birth Chart 完整顯示，數字頻率小圓點正確</span></div>
+          <div class="flex items-start gap-2 text-sm"><span class="w-5 h-5 rounded border-2 border-warmgray/20 flex-shrink-0 mt-0.5"></span><span class="text-warmgray/70">Ego Number 第一段免費可讀，後續段落模糊鎖定</span></div>
+          <div class="flex items-start gap-2 text-sm"><span class="w-5 h-5 rounded border-2 border-warmgray/20 flex-shrink-0 mt-0.5"></span><span class="text-warmgray/70">模糊區域可以看到文字輪廓但讀不清楚</span></div>
+          <div class="flex items-start gap-2 text-sm"><span class="w-5 h-5 rounded border-2 border-warmgray/20 flex-shrink-0 mt-0.5"></span><span class="text-warmgray/70">6 張鎖定卡片都有好奇觸發文案 + 鎖頭圖示</span></div>
+          <div class="flex items-start gap-2 text-sm"><span class="w-5 h-5 rounded border-2 border-warmgray/20 flex-shrink-0 mt-0.5"></span><span class="text-warmgray/70">價格顯示 <del>$19.90</del> → $9.90</span></div>
+          <div class="flex items-start gap-2 text-sm"><span class="w-5 h-5 rounded border-2 border-warmgray/20 flex-shrink-0 mt-0.5"></span><span class="text-warmgray/70">信任標誌（Secure Payment / Encrypted / Guarantee）出現在 CTA 區塊</span></div>
+          <div class="flex items-start gap-2 text-sm"><span class="w-5 h-5 rounded border-2 border-warmgray/20 flex-shrink-0 mt-0.5"></span><span class="text-warmgray/70">浮動底部 CTA 列在滾動 800px 後出現</span></div>
+          <div class="flex items-start gap-2 text-sm"><span class="w-5 h-5 rounded border-2 border-warmgray/20 flex-shrink-0 mt-0.5"></span><span class="text-warmgray/70">FAQ 手風琴可正常展開/收合</span></div>
+          <div class="flex items-start gap-2 text-sm"><span class="w-5 h-5 rounded border-2 border-warmgray/20 flex-shrink-0 mt-0.5"></span><span class="text-warmgray/70">手機版排版正常，CTA 按鈕最小觸控目標 44px</span></div>
+        </div>
+
+        <h3 class="text-lg font-bold mb-4">付費版</h3>
+        <div class="space-y-2 mb-6">
+          <div class="flex items-start gap-2 text-sm"><span class="w-5 h-5 rounded border-2 border-warmgray/20 flex-shrink-0 mt-0.5"></span><span class="text-warmgray/70">兩個頁籤可正常切換（Inner Blueprint / Outer Path）</span></div>
+          <div class="flex items-start gap-2 text-sm"><span class="w-5 h-5 rounded border-2 border-warmgray/20 flex-shrink-0 mt-0.5"></span><span class="text-warmgray/70">頁籤切換後自動滾動到內容頂部</span></div>
+          <div class="flex items-start gap-2 text-sm"><span class="w-5 h-5 rounded border-2 border-warmgray/20 flex-shrink-0 mt-0.5"></span><span class="text-warmgray/70">每個數字解讀末尾都有 Action Insight 區塊（sage 綠色背景）</span></div>
+          <div class="flex items-start gap-2 text-sm"><span class="w-5 h-5 rounded border-2 border-warmgray/20 flex-shrink-0 mt-0.5"></span><span class="text-warmgray/70">每個 Action Insight 都有「Try this:」微行動</span></div>
+          <div class="flex items-start gap-2 text-sm"><span class="w-5 h-5 rounded border-2 border-warmgray/20 flex-shrink-0 mt-0.5"></span><span class="text-warmgray/70">閱讀進度條跟隨滾動更新</span></div>
+          <div class="flex items-start gap-2 text-sm"><span class="w-5 h-5 rounded border-2 border-warmgray/20 flex-shrink-0 mt-0.5"></span><span class="text-warmgray/70">PDF 下載按鈕存在於三處（桌面導航列 / 手機 Hero 下方 / 底部區塊）</span></div>
+          <div class="flex items-start gap-2 text-sm"><span class="w-5 h-5 rounded border-2 border-warmgray/20 flex-shrink-0 mt-0.5"></span><span class="text-warmgray/70">分享按鈕點擊後複製連結 + Toast 通知</span></div>
+          <div class="flex items-start gap-2 text-sm"><span class="w-5 h-5 rounded border-2 border-warmgray/20 flex-shrink-0 mt-0.5"></span><span class="text-warmgray/70">Connection Pattern 卡片有正確的彩色標籤</span></div>
+          <div class="flex items-start gap-2 text-sm"><span class="w-5 h-5 rounded border-2 border-warmgray/20 flex-shrink-0 mt-0.5"></span><span class="text-warmgray/70">Key Life Ages 時間線正確顯示 4 個 Peak 年齡</span></div>
+          <div class="flex items-start gap-2 text-sm"><span class="w-5 h-5 rounded border-2 border-warmgray/20 flex-shrink-0 mt-0.5"></span><span class="text-warmgray/70">Monthly Forecast 12 張月卡正確排列</span></div>
+          <div class="flex items-start gap-2 text-sm"><span class="w-5 h-5 rounded border-2 border-warmgray/20 flex-shrink-0 mt-0.5"></span><span class="text-warmgray/70">報告完成區塊有兩張 Next Step CTA 卡片</span></div>
+          <div class="flex items-start gap-2 text-sm"><span class="w-5 h-5 rounded border-2 border-warmgray/20 flex-shrink-0 mt-0.5"></span><span class="text-warmgray/70">「FRUSTRATION Connection」標題不再截斷</span></div>
+          <div class="flex items-start gap-2 text-sm"><span class="w-5 h-5 rounded border-2 border-warmgray/20 flex-shrink-0 mt-0.5"></span><span class="text-warmgray/70">「energy」拼字正確、推薦語無重複</span></div>
+          <div class="flex items-start gap-2 text-sm"><span class="w-5 h-5 rounded border-2 border-warmgray/20 flex-shrink-0 mt-0.5"></span><span class="text-warmgray/70">免費版與付費版在視覺上有明顯差異</span></div>
+        </div>
+
+        <h3 class="text-lg font-bold mb-4">Attributes 教育頁</h3>
+        <div class="space-y-2 mb-4">
+          <div class="flex items-start gap-2 text-sm"><span class="w-5 h-5 rounded border-2 border-warmgray/20 flex-shrink-0 mt-0.5"></span><span class="text-warmgray/70">每篇文章擴充到 800-1200 字</span></div>
+          <div class="flex items-start gap-2 text-sm"><span class="w-5 h-5 rounded border-2 border-warmgray/20 flex-shrink-0 mt-0.5"></span><span class="text-warmgray/70">每篇文章包含生活化範例</span></div>
+          <div class="flex items-start gap-2 text-sm"><span class="w-5 h-5 rounded border-2 border-warmgray/20 flex-shrink-0 mt-0.5"></span><span class="text-warmgray/70">每篇文章底部有個人化 CTA（連回首頁）</span></div>
+          <div class="flex items-start gap-2 text-sm"><span class="w-5 h-5 rounded border-2 border-warmgray/20 flex-shrink-0 mt-0.5"></span><span class="text-warmgray/70">文章語氣是引發好奇的，不是字典式的</span></div>
+          <div class="flex items-start gap-2 text-sm"><span class="w-5 h-5 rounded border-2 border-warmgray/20 flex-shrink-0 mt-0.5"></span><span class="text-warmgray/70">CTA 文案針對各主題個別撰寫</span></div>
+        </div>
+      </section>
+
+      <!-- ======== 附錄 ======== -->
+      <section id="appendix" class="mb-20">
+        <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+          <span class="w-8 h-8 rounded-lg bg-sage text-white flex items-center justify-center text-sm font-bold">+</span>
+          附錄：快速參考
+        </h2>
+
+        <h3 class="text-lg font-bold mb-4">所有原型連結</h3>
+        <div class="overflow-x-auto mb-8">
+          <table class="text-sm">
+            <thead><tr class="border-b-2 border-warmgray/10"><th class="py-3 pr-4">頁面</th><th class="py-3">URL</th></tr></thead>
+            <tbody class="text-warmgray/70">
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-4 font-medium text-warmgray">首頁 V1</td><td class="py-2.5"><a href="https://terrelyeh.github.io/numerology-report-redesign/home.html" target="_blank" class="text-sage hover:underline">home.html ↗</a></td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-4 font-medium text-warmgray">首頁 V2</td><td class="py-2.5"><a href="https://terrelyeh.github.io/numerology-report-redesign/home-v2.html" target="_blank" class="text-sage hover:underline">home-v2.html ↗</a></td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-4 font-medium text-warmgray">免費版</td><td class="py-2.5"><a href="https://terrelyeh.github.io/numerology-report-redesign/free.html" target="_blank" class="text-sage hover:underline">free.html ↗</a></td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-4 font-medium text-warmgray">付費版</td><td class="py-2.5"><a href="https://terrelyeh.github.io/numerology-report-redesign/" target="_blank" class="text-sage hover:underline">index.html ↗</a></td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-4 font-medium text-warmgray">優化指南</td><td class="py-2.5"><a href="https://terrelyeh.github.io/numerology-report-redesign/guide.html" target="_blank" class="text-sage hover:underline">guide.html ↗</a></td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-4 font-medium text-warmgray">AI 需求文件</td><td class="py-2.5"><a href="https://terrelyeh.github.io/numerology-report-redesign/ai-requirements.html" target="_blank" class="text-sage hover:underline">ai-requirements.html ↗</a></td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-4 font-medium text-warmgray">Attributes: Life Path</td><td class="py-2.5"><a href="https://terrelyeh.github.io/numerology-report-redesign/attributes-life-path.html" target="_blank" class="text-sage hover:underline">attributes-life-path.html ↗</a></td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-4 font-medium text-warmgray">Attributes: Ego</td><td class="py-2.5"><a href="https://terrelyeh.github.io/numerology-report-redesign/attributes-ego.html" target="_blank" class="text-sage hover:underline">attributes-ego.html ↗</a></td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-4 font-medium text-warmgray">Attributes: Key Life Ages</td><td class="py-2.5"><a href="https://terrelyeh.github.io/numerology-report-redesign/attributes-key-life-ages.html" target="_blank" class="text-sage hover:underline">attributes-key-life-ages.html ↗</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="text-lg font-bold mb-4">色彩快速對照</h3>
+        <div class="overflow-x-auto mb-8">
+          <table class="text-sm">
+            <thead><tr class="border-b-2 border-warmgray/10"><th class="py-3 pr-4">用途</th><th class="py-3 pr-4">色碼</th><th class="py-3">預覽</th></tr></thead>
+            <tbody class="text-warmgray/70">
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-4">背景</td><td class="py-2.5 pr-4"><code>#EDE8E0</code> cream</td><td class="py-2.5"><span class="inline-block w-6 h-6 rounded border border-warmgray/10" style="background:#EDE8E0"></span></td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-4">文字</td><td class="py-2.5 pr-4"><code>#2C3345</code> warmgray</td><td class="py-2.5"><span class="inline-block w-6 h-6 rounded" style="background:#2C3345"></span></td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-4">CTA / 強調</td><td class="py-2.5 pr-4"><code>#3A6B5E</code> sage</td><td class="py-2.5"><span class="inline-block w-6 h-6 rounded" style="background:#3A6B5E"></span></td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-4">Action Insight 背景</td><td class="py-2.5 pr-4"><code>#E8F0ED</code> sagelight</td><td class="py-2.5"><span class="inline-block w-6 h-6 rounded border border-warmgray/10" style="background:#E8F0ED"></span></td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-4">次要強調</td><td class="py-2.5 pr-4"><code>#B8964E</code> gold</td><td class="py-2.5"><span class="inline-block w-6 h-6 rounded" style="background:#B8964E"></span></td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-4">Frustration 標籤</td><td class="py-2.5 pr-4"><code>#E8D5D0</code> rose</td><td class="py-2.5"><span class="inline-block w-6 h-6 rounded border border-warmgray/10" style="background:#E8D5D0"></span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="text-lg font-bold mb-4">核心文案</h3>
+        <div class="overflow-x-auto mb-4">
+          <table class="text-sm">
+            <thead><tr class="border-b-2 border-warmgray/10"><th class="py-3 pr-4">位置</th><th class="py-3">文案</th></tr></thead>
+            <tbody class="text-warmgray/70">
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-4 font-medium text-warmgray">免費版 CTA</td><td class="py-2.5">Unlock My Full Report →</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-4 font-medium text-warmgray">付費版完成</td><td class="py-2.5">You've Read Your Full Report</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-4 font-medium text-warmgray">價格行</td><td class="py-2.5"><del>$19.90</del> $9.90 · One-time payment · Lifetime access</td></tr>
+              <tr class="border-b border-warmgray/10"><td class="py-2.5 pr-4 font-medium text-warmgray">信任標誌</td><td class="py-2.5">Secure Payment · 256-bit Encrypted · 30-Day Guarantee</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="border-t border-warmgray/10 pt-8 pb-16 text-center text-warmgray/30 text-xs">
+        <p>Numerology Within AI 需求交付文件 · 文件維護者：Terrel Yeh · 2026-04-06</p>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- TOC active state script -->
+  <script>
+    const sections = document.querySelectorAll('section[id]');
+    const tocLinks = document.querySelectorAll('.toc-link');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => link.classList.remove('active'));
+          const active = document.querySelector(`.toc-link[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -80% 0px' });
+
+    sections.forEach(section => observer.observe(section));
+  </script>
+
+</body>
+</html>
