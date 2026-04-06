@@ -90,11 +90,9 @@
           <a href="#problems" class="toc-link block py-1 text-warmgray/60">二、現有問題分析</a>
           <a href="#ux" class="toc-link block py-1 text-warmgray/60">三、使用者體驗（UX）</a>
           <a href="#ux-email" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">3.1 Email 驗證碼</a>
-          <a href="#ux-scroll" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">3.2 滾動動畫</a>
-          <a href="#ux-zindex" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">3.3 Z-index 覆蓋</a>
-          <a href="#ux-funnel" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">3.4 轉換流程</a>
-          <a href="#ux-gap" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">3.5 付費體驗落差</a>
-          <a href="#ux-mobile" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">3.6 行動裝置</a>
+          <a href="#ux-funnel" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">3.2 轉換流程</a>
+          <a href="#ux-gap" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">3.3 付費體驗落差</a>
+          <a href="#ux-mobile" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">3.4 行動裝置</a>
           <a href="#free-page" class="toc-link block py-1 text-warmgray/60">四、免費版頁面優化</a>
           <a href="#paid-page" class="toc-link block py-1 text-warmgray/60">五、付費版頁面優化</a>
           <a href="#tech" class="toc-link block py-1 text-warmgray/60">六、技術實作建議</a>
@@ -125,7 +123,7 @@
         </h2>
 
         <p class="text-warmgray/80 leading-relaxed mb-6">
-          Numerology Within 的轉換漏斗在「免費報告 → 付費結帳」出現嚴重斷裂。使用者對免費內容產生興趣並點擊購買，但在抵達付款頁面前因多步驟 Email 驗證流程而流失。同時，免費版提供過多完整內容、付費版缺乏差異化感知價值、頁面存在渲染 bug，進一步惡化了轉換率。
+          Numerology Within 的轉換漏斗在「免費報告 → 付費結帳」出現嚴重斷裂。使用者對免費內容產生興趣並點擊購買，但在抵達付款頁面前因多步驟 Email 驗證流程而流失。同時，免費版提供過多完整內容、付費版缺乏差異化感知價值、頁面存在內容 bug，進一步惡化了轉換率。
         </p>
 
         <div class="grid sm:grid-cols-2 gap-4 mb-8">
@@ -143,7 +141,7 @@
           </div>
           <div class="bg-sagelight rounded-xl p-5 border border-sage/10">
             <p class="text-sage font-medium text-sm mb-2">🐛 技術修復</p>
-            <p class="text-warmgray/60 text-sm">滾動動畫失效、z-index 覆蓋層、內容截斷 bug</p>
+            <p class="text-warmgray/60 text-sm">標題截斷、拼字錯誤、重複推薦語等內容 bug</p>
           </div>
         </div>
 
@@ -194,16 +192,6 @@
               </tr>
             </thead>
             <tbody class="text-warmgray/70">
-              <tr class="border-b border-warmgray/5">
-                <td class="py-3 pr-4 font-medium text-warmgray/40 line-through">滾動動畫渲染失敗</td>
-                <td class="py-3 pr-4"><span class="bg-sagelight text-sage px-2 py-0.5 rounded text-xs font-medium">已排除</span></td>
-                <td class="py-3 text-warmgray/40">經複測確認為自動化工具截圖問題，實際瀏覽器中所有 section opacity 均為 1，內容正常顯示</td>
-              </tr>
-              <tr class="border-b border-warmgray/5">
-                <td class="py-3 pr-4 font-medium text-warmgray/40 line-through">z-index 覆蓋層</td>
-                <td class="py-3 pr-4"><span class="bg-sagelight text-sage px-2 py-0.5 rounded text-xs font-medium">已排除</span></td>
-                <td class="py-3 text-warmgray/40">該元素為 Chrome 擴充套件（<code class="bg-gray-100 px-1 rounded text-xs">#claude-agent-glow-border</code>）注入，非網站本身問題，且 pointerEvents: none 不影響互動</td>
-              </tr>
               <tr class="border-b border-warmgray/5">
                 <td class="py-3 pr-4 font-medium text-warmgray">標題截斷</td>
                 <td class="py-3 pr-4"><span class="badge-p1 px-2 py-0.5 rounded text-xs font-medium">中等</span></td>
@@ -312,35 +300,11 @@
           </div>
         </div>
 
-        <!-- 3.2 Scroll — FALSE POSITIVE -->
-        <div id="ux-scroll" class="mb-12 opacity-60">
-          <div class="flex items-center gap-3 mb-4">
-            <span class="bg-sagelight text-sage px-2.5 py-1 rounded-lg text-xs font-bold">已排除</span>
-            <h3 class="text-lg font-bold line-through">3.2 頁面滾動動畫問題</h3>
-          </div>
-          <div class="callout-success rounded-xl p-5">
-            <p class="text-sage text-sm"><strong>複測結果（2026-04-06）：</strong>經重新以真實 Chrome 瀏覽器檢測，所有 8 個 section 的 opacity 均為 1、visibility 為 visible，頁面內容正常渲染（總高度 3675px）。無任何 opacity: 0 的隱藏元素。</p>
-            <p class="text-warmgray/50 text-xs mt-2">原始偵測結果為自動化截圖工具的渲染限制所致，非網站本身問題。</p>
-          </div>
-        </div>
-
-        <!-- 3.3 z-index — FALSE POSITIVE -->
-        <div id="ux-zindex" class="mb-12 opacity-60">
-          <div class="flex items-center gap-3 mb-4">
-            <span class="bg-sagelight text-sage px-2.5 py-1 rounded-lg text-xs font-bold">已排除</span>
-            <h3 class="text-lg font-bold line-through">3.3 Z-index 覆蓋層問題</h3>
-          </div>
-          <div class="callout-success rounded-xl p-5">
-            <p class="text-sage text-sm"><strong>複測結果（2026-04-06）：</strong>該 <code class="bg-white/60 px-1 rounded text-xs">z-index: 2147483646</code> 元素實為 Chrome 擴充套件「Claude in Chrome」注入的發光邊框（<code class="bg-white/60 px-1 rounded text-xs">#claude-agent-glow-border</code>），並非網站本身的元素。且該元素 <code class="bg-white/60 px-1 rounded text-xs">pointerEvents: none; opacity: 0</code>，不影響任何使用者互動。</p>
-            <p class="text-warmgray/50 text-xs mt-2">非網站問題，無需修復。</p>
-          </div>
-        </div>
-
-        <!-- 3.4 Funnel -->
+        <!-- 3.2 Funnel -->
         <div id="ux-funnel" class="mb-12">
           <div class="flex items-center gap-3 mb-4">
             <span class="badge-p1 px-2.5 py-1 rounded-lg text-xs font-bold">P1</span>
-            <h3 class="text-lg font-bold">3.4 免費 → 付費的轉換流程設計</h3>
+            <h3 class="text-lg font-bold">3.2 免費 → 付費的轉換流程設計</h3>
           </div>
           <p class="text-warmgray/70 text-sm leading-relaxed mb-4">
             免費版給了太多完整內容（完整 Daily Number），使用者看完覺得「夠了」。新設計採用<strong>好奇缺口（Curiosity Gap）</strong>策略：
@@ -363,11 +327,11 @@
           </div>
         </div>
 
-        <!-- 3.5 Gap -->
+        <!-- 3.3 Gap -->
         <div id="ux-gap" class="mb-12">
           <div class="flex items-center gap-3 mb-4">
             <span class="badge-p1 px-2.5 py-1 rounded-lg text-xs font-bold">P1</span>
-            <h3 class="text-lg font-bold">3.5 付費後的體驗落差</h3>
+            <h3 class="text-lg font-bold">3.3 付費後的體驗落差</h3>
           </div>
           <div class="overflow-x-auto">
             <table class="text-sm mb-4">
@@ -390,11 +354,11 @@
           </div>
         </div>
 
-        <!-- 3.6 Mobile -->
+        <!-- 3.4 Mobile -->
         <div id="ux-mobile" class="mb-4">
           <div class="flex items-center gap-3 mb-4">
             <span class="badge-p1 px-2.5 py-1 rounded-lg text-xs font-bold">P1</span>
-            <h3 class="text-lg font-bold">3.6 行動裝置體驗</h3>
+            <h3 class="text-lg font-bold">3.4 行動裝置體驗</h3>
           </div>
           <ul class="text-sm text-warmgray/70 space-y-2">
             <li>• <strong>浮動底部 CTA 列</strong>（free.html）：滾動後底部固定購買提示</li>
@@ -699,8 +663,6 @@
               </tr>
             </thead>
             <tbody class="text-warmgray/70">
-              <tr class="border-b border-warmgray/5 opacity-40"><td class="py-2.5 pr-4 font-medium text-warmgray line-through">移除 z-index 覆蓋層</td><td class="py-2.5 pr-4"><span class="bg-sagelight text-sage px-2 py-0.5 rounded text-xs">已排除</span></td><td class="py-2.5 pr-4">—</td><td class="py-2.5">Chrome 擴充套件造成，非網站問題</td></tr>
-              <tr class="border-b border-warmgray/5 opacity-40"><td class="py-2.5 pr-4 font-medium text-warmgray line-through">修復滾動動畫</td><td class="py-2.5 pr-4"><span class="bg-sagelight text-sage px-2 py-0.5 rounded text-xs">已排除</span></td><td class="py-2.5 pr-4">—</td><td class="py-2.5">複測正常，為自動化工具問題</td></tr>
               <tr class="border-b border-warmgray/5"><td class="py-2.5 pr-4 font-medium text-warmgray">修正截斷 / 拼字 / 重複</td><td class="py-2.5 pr-4"><span class="badge-p0 px-2 py-0.5 rounded text-xs">P0</span></td><td class="py-2.5 pr-4">1h</td><td class="py-2.5">三個內容 bug 一次修完</td></tr>
               <tr class="border-b border-warmgray/5"><td class="py-2.5 pr-4 font-medium text-warmgray">新版免費頁面</td><td class="py-2.5 pr-4"><span class="badge-p1 px-2 py-0.5 rounded text-xs">P1</span></td><td class="py-2.5 pr-4">2-3 天</td><td class="py-2.5">依 free.html 原型實作</td></tr>
               <tr class="border-b border-warmgray/5"><td class="py-2.5 pr-4 font-medium text-warmgray">Action Insight 區塊</td><td class="py-2.5 pr-4"><span class="badge-p1 px-2 py-0.5 rounded text-xs">P1</span></td><td class="py-2.5 pr-4">1-2 天</td><td class="py-2.5">每個解讀末尾新增</td></tr>
@@ -767,8 +729,6 @@
           </div>
           <div class="space-y-2 pl-2">
             <label class="flex items-start gap-3 text-sm"><input type="checkbox" class="mt-1 accent-red"><span>移除 Email 驗證碼流程（改為付款時收集）</span></label>
-            <label class="flex items-start gap-3 text-sm text-warmgray/30 line-through"><input type="checkbox" class="mt-1" checked disabled><span>修復滾動動畫 bug → 已排除（非網站問題）</span></label>
-            <label class="flex items-start gap-3 text-sm text-warmgray/30 line-through"><input type="checkbox" class="mt-1" checked disabled><span>修復 z-index 覆蓋層 → 已排除（Chrome 擴充套件造成）</span></label>
             <label class="flex items-start gap-3 text-sm"><input type="checkbox" class="mt-1 accent-red"><span>修正「FRUSTRATI」截斷 / 「engery」拼字 / S.L. 重複</span></label>
           </div>
         </div>
