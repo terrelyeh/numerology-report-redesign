@@ -194,6 +194,9 @@
     <!-- Canvas for animated particles -->
     <canvas id="particles-canvas"></canvas>
 
+    <!-- ===== RESONANCE WAVES ===== -->
+    <svg id="resonance-waves" class="absolute inset-0 w-full h-full" style="z-index:2; pointer-events:none; opacity:0.7;" preserveAspectRatio="none"></svg>
+
     <!-- ===== ORBITING NUMBERS (V1-inspired) ===== -->
     <div class="orbit-system">
       <!-- Decorative rings -->
@@ -706,6 +709,72 @@
         requestAnimationFrame(animate);
       }
       animate();
+    })();
+
+    // ===== Resonance Wave Animation =====
+    (function() {
+      const svg = document.getElementById('resonance-waves');
+      if (!svg) return;
+      const ns = 'http://www.w3.org/2000/svg';
+
+      // Wave configurations — each wave has its own character
+      const waves = [
+        { freq: 0.008, amp: 28, speed: 0.015, phase: 0,    yPct: 0.28, color: '78,205,196',  opacity: 0.18, width: 2.0 },
+        { freq: 0.012, amp: 35, speed: 0.022, phase: 1.2,  yPct: 0.38, color: '78,205,196',  opacity: 0.14, width: 1.8 },
+        { freq: 0.006, amp: 45, speed: 0.010, phase: 2.5,  yPct: 0.50, color: '255,255,220', opacity: 0.10, width: 1.5 },
+        { freq: 0.015, amp: 20, speed: 0.028, phase: 0.8,  yPct: 0.62, color: '42,157,143',  opacity: 0.16, width: 1.8 },
+        { freq: 0.010, amp: 22, speed: 0.018, phase: 3.5,  yPct: 0.72, color: '78,205,196',  opacity: 0.10, width: 1.2 },
+      ];
+
+      // Create path elements
+      const paths = waves.map(w => {
+        const path = document.createElementNS(ns, 'path');
+        path.setAttribute('fill', 'none');
+        path.setAttribute('stroke', `rgba(${w.color},${w.opacity})`);
+        path.setAttribute('stroke-width', w.width);
+        path.setAttribute('stroke-linecap', 'round');
+        // Soft glow via filter
+        path.style.filter = `drop-shadow(0 0 6px rgba(${w.color},${w.opacity * 2}))`;
+        svg.appendChild(path);
+        return path;
+      });
+
+      let time = 0;
+
+      function drawWaves() {
+        const W = svg.clientWidth || svg.parentElement.offsetWidth;
+        const H = svg.clientHeight || svg.parentElement.offsetHeight;
+        svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+
+        // Only draw waves on the right 60% of the screen
+        const startX = W * 0.35;
+
+        waves.forEach((w, i) => {
+          const baseY = H * w.yPct;
+          let d = '';
+
+          for (let x = startX; x <= W; x += 3) {
+            // Fade in from left edge
+            const fadeIn = Math.min(1, (x - startX) / (W * 0.15));
+            // Fade out at right edge
+            const fadeOut = Math.min(1, (W - x) / (W * 0.08));
+            const envelope = fadeIn * fadeOut;
+
+            // Standing wave: two sine waves with slightly different frequencies create beats
+            const wave1 = Math.sin(w.freq * x + w.phase + time * w.speed * 60);
+            const wave2 = Math.sin(w.freq * 1.15 * x - w.phase * 0.7 + time * w.speed * 45);
+            const y = baseY + (wave1 * 0.6 + wave2 * 0.4) * w.amp * envelope;
+
+            d += (x === startX ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1);
+          }
+
+          paths[i].setAttribute('d', d);
+        });
+
+        time++;
+        requestAnimationFrame(drawWaves);
+      }
+      drawWaves();
     })();
   </script>
 
