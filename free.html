@@ -127,9 +127,9 @@
       <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
       Free Report Preview
     </div>
-    <h1 class="font-serif text-4xl md:text-5xl text-warmgray leading-tight mb-4">Hi, Terrel.</h1>
+    <h1 id="user-greeting" class="font-serif text-4xl md:text-5xl text-warmgray leading-tight mb-4">Hi, Terrel.</h1>
     <p class="text-warmgray/60 text-lg mb-2">Based on your date of birth</p>
-    <p class="font-serif text-2xl text-warmgray mb-3">August 20, 1980</p>
+    <p id="user-dob" class="font-serif text-2xl text-warmgray mb-3">August 20, 1980</p>
 
     <!-- Personalized Quote — this is the HOOK -->
     <div class="max-w-2xl mx-auto mt-8 bg-white/60 rounded-2xl p-6 border border-warmgray/10">
@@ -565,6 +565,21 @@
   </footer>
 
   <script>
+    // Read query params from home.html form and personalize
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const name = params.get('name');
+      const dob = params.get('dob');
+      if (name) {
+        document.getElementById('user-greeting').textContent = 'Hi, ' + name + '.';
+      }
+      if (dob) {
+        const [y, m, d] = dob.split('-').map(Number);
+        const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+        document.getElementById('user-dob').textContent = months[m - 1] + ' ' + d + ', ' + y;
+      }
+    })();
+
     // Show floating CTA after scrolling past the ego section
     const floatingCta = document.getElementById('floating-cta');
     let ctaVisible = false;

@@ -364,11 +364,11 @@
         <form id="report-form" class="space-y-6">
           <div>
             <label class="block text-sm font-medium mb-2">Your First Name</label>
-            <input type="text" placeholder="Enter your first name" class="form-input w-full px-5 py-3.5 rounded-xl border border-warmgray/15 bg-white text-warmgray placeholder:text-warmgray/30 text-sm">
+            <input id="input-name" type="text" placeholder="Enter your first name" required class="form-input w-full px-5 py-3.5 rounded-xl border border-warmgray/15 bg-white text-warmgray placeholder:text-warmgray/30 text-sm">
           </div>
           <div>
             <label class="block text-sm font-medium mb-2">Your Date of Birth</label>
-            <input type="date" class="form-input w-full px-5 py-3.5 rounded-xl border border-warmgray/15 bg-white text-warmgray text-sm">
+            <input id="input-dob" type="date" required class="form-input w-full px-5 py-3.5 rounded-xl border border-warmgray/15 bg-white text-warmgray text-sm">
           </div>
           <button type="submit" class="w-full bg-sage text-white py-4 rounded-xl text-base font-medium hover:bg-sage/90 transition-all flex items-center justify-center gap-2">
             Get Your Free Daily Number & Birth Chart
@@ -454,7 +454,7 @@
     </div>
   </footer>
 
-  <!-- Nav scroll effect -->
+  <!-- Nav scroll effect + Form submit -->
   <script>
     const nav = document.getElementById('main-nav');
     window.addEventListener('scroll', () => {
@@ -463,6 +463,16 @@
       } else {
         nav.classList.remove('bg-warmgray/95', 'backdrop-blur-md', 'shadow-lg');
       }
+    });
+
+    // Form → free.html redirect
+    document.getElementById('report-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('input-name').value.trim();
+      const dob = document.getElementById('input-dob').value;
+      if (!name || !dob) return;
+      const params = new URLSearchParams({ name, dob });
+      window.location.href = 'free.html?' + params.toString();
     });
   </script>
 
