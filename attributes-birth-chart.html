@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Birth Chart — Numerology Within</title>
+  <meta name="description" content="The numerology Birth Chart is a 3x3 grid mapped from your date of birth. Learn how nine spaces reveal your core energies, hidden patterns, and growth areas.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: '#EDE8E0',
+            warmgray: '#2C3345',
+            sage: '#3A6B5E',
+            sagelight: '#E8F0ED',
+            sagemid: '#D0E2DB',
+            gold: '#B8964E',
+            goldlight: '#FBF6EE',
+            rose: '#E8D5D0',
+            rosedark: '#8B6B62',
+          },
+          fontFamily: {
+            serif: ['Instrument Serif', 'Georgia', 'serif'],
+            sans: ['DM Sans', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'DM Sans', sans-serif; }
+    h1, h2, h3, .font-serif { font-family: 'Instrument Serif', Georgia, serif; }
+    html { scroll-behavior: smooth; }
+
+    /* Article body typography */
+    .article-body p {
+      line-height: 1.8;
+      margin-bottom: 1.5em;
+      color: #2C3345;
+    }
+    .article-body h2 {
+      margin-top: 2.5em;
+      margin-bottom: 0.75em;
+    }
+    .article-body blockquote {
+      border-left: 3px solid #3A6B5E;
+      padding-left: 1.25rem;
+      margin: 2em 0;
+      color: #2C3345;
+      font-style: italic;
+    }
+
+    /* Life Path card hover */
+    .lp-card {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .lp-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+    }
+
+    /* Related article card hover */
+    .related-card {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .related-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    }
+
+    /* Scroll margin for anchors */
+    section[id] { scroll-margin-top: 80px; }
+  </style>
+</head>
+<body class="bg-cream text-warmgray">
+
+  <!-- ======== NAV ======== -->
+  <nav class="sticky top-0 z-50 bg-cream/95 backdrop-blur-md border-b border-warmgray/10">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="home.html" class="text-xl font-serif tracking-wide text-warmgray">Numerology Within</a>
+      <div class="flex items-center gap-6 text-sm">
+        <a href="#" class="text-warmgray/60 hover:text-warmgray transition hidden md:block">Attributes</a>
+        <a href="home.html" class="bg-sage text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-sage/90 transition">
+          Get Free Report
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ======== HERO ======== -->
+  <section class="pt-16 pb-12 md:pt-24 md:pb-16">
+    <div class="max-w-3xl mx-auto px-6">
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-2 text-sm text-warmgray/50 mb-8">
+        <a href="#" class="hover:text-sage transition">Attributes</a>
+        <span>/</span>
+        <span class="text-warmgray/80">Birth Chart</span>
+      </nav>
+
+      <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl text-warmgray leading-tight mb-6">The Birth Chart</h1>
+      <p class="text-lg md:text-xl text-warmgray/70 leading-relaxed max-w-2xl mb-6">
+        A visual map of your core energies &mdash; nine spaces, each one telling a different part of your story.
+      </p>
+      <p class="text-sm text-warmgray/40">4 min read</p>
+    </div>
+  </section>
+
+  <!-- ======== ARTICLE BODY ======== -->
+  <article class="pb-16">
+    <div class="max-w-[720px] mx-auto px-6 article-body">
+
+      <!-- Section 1: What It Is -->
+      <section id="what-it-is">
+        <h2 class="font-serif text-2xl md:text-3xl text-warmgray">What It Is</h2>
+        <p>
+          The Birth Chart is a 3&times;3 grid &mdash; nine positions, numbered 1 through 9 &mdash; mapped directly from your date of birth. Each position in the grid represents a different energy, a different way of being in the world. The numbers that show up in your birthday light up on the chart, and the ones that do not reveal just as much about you as the ones that do.
+        </p>
+        <p>
+          Think of it as a fingerprint. No two charts look exactly alike, even among people born on the same day. The combination of which numbers appear, how often they repeat, and which ones are absent creates a pattern that is uniquely yours.
+        </p>
+        <p>
+          Unlike your Life Path Number, which distills your birth date down to a single digit, the Birth Chart preserves the full picture. It does not simplify &mdash; it maps. And that map becomes the foundation for understanding every other number in your reading.
+        </p>
+      </section>
+
+      <!-- Section 2: How to Read the Grid -->
+      <section id="reading-the-grid">
+        <h2 class="font-serif text-2xl md:text-3xl text-warmgray">How to Read the Grid</h2>
+        <p>
+          The grid has three rows, and each row governs a different domain of your experience.
+        </p>
+        <p>
+          The top row &mdash; positions 7, 8, and 9 &mdash; relates to mental and intellectual energy. This is where analytical thinking, philosophical depth, and ambition live. If your chart is heavy in this row, you probably spend a lot of time in your head, processing, strategizing, and asking questions that other people have not thought to ask yet.
+        </p>
+        <p>
+          The middle row &mdash; positions 4, 5, and 6 &mdash; connects to emotional and intuitive processes. This is your feeling center: empathy, creativity, sensitivity, and the ability to read a room without anyone saying a word. People with a strong middle row often know things before they can explain how they know them.
+        </p>
+        <p>
+          The bottom row &mdash; positions 1, 2, and 3 &mdash; represents physical and practical energy. Communication, cooperation, and the drive to get things done in the real world. This row is about tangible output &mdash; building, speaking, creating things you can touch and see.
+        </p>
+        <p>
+          The frequency of each number matters too. A single appearance means the energy is present but moderate. When a number repeats &mdash; appearing two or three times in your birth date &mdash; that energy is amplified. It becomes louder, more insistent, harder to ignore. Sometimes that amplification is a gift. Sometimes it is a challenge. Often it is both.
+        </p>
+      </section>
+
+      <!-- Section 3: What the Empty Spaces Mean -->
+      <section id="empty-spaces">
+        <h2 class="font-serif text-2xl md:text-3xl text-warmgray">What the Empty Spaces Mean</h2>
+        <p>
+          Here is where people tend to get nervous, so let us be clear: blank spaces on your Birth Chart are not weaknesses. They are not holes. They are growth areas &mdash; energies you were not born pre-loaded with, which means developing them requires conscious effort rather than instinct.
+        </p>
+        <p>
+          If your chart is missing a 5, for example, emotional spontaneity and adaptability might not come naturally. You might default to rigid planning when flexibility would serve you better, or feel genuinely uncomfortable when plans change at the last minute. That does not mean you cannot be spontaneous &mdash; it means the learning curve is steeper, and the growth that comes from it is more deliberate.
+        </p>
+        <p>
+          If the 8 position is empty, navigating authority and material power might feel like unfamiliar territory. You might undercharge for your work, avoid negotiation, or feel conflicted about wanting financial success.
+        </p>
+        <p>
+          The most interesting charts are rarely the "fullest" ones. A chart with every number present can actually feel diffuse &mdash; energy spread in every direction without a strong focus anywhere. The charts with distinct clusters and clear gaps tend to belong to people with sharp, recognizable personalities. The pattern matters more than the count.
+        </p>
+      </section>
+
+      <!-- Section 4: Connections and Patterns -->
+      <section id="connections">
+        <h2 class="font-serif text-2xl md:text-3xl text-warmgray">Connections and Patterns</h2>
+        <p>
+          When certain numbers appear together on your chart, they form what are called Connection Patterns &mdash; and these are where the reading starts to get really specific.
+        </p>
+        <p>
+          An Enquirer Connection, for instance, indicates a natural curiosity and investigative nature. People with this pattern tend to be the ones who cannot let a question go unanswered. They research, they dig, they follow threads until they find something satisfying. It is a gift in professions that require depth &mdash; and a source of frustration for partners who just want to pick a restaurant without a twenty-minute analysis.
+        </p>
+        <p>
+          A Frustration Connection reveals recurring tension points &mdash; areas where your energies pull against each other in ways that create internal friction. You might feel driven in two directions simultaneously, or find that your strengths in one area consistently create problems in another.
+        </p>
+        <p>
+          These patterns are not good or bad. They are blueprints for understanding why certain situations keep showing up in your life. Why the same type of conflict recurs in different relationships. Why certain career paths feel right on paper but drain you in practice. The connections explain the "why" behind patterns you have probably already noticed but could not quite name.
+        </p>
+      </section>
+
+      <!-- Section 5: Why It Matters -->
+      <section id="why-it-matters">
+        <h2 class="font-serif text-2xl md:text-3xl text-warmgray">Why It Matters</h2>
+        <p>
+          Your Birth Chart is the foundation everything else in your numerology reading builds on. Your Ego Number, your Superego, your Identity, your Life Path &mdash; all of them are derived from or interact with the energies mapped in this grid.
+        </p>
+        <p>
+          But here is what most people miss: the chart is not a collection of individual numbers. It is a system. The numbers relate to each other. A strong 1 next to a missing 2 tells a very different story than a strong 1 next to a strong 2. The clusters, the gaps, and the connections between them create a picture that no single number can capture on its own.
+        </p>
+        <p>
+          Understanding your chart as a whole &mdash; not just the individual pieces &mdash; reveals how your energies work together, where they support each other, where they clash, and what that tension creates. It is the difference between knowing the notes in a chord and actually hearing the music.
+        </p>
+        <p>
+          That is why we start here. Everything else makes more sense once you have seen the full map.
+        </p>
+      </section>
+    </div>
+  </article>
+
+  <!-- ======== CTA SECTION ======== -->
+  <section class="py-16 md:py-20">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="bg-cream border-2 border-sage/20 rounded-2xl p-8 md:p-12 text-center">
+        <h2 class="font-serif text-3xl md:text-4xl text-warmgray mb-4">Curious about YOUR Birth Chart?</h2>
+        <p class="text-warmgray/70 leading-relaxed max-w-lg mx-auto mb-8">
+          See how your birth date maps onto the 9-space grid &mdash; your unique pattern might surprise you.
+        </p>
+        <a href="home.html" class="inline-block bg-sage text-white px-8 py-3.5 rounded-full font-medium hover:bg-sage/90 transition text-base">
+          Get My Free Report &rarr;
+        </a>
+        <p class="text-sm text-warmgray/40 mt-4">Free &middot; No email &middot; 10 seconds</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== RELATED ARTICLES ======== -->
+  <section class="py-12 md:py-16 border-t border-warmgray/10">
+    <div class="max-w-4xl mx-auto px-6">
+      <h2 class="font-serif text-2xl md:text-3xl text-warmgray mb-8 text-center">Keep Reading</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+
+        <a href="attributes-life-path.html" class="related-card block bg-white rounded-xl p-6 border border-warmgray/8">
+          <div class="text-xs font-medium text-sage uppercase tracking-wide mb-3">Attributes</div>
+          <h3 class="font-serif text-xl text-warmgray mb-2">The Life Path Number</h3>
+          <p class="text-sm text-warmgray/60 leading-relaxed">The single most important number in your chart &mdash; your purpose, drive, and the lessons life keeps bringing back.</p>
+        </a>
+
+        <a href="attributes-ego.html" class="related-card block bg-white rounded-xl p-6 border border-warmgray/8">
+          <div class="text-xs font-medium text-sage uppercase tracking-wide mb-3">Attributes</div>
+          <h3 class="font-serif text-xl text-warmgray mb-2">The Ego Number</h3>
+          <p class="text-sm text-warmgray/60 leading-relaxed">The mental lens you see the world through every day &mdash; your default way of processing decisions.</p>
+        </a>
+
+        <a href="attributes-connections.html" class="related-card block bg-white rounded-xl p-6 border border-warmgray/8">
+          <div class="text-xs font-medium text-sage uppercase tracking-wide mb-3">Attributes</div>
+          <h3 class="font-serif text-xl text-warmgray mb-2">Birth Chart Connections</h3>
+          <p class="text-sm text-warmgray/60 leading-relaxed">No number exists alone. See how your core numbers work together to shape who you are.</p>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== FOOTER ======== -->
+  <footer class="py-8 border-t border-warmgray/10">
+    <div class="max-w-5xl mx-auto px-6 text-center text-warmgray/40 text-sm">
+      <p>
+        <a href="/terms" class="hover:text-warmgray/60">Terms</a>
+        <span class="mx-2">&middot;</span>
+        Contact us: <a href="mailto:service@numerologywithin.net" class="hover:text-warmgray/60">service@numerologywithin.net</a>
+        <span class="mx-2">&middot;</span>
+        &copy; 2026 Numerology Within. All Rights Reserved.
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
