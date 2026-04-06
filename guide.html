@@ -88,16 +88,20 @@
         <nav class="space-y-1 text-sm">
           <a href="#summary" class="toc-link block py-1 text-warmgray/60">一、執行摘要</a>
           <a href="#problems" class="toc-link block py-1 text-warmgray/60">二、現有問題分析</a>
-          <a href="#ux" class="toc-link block py-1 text-warmgray/60">三、使用者體驗（UX）</a>
-          <a href="#ux-email" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">3.1 Email 驗證碼</a>
-          <a href="#ux-funnel" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">3.2 轉換流程</a>
-          <a href="#ux-gap" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">3.3 付費體驗落差</a>
-          <a href="#ux-mobile" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">3.4 行動裝置</a>
-          <a href="#free-page" class="toc-link block py-1 text-warmgray/60">四、免費版頁面優化</a>
-          <a href="#paid-page" class="toc-link block py-1 text-warmgray/60">五、付費版頁面優化</a>
-          <a href="#tech" class="toc-link block py-1 text-warmgray/60">六、技術實作建議</a>
-          <a href="#roadmap" class="toc-link block py-1 text-warmgray/60">七、執行路線圖</a>
-          <a href="#links" class="toc-link block py-1 text-warmgray/60">八、原型連結</a>
+          <a href="#content-review" class="toc-link block py-1 text-warmgray/60">三、既有內容現況分析</a>
+          <a href="#cr-free" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">3.1 免費版內容</a>
+          <a href="#cr-paid" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">3.2 付費版內容</a>
+          <a href="#cr-verdict" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">3.3 總結判定</a>
+          <a href="#ux" class="toc-link block py-1 text-warmgray/60">四、使用者體驗（UX）</a>
+          <a href="#ux-email" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">4.1 Email 驗證碼</a>
+          <a href="#ux-funnel" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">4.2 轉換流程</a>
+          <a href="#ux-gap" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">4.3 付費體驗落差</a>
+          <a href="#ux-mobile" class="toc-link block py-1 pl-4 text-warmgray/40 text-xs">4.4 行動裝置</a>
+          <a href="#free-page" class="toc-link block py-1 text-warmgray/60">五、免費版頁面優化</a>
+          <a href="#paid-page" class="toc-link block py-1 text-warmgray/60">六、付費版頁面優化</a>
+          <a href="#tech" class="toc-link block py-1 text-warmgray/60">七、技術實作建議</a>
+          <a href="#roadmap" class="toc-link block py-1 text-warmgray/60">八、執行路線圖</a>
+          <a href="#links" class="toc-link block py-1 text-warmgray/60">九、原型連結</a>
         </nav>
       </div>
     </aside>
@@ -159,25 +163,37 @@
 
         <!-- 2.1 Funnel -->
         <h3 class="text-lg font-bold mb-4">2.1 轉換漏斗斷點分析</h3>
-        <div class="bg-gray-50 rounded-xl p-6 mb-8 overflow-x-auto">
-          <div class="flex items-center gap-2 text-sm flex-wrap">
-            <span class="bg-sagelight text-sage px-3 py-1.5 rounded-lg whitespace-nowrap">輸入生日</span>
-            <span class="text-warmgray/20">→</span>
-            <span class="bg-sagelight text-sage px-3 py-1.5 rounded-lg whitespace-nowrap">免費報告</span>
-            <span class="text-warmgray/20">→</span>
-            <span class="bg-sagelight text-sage px-3 py-1.5 rounded-lg whitespace-nowrap">點擊購買</span>
-            <span class="text-warmgray/20">→</span>
-            <span class="bg-red/10 text-red px-3 py-1.5 rounded-lg font-medium whitespace-nowrap">輸入 Email</span>
-            <span class="text-warmgray/20">→</span>
-            <span class="bg-red/10 text-red px-3 py-1.5 rounded-lg font-medium whitespace-nowrap">去信箱找驗證碼</span>
-            <span class="text-warmgray/20">→</span>
-            <span class="bg-red/10 text-red px-3 py-1.5 rounded-lg font-medium whitespace-nowrap">回網站輸入</span>
-            <span class="text-warmgray/20">→</span>
-            <span class="bg-warmgray text-white px-3 py-1.5 rounded-lg whitespace-nowrap">付款頁</span>
-            <span class="text-warmgray/20">→</span>
-            <span class="bg-warmgray text-white px-3 py-1.5 rounded-lg whitespace-nowrap">完成</span>
+        <div class="bg-gray-50 rounded-xl p-6 mb-8">
+          <!-- Desktop: horizontal -->
+          <div class="hidden md:flex items-center gap-1.5 text-sm mb-4">
+            <span class="bg-sagelight text-sage px-3 py-1.5 rounded-lg whitespace-nowrap text-xs">輸入生日</span>
+            <span class="text-warmgray/20 text-xs">→</span>
+            <span class="bg-sagelight text-sage px-3 py-1.5 rounded-lg whitespace-nowrap text-xs">免費報告</span>
+            <span class="text-warmgray/20 text-xs">→</span>
+            <span class="bg-sagelight text-sage px-3 py-1.5 rounded-lg whitespace-nowrap text-xs">點擊購買</span>
+            <span class="text-warmgray/20 text-xs">→</span>
+            <span class="bg-red/10 text-red px-3 py-1.5 rounded-lg font-medium whitespace-nowrap text-xs">輸入 Email</span>
+            <span class="text-warmgray/20 text-xs">→</span>
+            <span class="bg-red/10 text-red px-3 py-1.5 rounded-lg font-medium whitespace-nowrap text-xs">去信箱找驗證碼</span>
+            <span class="text-warmgray/20 text-xs">→</span>
+            <span class="bg-red/10 text-red px-3 py-1.5 rounded-lg font-medium whitespace-nowrap text-xs">回網站輸入</span>
+            <span class="text-warmgray/20 text-xs">→</span>
+            <span class="bg-warmgray text-white px-3 py-1.5 rounded-lg whitespace-nowrap text-xs">付款頁</span>
+            <span class="text-warmgray/20 text-xs">→</span>
+            <span class="bg-warmgray text-white px-3 py-1.5 rounded-lg whitespace-nowrap text-xs">完成</span>
           </div>
-          <p class="text-red text-sm font-medium mt-4">⚠️ 紅色步驟為不必要的摩擦點——每步流失 20-40% 使用者，總流失率預估 70-90%</p>
+          <!-- Mobile: vertical steps -->
+          <div class="md:hidden space-y-2 mb-4">
+            <div class="flex items-center gap-3"><span class="w-6 h-6 rounded-full bg-sage text-white flex items-center justify-center text-xs flex-shrink-0">1</span><span class="bg-sagelight text-sage px-3 py-1.5 rounded-lg text-xs">輸入生日</span></div>
+            <div class="flex items-center gap-3"><span class="w-6 h-6 rounded-full bg-sage text-white flex items-center justify-center text-xs flex-shrink-0">2</span><span class="bg-sagelight text-sage px-3 py-1.5 rounded-lg text-xs">看到免費報告</span></div>
+            <div class="flex items-center gap-3"><span class="w-6 h-6 rounded-full bg-sage text-white flex items-center justify-center text-xs flex-shrink-0">3</span><span class="bg-sagelight text-sage px-3 py-1.5 rounded-lg text-xs">點擊購買</span></div>
+            <div class="flex items-center gap-3"><span class="w-6 h-6 rounded-full bg-red text-white flex items-center justify-center text-xs flex-shrink-0">4</span><span class="bg-red/10 text-red px-3 py-1.5 rounded-lg text-xs font-medium">輸入 Email</span><span class="text-red text-xs">← 摩擦開始</span></div>
+            <div class="flex items-center gap-3"><span class="w-6 h-6 rounded-full bg-red text-white flex items-center justify-center text-xs flex-shrink-0">5</span><span class="bg-red/10 text-red px-3 py-1.5 rounded-lg text-xs font-medium">去信箱找驗證碼</span></div>
+            <div class="flex items-center gap-3"><span class="w-6 h-6 rounded-full bg-red text-white flex items-center justify-center text-xs flex-shrink-0">6</span><span class="bg-red/10 text-red px-3 py-1.5 rounded-lg text-xs font-medium">回網站輸入驗證碼</span></div>
+            <div class="flex items-center gap-3"><span class="w-6 h-6 rounded-full bg-warmgray text-white flex items-center justify-center text-xs flex-shrink-0">7</span><span class="bg-warmgray text-white px-3 py-1.5 rounded-lg text-xs">付款頁面</span></div>
+            <div class="flex items-center gap-3"><span class="w-6 h-6 rounded-full bg-warmgray text-white flex items-center justify-center text-xs flex-shrink-0">8</span><span class="bg-warmgray text-white px-3 py-1.5 rounded-lg text-xs">完成付款</span></div>
+          </div>
+          <p class="text-red text-sm font-medium">⚠️ 紅色步驟為不必要的摩擦點——每步流失 20-40% 使用者，總流失率預估 70-90%</p>
         </div>
 
         <!-- 2.2 Tech -->
@@ -235,10 +251,150 @@
         </div>
       </section>
 
-      <!-- ======== 三、UX ======== -->
+      <!-- ======== 三、既有內容現況分析 ======== -->
+      <section id="content-review" class="mb-20 page-break">
+        <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+          <span class="w-8 h-8 rounded-lg bg-gold text-white flex items-center justify-center text-sm font-bold">3</span>
+          既有內容現況分析
+        </h2>
+        <p class="text-warmgray/70 text-sm leading-relaxed mb-8">
+          在討論怎麼改之前，先盤點一下目前免費版和付費版「實際有什麼」，以及這些內容的豐富度、實用性和轉換效果。
+        </p>
+
+        <!-- 3.1 Free -->
+        <div id="cr-free" class="mb-12">
+          <h3 class="text-lg font-bold mb-4">3.1 免費版內容現況</h3>
+
+          <div class="bg-gray-50 rounded-xl p-6 mb-4">
+            <p class="font-medium text-sm mb-4">目前免費報告包含以下內容：</p>
+            <div class="overflow-x-auto">
+              <table class="text-sm w-full">
+                <thead><tr class="border-b-2 border-warmgray/10"><th class="py-2 pr-4 text-left">內容區塊</th><th class="py-2 pr-4 text-left">完整度</th><th class="py-2 text-left">評估</th></tr></thead>
+                <tbody class="text-warmgray/70">
+                  <tr class="border-b border-warmgray/5"><td class="py-2.5 pr-4 font-medium text-warmgray">Birth Chart 格線圖</td><td class="py-2.5 pr-4"><span class="bg-sagelight text-sage px-2 py-0.5 rounded text-xs">完整</span></td><td class="py-2.5">✅ 有效建立個人化感——使用者看到「這是我的出生日期算出來的」</td></tr>
+                  <tr class="border-b border-warmgray/5"><td class="py-2.5 pr-4 font-medium text-warmgray">Daily Number 解讀</td><td class="py-2.5 pr-4"><span class="bg-red/10 text-red px-2 py-0.5 rounded text-xs">完整</span></td><td class="py-2.5">⚠️ <strong>問題：給太多了。</strong>完整的每日數字解讀讓使用者覺得「已經夠了」，缺乏升級動機</td></tr>
+                  <tr class="border-b border-warmgray/5"><td class="py-2.5 pr-4 font-medium text-warmgray">核心數字標示</td><td class="py-2.5 pr-4"><span class="bg-sagelight text-sage px-2 py-0.5 rounded text-xs">完整</span></td><td class="py-2.5">✅ 列出 Ego、Superego 等數字名稱和數值，適合作為勾子</td></tr>
+                  <tr><td class="py-2.5 pr-4 font-medium text-warmgray">行動建議 / Action Tips</td><td class="py-2.5 pr-4"><span class="bg-warmgray/10 text-warmgray/50 px-2 py-0.5 rounded text-xs">無</span></td><td class="py-2.5">免費版不包含任何「接下來該怎麼做」的建議</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="callout-warning rounded-xl p-5 mb-4">
+            <p class="text-sm text-warmgray/70 leading-relaxed">
+              <strong class="text-orange">核心問題：</strong>免費版的 Daily Number 解讀是一段完整的、有深度的文字。使用者讀完後感覺已經「被算過了」，不會產生「我需要知道更多」的衝動。免費內容的 <strong>品質很好</strong>，但 <strong>給的量太多</strong>，反而成了付費轉換的阻礙。
+            </p>
+          </div>
+
+          <div class="grid sm:grid-cols-3 gap-3">
+            <div class="bg-gray-50 rounded-lg p-4 text-center">
+              <p class="text-2xl font-bold text-sage mb-1">A</p>
+              <p class="text-xs text-warmgray/50">內容品質</p>
+              <p class="text-xs text-warmgray/40 mt-1">文字有深度、個人化</p>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-4 text-center">
+              <p class="text-2xl font-bold text-red mb-1">D</p>
+              <p class="text-xs text-warmgray/50">轉換效果</p>
+              <p class="text-xs text-warmgray/40 mt-1">給太多，缺乏升級動機</p>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-4 text-center">
+              <p class="text-2xl font-bold text-orange mb-1">C</p>
+              <p class="text-xs text-warmgray/50">好奇缺口</p>
+              <p class="text-xs text-warmgray/40 mt-1">不夠明顯的「還有更多」感</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3.2 Paid -->
+        <div id="cr-paid" class="mb-12">
+          <h3 class="text-lg font-bold mb-4">3.2 付費版內容現況</h3>
+
+          <div class="bg-gray-50 rounded-xl p-6 mb-4">
+            <p class="font-medium text-sm mb-4">目前付費報告包含以下內容（$19.90）：</p>
+            <div class="overflow-x-auto">
+              <table class="text-sm w-full">
+                <thead><tr class="border-b-2 border-warmgray/10"><th class="py-2 pr-4 text-left">內容區塊</th><th class="py-2 pr-4 text-left">豐富度</th><th class="py-2 text-left">評估</th></tr></thead>
+                <tbody class="text-warmgray/70">
+                  <tr class="border-b border-warmgray/5"><td class="py-2.5 pr-4 font-medium text-warmgray">Ego Number 解讀</td><td class="py-2.5 pr-4"><span class="bg-sagelight text-sage px-2 py-0.5 rounded text-xs">充實</span></td><td class="py-2.5">✅ 多段深度分析，涵蓋平衡與失衡狀態</td></tr>
+                  <tr class="border-b border-warmgray/5"><td class="py-2.5 pr-4 font-medium text-warmgray">Superego Number 解讀</td><td class="py-2.5 pr-4"><span class="bg-sagelight text-sage px-2 py-0.5 rounded text-xs">充實</span></td><td class="py-2.5">✅ 連結直覺與邏輯的張力分析</td></tr>
+                  <tr class="border-b border-warmgray/5"><td class="py-2.5 pr-4 font-medium text-warmgray">Identity Number 解讀</td><td class="py-2.5 pr-4"><span class="bg-sagelight text-sage px-2 py-0.5 rounded text-xs">充實</span></td><td class="py-2.5">✅ 分析內在驅動力與情感表達的落差</td></tr>
+                  <tr class="border-b border-warmgray/5"><td class="py-2.5 pr-4 font-medium text-warmgray">Connection Patterns</td><td class="py-2.5 pr-4"><span class="bg-sagelight text-sage px-2 py-0.5 rounded text-xs">充實</span></td><td class="py-2.5">✅ Enquirer 和 Frustration 兩組連結分析，有獨到觀點</td></tr>
+                  <tr class="border-b border-warmgray/5"><td class="py-2.5 pr-4 font-medium text-warmgray">Life Path / Attitude / Day of Birth</td><td class="py-2.5 pr-4"><span class="bg-sagelight text-sage px-2 py-0.5 rounded text-xs">充實</span></td><td class="py-2.5">✅ 三個外在數字均有完整解讀</td></tr>
+                  <tr class="border-b border-warmgray/5"><td class="py-2.5 pr-4 font-medium text-warmgray">Peak Pyramids / Key Life Ages</td><td class="py-2.5 pr-4"><span class="bg-sagelight text-sage px-2 py-0.5 rounded text-xs">充實</span></td><td class="py-2.5">✅ 4 個人生高峰期，每個都有解讀</td></tr>
+                  <tr class="border-b border-warmgray/5"><td class="py-2.5 pr-4 font-medium text-warmgray">月度能量預測</td><td class="py-2.5 pr-4"><span class="bg-goldlight text-gold px-2 py-0.5 rounded text-xs">中等</span></td><td class="py-2.5">⚠️ 每月只有 1-2 句概述，偏薄，可再加深</td></tr>
+                  <tr class="border-b border-warmgray/5"><td class="py-2.5 pr-4 font-medium text-warmgray">行動建議 / Action Tips</td><td class="py-2.5 pr-4"><span class="bg-red/10 text-red px-2 py-0.5 rounded text-xs">無</span></td><td class="py-2.5">❌ <strong>完全沒有</strong>。只告訴你「你是什麼樣的人」，沒有「所以你該怎麼做」</td></tr>
+                  <tr><td class="py-2.5 pr-4 font-medium text-warmgray">PDF / 下載 / 分享</td><td class="py-2.5 pr-4"><span class="bg-red/10 text-red px-2 py-0.5 rounded text-xs">無</span></td><td class="py-2.5">❌ 付了錢但無法帶走報告，無法離線閱讀或分享</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-3 gap-3 mb-6">
+            <div class="bg-gray-50 rounded-lg p-4 text-center">
+              <p class="text-2xl font-bold text-sage mb-1">A-</p>
+              <p class="text-xs text-warmgray/50">內容豐富度</p>
+              <p class="text-xs text-warmgray/40 mt-1">8+ 數字完整解讀，覆蓋面廣</p>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-4 text-center">
+              <p class="text-2xl font-bold text-red mb-1">D</p>
+              <p class="text-xs text-warmgray/50">實用性（可操作性）</p>
+              <p class="text-xs text-warmgray/40 mt-1">零行動建議，讀完不知怎麼用</p>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-4 text-center">
+              <p class="text-2xl font-bold text-orange mb-1">C</p>
+              <p class="text-xs text-warmgray/50">感知價值</p>
+              <p class="text-xs text-warmgray/40 mt-1">跟免費版視覺無差異，無 PDF</p>
+            </div>
+          </div>
+
+          <div class="callout-info rounded-xl p-5">
+            <p class="text-sm text-warmgray/70 leading-relaxed">
+              <strong class="text-blue">重點：</strong>付費報告的「原始內容」其實相當紮實——每個數字都有多段有深度的個人化分析，不是那種一兩句話的泛泛之談。問題不在內容的「質量」，而在 <strong>包裝和呈現</strong>：
+            </p>
+            <ul class="text-sm text-warmgray/60 mt-3 space-y-1.5">
+              <li>1. 沒有把深度解讀轉化為使用者可以「帶走去用」的東西（Action Tips）</li>
+              <li>2. 沒有在視覺上讓使用者感受到「這跟免費的不一樣」</li>
+              <li>3. 沒有提供永久存取的形式（PDF、書籤等）來強化「我買了一個有價值的東西」的感覺</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 3.3 Verdict -->
+        <div id="cr-verdict" class="mb-4">
+          <h3 class="text-lg font-bold mb-4">3.3 總結判定</h3>
+
+          <div class="bg-warmgray rounded-2xl p-8 text-white">
+            <div class="grid sm:grid-cols-2 gap-6">
+              <div>
+                <p class="text-white/40 text-xs tracking-widest uppercase mb-3">免費版的問題</p>
+                <p class="font-bold text-lg mb-2">內容太好、給太多</p>
+                <p class="text-white/60 text-sm leading-relaxed">
+                  內容品質高是好事，但免費版應該是「讓你嘗一口就想買整盤」，而不是「讓你吃飽了就走」。需要重新切割：展示「你的數字是什麼」但鎖住「這對你意味著什麼」。
+                </p>
+              </div>
+              <div>
+                <p class="text-white/40 text-xs tracking-widest uppercase mb-3">付費版的問題</p>
+                <p class="font-bold text-lg mb-2">有料但缺乏包裝</p>
+                <p class="text-white/60 text-sm leading-relaxed">
+                  解讀的深度和個人化程度其實值得 $19.90，但使用者感受不到。需要新增 Action Insights（行動建議）、PDF 下載、視覺升級，讓付費體驗「明顯不同且值得」。
+                </p>
+              </div>
+            </div>
+
+            <div class="border-t border-white/10 mt-6 pt-6">
+              <p class="text-white/40 text-xs tracking-widest uppercase mb-3">一句話總結</p>
+              <p class="text-white font-medium leading-relaxed">
+                你的內容底子是好的——不需要重寫。需要的是重新切割（免費版少給一點）、重新包裝（付費版多加行動建議和功能），以及修好阻擋轉換的流程問題。
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======== 四、UX ======== -->
       <section id="ux" class="mb-20 page-break">
         <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-          <span class="w-8 h-8 rounded-lg bg-red text-white flex items-center justify-center text-sm font-bold">3</span>
+          <span class="w-8 h-8 rounded-lg bg-red text-white flex items-center justify-center text-sm font-bold">4</span>
           使用者體驗（UX）優化建議
         </h2>
 
@@ -246,7 +402,7 @@
         <div id="ux-email" class="mb-12">
           <div class="flex items-center gap-3 mb-4">
             <span class="badge-p0 px-2.5 py-1 rounded-lg text-xs font-bold">P0 最高優先級</span>
-            <h3 class="text-lg font-bold">3.1 Email 驗證碼流程問題</h3>
+            <h3 class="text-lg font-bold">4.1 Email 驗證碼流程問題</h3>
           </div>
 
           <div class="callout-critical rounded-xl p-6 mb-6">
@@ -304,7 +460,7 @@
         <div id="ux-funnel" class="mb-12">
           <div class="flex items-center gap-3 mb-4">
             <span class="badge-p1 px-2.5 py-1 rounded-lg text-xs font-bold">P1</span>
-            <h3 class="text-lg font-bold">3.2 免費 → 付費的轉換流程設計</h3>
+            <h3 class="text-lg font-bold">4.2 免費 → 付費的轉換流程設計</h3>
           </div>
           <p class="text-warmgray/70 text-sm leading-relaxed mb-4">
             免費版給了太多完整內容（完整 Daily Number），使用者看完覺得「夠了」。新設計採用<strong>好奇缺口（Curiosity Gap）</strong>策略：
@@ -331,7 +487,7 @@
         <div id="ux-gap" class="mb-12">
           <div class="flex items-center gap-3 mb-4">
             <span class="badge-p1 px-2.5 py-1 rounded-lg text-xs font-bold">P1</span>
-            <h3 class="text-lg font-bold">3.3 付費後的體驗落差</h3>
+            <h3 class="text-lg font-bold">4.3 付費後的體驗落差</h3>
           </div>
           <div class="overflow-x-auto">
             <table class="text-sm mb-4">
@@ -358,7 +514,7 @@
         <div id="ux-mobile" class="mb-4">
           <div class="flex items-center gap-3 mb-4">
             <span class="badge-p1 px-2.5 py-1 rounded-lg text-xs font-bold">P1</span>
-            <h3 class="text-lg font-bold">3.4 行動裝置體驗</h3>
+            <h3 class="text-lg font-bold">4.4 行動裝置體驗</h3>
           </div>
           <ul class="text-sm text-warmgray/70 space-y-2">
             <li>• <strong>浮動底部 CTA 列</strong>（free.html）：滾動後底部固定購買提示</li>
@@ -368,10 +524,10 @@
         </div>
       </section>
 
-      <!-- ======== 四、免費版 ======== -->
+      <!-- ======== 五、免費版 ======== -->
       <section id="free-page" class="mb-20 page-break">
         <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-          <span class="w-8 h-8 rounded-lg bg-warmgray text-white flex items-center justify-center text-sm font-bold">4</span>
+          <span class="w-8 h-8 rounded-lg bg-warmgray text-white flex items-center justify-center text-sm font-bold">5</span>
           免費版頁面（Hook Page）優化說明
         </h2>
 
@@ -484,10 +640,10 @@
         </div>
       </section>
 
-      <!-- ======== 五、付費版 ======== -->
+      <!-- ======== 六、付費版 ======== -->
       <section id="paid-page" class="mb-20 page-break">
         <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-          <span class="w-8 h-8 rounded-lg bg-warmgray text-white flex items-center justify-center text-sm font-bold">5</span>
+          <span class="w-8 h-8 rounded-lg bg-warmgray text-white flex items-center justify-center text-sm font-bold">6</span>
           付費版頁面優化說明
         </h2>
 
@@ -644,10 +800,10 @@
         </div>
       </section>
 
-      <!-- ======== 六、技術實作 ======== -->
+      <!-- ======== 七、技術實作 ======== -->
       <section id="tech" class="mb-20 page-break">
         <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-          <span class="w-8 h-8 rounded-lg bg-warmgray text-white flex items-center justify-center text-sm font-bold">6</span>
+          <span class="w-8 h-8 rounded-lg bg-warmgray text-white flex items-center justify-center text-sm font-bold">7</span>
           技術實作建議
         </h2>
 
@@ -711,10 +867,10 @@
         </div>
       </section>
 
-      <!-- ======== 七、路線圖 ======== -->
+      <!-- ======== 八、路線圖 ======== -->
       <section id="roadmap" class="mb-20 page-break">
         <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-          <span class="w-8 h-8 rounded-lg bg-warmgray text-white flex items-center justify-center text-sm font-bold">7</span>
+          <span class="w-8 h-8 rounded-lg bg-warmgray text-white flex items-center justify-center text-sm font-bold">8</span>
           優先級與執行路線圖
         </h2>
 
@@ -783,10 +939,10 @@
         </div>
       </section>
 
-      <!-- ======== 八、連結 ======== -->
+      <!-- ======== 九、連結 ======== -->
       <section id="links" class="mb-20">
         <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-          <span class="w-8 h-8 rounded-lg bg-warmgray text-white flex items-center justify-center text-sm font-bold">8</span>
+          <span class="w-8 h-8 rounded-lg bg-warmgray text-white flex items-center justify-center text-sm font-bold">9</span>
           原型預覽連結
         </h2>
 
