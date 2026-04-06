@@ -107,6 +107,23 @@
       75% { transform: translateY(10px) rotate(-2deg); opacity: 0.03; }
     }
 
+    /* Resonance vibration — only the right-side waveform area */
+    .wave-resonance {
+      position: absolute;
+      inset: -6px;
+      background: url('https://test.numerologywithin.net/assets/banner-CwtNIAzs.png') center center / cover no-repeat;
+      z-index: 0;
+      pointer-events: none;
+      clip-path: polygon(62% 20%, 100% 20%, 100% 80%, 62% 80%);
+      animation: wave-vibrate 8s ease-in-out infinite;
+    }
+    @keyframes wave-vibrate {
+      0%, 100% { transform: translateY(0px); }
+      25% { transform: translateY(-2px); }
+      50% { transform: translateY(1.5px); }
+      75% { transform: translateY(-1px); }
+    }
+
     /* ===== ORBITING NUMBERS (from V1) ===== */
     @keyframes orbit {
       from { transform: rotate(0deg) translateX(var(--orbit-r, 140px)) rotate(0deg); }
@@ -189,8 +206,8 @@
   <!-- ======== HERO ======== -->
   <section class="hero-v2 flex items-center relative">
 
-    <!-- Resonance waves — ultra-slow sine waves aligned with banner waveform -->
-    <svg id="resonance-waves" class="absolute inset-0 w-full h-full" style="z-index:2; pointer-events:none;" preserveAspectRatio="none"></svg>
+    <!-- Waveform resonance: clipped copy of banner, only right-side waves vibrate -->
+    <div class="wave-resonance"></div>
 
     <!-- Brain glow overlay on the banner image -->
     <div class="brain-glow-overlay"></div>
@@ -712,66 +729,6 @@
       animate();
     })();
 
-    // ===== Ultra-slow Resonance Waves =====
-    (function() {
-      const svg = document.getElementById('resonance-waves');
-      if (!svg) return;
-      const ns = 'http://www.w3.org/2000/svg';
-
-      // Waves: ultra-slow speed values (10x slower than original)
-      const waves = [
-        { freq: 0.006, amp: 22, speed: 0.0015, phase: 0,    yPct: 0.30, color: '78,205,196',  opacity: 0.12, width: 1.5 },
-        { freq: 0.009, amp: 30, speed: 0.0020, phase: 1.2,  yPct: 0.40, color: '78,205,196',  opacity: 0.09, width: 1.3 },
-        { freq: 0.004, amp: 38, speed: 0.0012, phase: 2.5,  yPct: 0.50, color: '255,255,220', opacity: 0.06, width: 1.0 },
-        { freq: 0.011, amp: 16, speed: 0.0025, phase: 0.8,  yPct: 0.60, color: '42,157,143',  opacity: 0.10, width: 1.4 },
-        { freq: 0.007, amp: 18, speed: 0.0018, phase: 3.5,  yPct: 0.70, color: '78,205,196',  opacity: 0.07, width: 1.0 },
-      ];
-
-      const paths = waves.map(w => {
-        const path = document.createElementNS(ns, 'path');
-        path.setAttribute('fill', 'none');
-        path.setAttribute('stroke', `rgba(${w.color},${w.opacity})`);
-        path.setAttribute('stroke-width', w.width);
-        path.setAttribute('stroke-linecap', 'round');
-        path.style.filter = `drop-shadow(0 0 8px rgba(${w.color},${w.opacity * 1.5}))`;
-        svg.appendChild(path);
-        return path;
-      });
-
-      let time = 0;
-
-      function drawWaves() {
-        const W = svg.clientWidth || svg.parentElement.offsetWidth;
-        const H = svg.clientHeight || svg.parentElement.offsetHeight;
-        svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
-
-        const startX = W * 0.38;
-
-        waves.forEach((w, i) => {
-          const baseY = H * w.yPct;
-          let d = '';
-
-          for (let x = startX; x <= W; x += 3) {
-            const fadeIn = Math.min(1, (x - startX) / (W * 0.18));
-            const fadeOut = Math.min(1, (W - x) / (W * 0.06));
-            const envelope = fadeIn * fadeOut;
-
-            // Two sine waves creating gentle interference / breathing
-            const wave1 = Math.sin(w.freq * x + w.phase + time * w.speed * 60);
-            const wave2 = Math.sin(w.freq * 1.08 * x - w.phase * 0.5 + time * w.speed * 42);
-            const y = baseY + (wave1 * 0.65 + wave2 * 0.35) * w.amp * envelope;
-
-            d += (x === startX ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1);
-          }
-
-          paths[i].setAttribute('d', d);
-        });
-
-        time++;
-        requestAnimationFrame(drawWaves);
-      }
-      drawWaves();
-    })();
   </script>
 
 </body>
