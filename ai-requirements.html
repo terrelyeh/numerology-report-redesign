@@ -64,11 +64,19 @@
         <span class="text-sm text-warmgray/40">|</span>
         <span class="text-sm font-medium">AI 需求交付文件</span>
       </div>
-      <div class="flex items-center gap-4 text-sm">
+      <div class="hidden md:flex items-center gap-4 text-sm">
         <a href="https://terrelyeh.github.io/numerology-report-redesign/guide.html" target="_blank" class="text-sage hover:underline">優化指南 ↗</a>
         <a href="https://terrelyeh.github.io/numerology-report-redesign/free.html" target="_blank" class="text-sage hover:underline">免費版原型 ↗</a>
         <a href="https://terrelyeh.github.io/numerology-report-redesign/" target="_blank" class="text-sage hover:underline">付費版原型 ↗</a>
       </div>
+      <button onclick="document.getElementById('ai-mobile-menu').classList.toggle('hidden')" class="md:hidden text-warmgray/60 hover:text-sage p-1">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+    <div id="ai-mobile-menu" class="hidden md:hidden border-t border-gray-100 bg-white/95 px-6 py-3 space-y-2 text-sm">
+      <a href="https://terrelyeh.github.io/numerology-report-redesign/guide.html" target="_blank" class="block text-sage hover:underline">優化指南 ↗</a>
+      <a href="https://terrelyeh.github.io/numerology-report-redesign/free.html" target="_blank" class="block text-sage hover:underline">免費版原型 ↗</a>
+      <a href="https://terrelyeh.github.io/numerology-report-redesign/" target="_blank" class="block text-sage hover:underline">付費版原型 ↗</a>
     </div>
   </nav>
 
