@@ -544,7 +544,91 @@ DON'T:
 
 ---
 
-## 7. 驗收標準
+## 8. Attributes 教育頁優化
+
+### 8.1 頁面說明
+
+`/attributes` 是一個命理名詞百科頁，包含 11 篇教育文章。目前風格太像字典，使用者讀完就離開，沒有被引導進轉換漏斗。
+
+### 8.2 改寫方向
+
+每篇文章從「名詞解釋」改寫為「讓人想算自己的」：
+
+```
+[概念介紹]（精簡保留現有內容）
+    ↓
+[生活化範例]（新增：這個數字在日常中如何表現？）
+    ↓
+[數字差異預告]（新增：「Number 3 和 9 的表現截然不同...」但不完整揭露）
+    ↓
+[個人化 CTA]（新增：「想知道你的是什麼？Get My Free Report →」）
+```
+
+**改寫前**（現有風格）：
+> Conscious Self is the center of your thoughts, feelings, and attitudes. It influences how you think, remember, imagine, and make choices.
+
+**改寫後**（建議風格）：
+> Your Ego Number shapes how you think, make decisions, and process everyday experiences. Someone with Ego Number 3 might approach problems through creative brainstorming, while Ego Number 9 tends to take on responsibility for everything around them. Understanding your Ego Number helps you see why certain situations drain you — and why others feel effortless.
+
+### 8.3 寫作規則
+
+- 每篇擴充到 800-1200 字（目前 250-830 字）
+- 新增 2-3 個生活化範例（「想像你在團隊會議中...」）
+- 暗示不同數字的差異但不完整揭露（保留好奇）
+- 提及跟其他數字的互動關係（「你的 Ego Number 會跟 Identity Number 互動...」）
+- 語氣溫暖但直接，像在跟朋友解釋，不像在讀教科書
+
+### 8.4 每篇文章底部 CTA
+
+```html
+<div class="cta-block">
+  <p class="cta-title">Curious about YOUR {主題名稱}?</p>
+  <p class="cta-desc">{個人化引導文案}</p>
+  <a href="/" class="cta-button">Get My Free Report →</a>
+</div>
+```
+
+各主題的 CTA 文案：
+
+| 主題 | CTA 副標 |
+|------|---------|
+| Birth Chart | See how your birth date maps onto the 9-space grid — your unique pattern might surprise you. |
+| Identity Number | Your Identity Number reveals your instinctive reactions. Find out what drives you beneath the surface. |
+| Ego Number | Your Ego Number shapes every decision you make. Discover yours in 10 seconds. |
+| Superego Number | Your Superego Number guides your deepest values. What's yours telling you? |
+| Isolated Number | Do you have an Isolated Number? It could explain a growth pattern you've been experiencing. |
+| Connections | Your birth chart might contain hidden connections. See what patterns your numbers form. |
+| Life Path | Your Life Path Number is the single most important number in your chart. Calculate yours now. |
+| Attitude | First impressions start with your Attitude Number. See how others perceive you. |
+| Day of Birth | Your natural talents are encoded in your Day of Birth Number. What's yours? |
+| Key Life Ages | 4 pivotal ages are written in your chart. Find out when your next turning point arrives. |
+| Personal Year | 2026 has a specific energy for YOU. Discover your Personal Year Number. |
+
+### 8.5 AI 改寫提示詞模板
+
+當需要 AI 改寫 Attributes 頁面的文章時：
+
+```
+請改寫 Numerology Within 的 Attributes 教育頁文章。
+
+主題：{主題名稱}（例：The Ego Number）
+現有內容：
+{貼入現有文字}
+
+改寫要求：
+1. 保留核心概念，但從「字典式解說」改為「引發好奇的介紹」
+2. 擴充到 800-1200 字
+3. 新增 2-3 個生活化範例
+4. 暗示不同數字在這個位置的差異（但不完整揭露每個數字的具體含義）
+5. 提及這個數字跟其他數字的互動
+6. 結尾段落自然引導到「想知道你的是什麼？」
+7. 語氣：溫暖、直接，像聰明朋友在解釋，不像教科書
+8. 全英文
+```
+
+---
+
+## 9. 驗收標準
 
 完成改版後，使用以下清單驗收：
 
@@ -575,6 +659,13 @@ DON'T:
 - [ ] 「energy」拼字正確
 - [ ] 推薦語無重複
 - [ ] 免費版與付費版在視覺上有明顯差異（色彩、功能、佈局）
+
+### Attributes 教育頁
+- [ ] 每篇文章擴充到 800-1200 字
+- [ ] 每篇文章包含生活化範例
+- [ ] 每篇文章底部有個人化 CTA（連回首頁）
+- [ ] 文章語氣是引發好奇的，不是字典式的
+- [ ] CTA 文案針對各主題個別撰寫（不是一模一樣的通用文案）
 
 ---
 

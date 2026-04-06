@@ -784,7 +784,111 @@ function switchTab(tab) {
 
 ---
 
-## 十、原型預覽連結
+## 十、Attributes 教育頁優化
+
+### 10.1 現況分析
+
+Attributes 頁面（`/attributes`）是一個命理名詞百科頁，以左側目錄 + 右側文章的方式解釋 11 個命理概念的通用定義。
+
+**目前頁面的 11 個主題：**
+
+| # | 主題 | 目前字數 | 問題 |
+|---|------|---------|------|
+| 01 | Birth Chart | ~320 字 | 太短，只說明格子概念 |
+| 02 | The Identity Number | ~830 字 | 相對完整，但缺乏範例 |
+| 03 | The Ego Number | ~480 字 | 中等，缺乏深度 |
+| 04 | The Superego Number | ~350 字 | 太短，僅概念說明 |
+| 05 | The Isolated Number | ~280 字 | 太短，沒有範例 |
+| 06 | Connection on Birth Chart | ~520 字 | 中等，但解釋不夠具體 |
+| 07 | The Life Path Number | ~440 字 | 中等，僅計算說明 |
+| 08 | The Attitude Number | ~390 字 | 太短 |
+| 09 | The Day of Birth Number | ~270 字 | 太短 |
+| 10 | The Key Life Ages | ~830 字 | 相對完整 |
+| 11 | Personal Yearly Number | ~315 字 | 太短 |
+
+**核心問題：**
+
+- **太像名詞解釋**：讀起來像字典條目，不像讓人產生好奇的文章
+- **沒有導流 CTA**：使用者讀完就離開了，沒有被引導去算自己的報告
+- **內容偏短**：大部分文章 300-500 字，對 SEO 排名不利（建議 800-1200 字）
+- **缺乏個人化鉤子**：通篇在說「這個數字是什麼」，沒有讓使用者想到「那我的呢？」
+
+### 10.2 優化方向
+
+#### A. 從「名詞解釋」變成「讓人想算自己的」
+
+每篇文章應遵循以下結構：
+
+```
+[概念介紹]（現有內容，精簡保留）
+    ↓
+[生活化範例]（新增：這個數字在日常生活中如何表現？）
+    ↓
+[數字之間的差異預告]（新增：「Number 3 和 Number 9 的 Ego 表現截然不同...」）
+    ↓
+[個人化 CTA]（新增：「想知道你的 Ego Number 是什麼？」）
+```
+
+**改寫前**（現有風格）：
+> Conscious Self is the center of your thoughts, feelings, and attitudes. It influences how you think, remember, imagine, and make choices.
+
+**改寫後**（建議風格）：
+> Your Ego Number shapes how you think, make decisions, and process everyday experiences. Someone with Ego Number 3 might approach problems through creative brainstorming, while Ego Number 9 tends to take on responsibility for everything around them. Understanding your Ego Number helps you see why certain situations drain you — and why others feel effortless.
+
+#### B. 每篇文章底部加導流 CTA
+
+每個主題的文章結尾都加一個 CTA 區塊：
+
+```html
+<div class="cta-block">
+  <p class="cta-title">Curious about YOUR {主題名稱}?</p>
+  <p class="cta-desc">Enter your birthday to discover what your numbers reveal about you.</p>
+  <a href="/" class="cta-button">Get My Free Report →</a>
+</div>
+```
+
+各主題的 CTA 文案建議：
+
+| 主題 | CTA 文案 |
+|------|---------|
+| Birth Chart | "See how your birth date maps onto the 9-space grid — your unique pattern might surprise you." |
+| Identity Number | "Your Identity Number reveals your instinctive reactions. Find out what drives you beneath the surface." |
+| Ego Number | "Your Ego Number shapes every decision you make. Discover yours in 10 seconds." |
+| Superego Number | "Your Superego Number guides your deepest values. What's yours telling you?" |
+| Isolated Number | "Do you have an Isolated Number? It could explain a growth pattern you've been experiencing." |
+| Connection Patterns | "Your birth chart might contain hidden connections. See what patterns your numbers form." |
+| Life Path Number | "Your Life Path Number is the single most important number in your chart. Calculate yours now." |
+| Attitude Number | "First impressions start with your Attitude Number. See how others perceive you." |
+| Day of Birth Number | "Your natural talents are encoded in your Day of Birth Number. What's yours?" |
+| Key Life Ages | "4 pivotal ages are written in your chart. Find out when your next turning point arrives." |
+| Personal Yearly Number | "2026 has a specific energy for YOU. Discover your Personal Year Number." |
+
+#### C. 內容擴充目標
+
+每篇文章從目前的 250-830 字擴充到 800-1200 字。新增內容應包含：
+
+1. **生活化的範例**：「想像你在團隊會議中...」
+2. **不同數字的差異暗示**：「Number 1 和 Number 9 在這個位置會有截然不同的表現...」（但不完整揭露，保留好奇）
+3. **跟其他數字的關聯性**：「你的 Ego Number 會跟 Identity Number 產生互動...」
+4. **一個小結段落**引導到 CTA
+
+### 10.3 SEO 價值
+
+這 11 篇教育文章經過擴充後，可以覆蓋以下高搜尋量關鍵字：
+
+| 目標關鍵字（範例） | 搜尋意圖 |
+|-------------------|---------|
+| what is life path number | 了解概念 → 導入首頁計算 |
+| numerology birth chart meaning | 了解概念 → 導入首頁計算 |
+| ego number numerology | 了解概念 → 導入首頁計算 |
+| numerology key life ages | 了解概念 → 導入首頁計算 |
+| personal year number 2026 | 時效性關鍵字，每年都有人搜 |
+
+**重點**：這些文章的角色是 SEO 入口 → 吸引自然流量 → 底部 CTA 導入轉換漏斗。不需要在文章中給出完整的個人化解讀，只需要讓讀者想到「那我的呢？」。
+
+---
+
+## 十一、原型預覽連結
 
 | 頁面 | 連結 | 說明 |
 |------|------|------|
