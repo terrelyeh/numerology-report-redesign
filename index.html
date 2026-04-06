@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Numerology Within — Your Full Report</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: '#EDE8E0',
+            warmgray: '#2C3345',
+            sage: '#3A6B5E',
+            sagelight: '#E8F0ED',
+            sagemid: '#D0E2DB',
+            gold: '#B8964E',
+            goldlight: '#FBF6EE',
+            rose: '#E8D5D0',
+            rosedark: '#8B6B62',
+          },
+          fontFamily: {
+            serif: ['Instrument Serif', 'Georgia', 'serif'],
+            sans: ['DM Sans', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'DM Sans', sans-serif; }
+    h1, h2, h3, .font-serif { font-family: 'Instrument Serif', Georgia, serif; }
+    .tab-active { background: #2C3345; color: white; }
+    .tab-inactive { background: white; color: #2C3345; border: 1px solid #d1cdc7; }
+    .birth-chart-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 2px;
+      aspect-ratio: 1;
+      max-width: 320px;
+    }
+    .birth-chart-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      border: 1px solid #d1cdc7;
+      position: relative;
+      min-height: 90px;
+    }
+    .birth-chart-cell .number {
+      font-family: 'Instrument Serif', serif;
+      font-size: 2.5rem;
+      color: #2C3345;
+      line-height: 1;
+    }
+    .birth-chart-cell .number.empty {
+      color: #d1cdc7;
+      font-size: 2rem;
+    }
+    .birth-chart-cell .dots {
+      display: flex;
+      gap: 4px;
+      margin-top: 4px;
+    }
+    .birth-chart-cell .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #3A6B5E;
+    }
+    .connection-line {
+      position: absolute;
+      background: rgba(58, 107, 94, 0.25);
+      z-index: 1;
+    }
+    /* Monthly card hover */
+    .month-card {
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .month-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    /* Smooth scroll */
+    html { scroll-behavior: smooth; }
+    /* Print styles */
+    @media print {
+      .no-print { display: none; }
+      body { background: white; }
+    }
+  </style>
+</head>
+<body class="bg-cream text-warmgray">
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-cream/90 backdrop-blur-md border-b border-warmgray/10">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="/" class="text-lg font-serif tracking-wide">Numerology Within</a>
+      <div class="flex items-center gap-6 text-sm">
+        <a href="/history" class="hover:opacity-70">My report</a>
+        <a href="/attributes" class="hover:opacity-70">Attributes</a>
+        <button class="bg-warmgray text-white px-4 py-1.5 rounded-full text-sm hover:opacity-90">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero / Personalized Intro -->
+  <header class="max-w-4xl mx-auto px-6 pt-16 pb-8 text-center">
+    <p class="text-sage font-medium text-sm tracking-widest uppercase mb-3">Your Personal Numerology Report</p>
+    <h1 class="font-serif text-4xl md:text-5xl text-warmgray leading-tight mb-4">Hi, Terrel.</h1>
+    <p class="text-warmgray/60 text-lg mb-2">Based on your date of birth</p>
+    <p class="font-serif text-2xl text-warmgray mb-3">August 20, 1980</p>
+
+    <!-- Personalized Summary — NEW -->
+    <div class="max-w-2xl mx-auto mt-8 bg-white/60 rounded-2xl p-6 border border-warmgray/10">
+      <p class="font-serif text-xl text-warmgray/80 italic leading-relaxed">
+        "Your 9-8-1 configuration is driven, intuitive, and quietly powerful. You lead with idealism, navigate with independence, and process life through a lens most people never see."
+      </p>
+      <p class="text-sm text-warmgray/40 mt-3">— Your unique numerological signature</p>
+    </div>
+  </header>
+
+  <!-- Tab Navigation -->
+  <div class="sticky top-[65px] z-40 bg-cream/90 backdrop-blur-md py-4 no-print">
+    <div class="flex justify-center gap-1">
+      <button onclick="switchTab('inner')" id="tab-inner" class="tab-active px-6 py-2.5 rounded-full text-sm font-medium transition-all">
+        Inner Blueprint
+      </button>
+      <button onclick="switchTab('outer')" id="tab-outer" class="tab-inactive px-6 py-2.5 rounded-full text-sm font-medium transition-all">
+        Outer Path
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- TAB 1: INNER BLUEPRINT -->
+  <!-- ============================================ -->
+  <div id="content-inner" class="max-w-5xl mx-auto px-6">
+
+    <!-- Section: Inner Architecture -->
+    <section class="py-12">
+      <div class="text-center mb-12">
+        <p class="text-sage text-sm tracking-widest uppercase font-medium mb-2">Part One</p>
+        <h2 class="font-serif text-3xl md:text-4xl">Inner Architecture</h2>
+        <p class="text-warmgray/50 mt-3 max-w-xl mx-auto">The numbers on your Birth Chart reveal the core design of your inner world — your drives, your conscious patterns, and your higher guidance.</p>
+      </div>
+
+      <!-- Birth Chart + Reading Grid -->
+      <div class="grid md:grid-cols-2 gap-12 items-start">
+
+        <!-- Left: Birth Chart Visual -->
+        <div class="flex flex-col items-center">
+          <div class="birth-chart-grid w-full max-w-[320px]">
+            <!-- Row 1: 3, 6, 9 -->
+            <div class="birth-chart-cell">
+              <span class="number empty">3</span>
+            </div>
+            <div class="birth-chart-cell">
+              <span class="number empty">6</span>
+            </div>
+            <div class="birth-chart-cell">
+              <span class="number">9</span>
+              <div class="dots"><span class="dot"></span></div>
+            </div>
+            <!-- Row 2: 2, 5, 8 -->
+            <div class="birth-chart-cell">
+              <span class="number">2</span>
+              <div class="dots"><span class="dot"></span></div>
+            </div>
+            <div class="birth-chart-cell">
+              <span class="number empty">5</span>
+            </div>
+            <div class="birth-chart-cell">
+              <span class="number">8</span>
+              <div class="dots"><span class="dot"></span><span class="dot"></span></div>
+            </div>
+            <!-- Row 3: 1, 4, 7 -->
+            <div class="birth-chart-cell">
+              <span class="number">1</span>
+              <div class="dots"><span class="dot"></span></div>
+            </div>
+            <div class="birth-chart-cell">
+              <span class="number empty">4</span>
+            </div>
+            <div class="birth-chart-cell">
+              <span class="number empty">7</span>
+            </div>
+          </div>
+          <p class="text-xs text-warmgray/40 mt-4">The dots below each number represent how often that number occurs in your birth date.</p>
+        </div>
+
+        <!-- Right: Quick Overview of all 4 numbers -->
+        <div class="space-y-4">
+          <a href="#ego" class="block bg-white rounded-xl p-5 border border-warmgray/10 hover:border-sage/30 transition-all group">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-xs text-sage tracking-widest uppercase font-medium">Your Ego Number</p>
+                <p class="font-serif text-xl mt-1">Your Conscious Self</p>
+              </div>
+              <span class="w-12 h-12 rounded-full border-2 border-warmgray/20 flex items-center justify-center font-serif text-2xl group-hover:border-sage transition-all">9</span>
+            </div>
+          </a>
+          <a href="#superego" class="block bg-white rounded-xl p-5 border border-warmgray/10 hover:border-sage/30 transition-all group">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-xs text-sage tracking-widest uppercase font-medium">Your Superego Number</p>
+                <p class="font-serif text-xl mt-1">Your Higher Inner Guidance</p>
+              </div>
+              <span class="w-12 h-12 rounded-full border-2 border-warmgray/20 flex items-center justify-center font-serif text-2xl group-hover:border-sage transition-all">8</span>
+            </div>
+          </a>
+          <a href="#identity" class="block bg-white rounded-xl p-5 border border-warmgray/10 hover:border-sage/30 transition-all group">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-xs text-sage tracking-widest uppercase font-medium">Your Identity Number</p>
+                <p class="font-serif text-xl mt-1">Your Raw Inner Drives</p>
+              </div>
+              <span class="w-12 h-12 rounded-full border-2 border-warmgray/20 flex items-center justify-center font-serif text-2xl group-hover:border-sage transition-all">1</span>
+            </div>
+          </a>
+          <a href="#isolated" class="block bg-white rounded-xl p-5 border border-warmgray/10 hover:border-sage/30 transition-all group">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-xs text-sage tracking-widest uppercase font-medium">Your Isolated Number</p>
+                <p class="font-serif text-xl mt-1">The Missing Piece</p>
+              </div>
+              <span class="w-12 h-12 rounded-full border-2 border-warmgray/20 flex items-center justify-center font-serif text-lg text-warmgray/40 group-hover:border-sage transition-all">—</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="border-t border-warmgray/10 my-4"></div>
+
+    <!-- ===== EGO NUMBER 9 ===== -->
+    <section id="ego" class="py-12 scroll-mt-32">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-14 h-14 rounded-full bg-warmgray text-white flex items-center justify-center font-serif text-3xl">9</span>
+        <div>
+          <p class="text-xs text-sage tracking-widest uppercase font-medium">Your Ego Number</p>
+          <h3 class="font-serif text-2xl">Your Conscious Self</h3>
+        </div>
+      </div>
+
+      <div class="prose prose-warmgray max-w-none">
+        <p class="text-warmgray/80 leading-relaxed text-[15px]">
+          The energy of the number 9 is built on three key traits: ambition, responsibility, and idealism. When these work together, they become a powerful force that pushes you to understand life, improve systems, and aim for something bigger than yourself. Over the last century, this drive has shaped much of the world we live in today.
+        </p>
+        <p class="text-warmgray/80 leading-relaxed text-[15px] mt-4">
+          But here's the reality — progress hasn't been evenly balanced. While knowledge and technology have leaped forward, our inner wisdom — the kind that helps us use progress wisely — hasn't always kept pace. If the 9 energy in your chart is well-balanced, you're someone who can bridge that gap. You think ahead, take responsibility, and genuinely want to leave things better than you found them.
+        </p>
+        <p class="text-warmgray/80 leading-relaxed text-[15px] mt-4">
+          When the 9 is out of balance, ambition can tip into over-responsibility. You may feel the weight of problems that aren't yours, take on too much, or become frustrated when others don't share your vision. The key is learning to lead without carrying — to inspire change without absorbing the cost.
+        </p>
+      </div>
+
+      <!-- ACTION TIP BOX -->
+      <div class="mt-8 bg-sagelight border border-sage/20 rounded-2xl p-6">
+        <div class="flex items-center gap-2 mb-3">
+          <svg class="w-5 h-5 text-sage" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+          <p class="font-medium text-sage text-sm tracking-wide">YOUR ACTION INSIGHT</p>
+        </div>
+        <p class="text-warmgray/80 leading-relaxed">
+          Your 9 energy drives you to take responsibility for everything around you — but not everything is yours to carry. This week, when you feel the urge to step in and fix something, pause and ask: <em>"Is this my responsibility, or am I absorbing someone else's?"</em>
+        </p>
+        <div class="mt-4 pt-4 border-t border-sage/15">
+          <p class="text-sage font-medium text-sm mb-1">Try this:</p>
+          <p class="text-warmgray/70 text-sm">Write down one thing you're currently carrying that isn't yours. Then consciously set it down.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="border-t border-warmgray/10 my-4"></div>
+
+    <!-- ===== SUPEREGO NUMBER 8 ===== -->
+    <section id="superego" class="py-12 scroll-mt-32">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-14 h-14 rounded-full bg-warmgray text-white flex items-center justify-center font-serif text-3xl">8</span>
+        <div>
+          <p class="text-xs text-sage tracking-widest uppercase font-medium">Your Superego Number</p>
+          <h3 class="font-serif text-2xl">Your Higher Inner Guidance</h3>
+        </div>
+      </div>
+
+      <div class="prose prose-warmgray max-w-none">
+        <p class="text-warmgray/80 leading-relaxed text-[15px]">
+          If your Birth Chart includes one 2, you're naturally intuitive — but that intuition works best when it's paired with logic. You have the ability to sense things others miss: subtle shifts in mood, unspoken dynamics, or the "feel" of a situation before the facts catch up. But this sensitivity can also make you second-guess yourself, especially in high-pressure environments.
+        </p>
+        <p class="text-warmgray/80 leading-relaxed text-[15px] mt-4">
+          The Superego Number 8 brings a layer of authority and independence to your inner guidance. Where your Ego (9) wants to improve things for others, your Superego (8) reminds you to build from a position of strength — not self-sacrifice. This tension between service and sovereignty is one of the most defining patterns in your chart.
+        </p>
+        <p class="text-warmgray/80 leading-relaxed text-[15px] mt-4">
+          When balanced, 8 gives you the quiet confidence to trust your own path, even when it doesn't match what others expect. When unbalanced, it can show up as rigidity or isolation — pulling away from support because you believe you "should" be able to handle it alone.
+        </p>
+      </div>
+
+      <!-- ACTION TIP BOX -->
+      <div class="mt-8 bg-sagelight border border-sage/20 rounded-2xl p-6">
+        <div class="flex items-center gap-2 mb-3">
+          <svg class="w-5 h-5 text-sage" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+          <p class="font-medium text-sage text-sm tracking-wide">YOUR ACTION INSIGHT</p>
+        </div>
+        <p class="text-warmgray/80 leading-relaxed">
+          With 8 as your higher guidance, your intuition works best when you give it space — not when you're rushing through decisions. Silence isn't empty for you; it's where your best answers live.
+        </p>
+        <div class="mt-4 pt-4 border-t border-sage/15">
+          <p class="text-sage font-medium text-sm mb-1">Try this:</p>
+          <p class="text-warmgray/70 text-sm">Before your next important decision, take 10 minutes of complete silence. No phone, no input. Notice what surfaces.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="border-t border-warmgray/10 my-4"></div>
+
+    <!-- ===== IDENTITY NUMBER 1 ===== -->
+    <section id="identity" class="py-12 scroll-mt-32">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-14 h-14 rounded-full bg-warmgray text-white flex items-center justify-center font-serif text-3xl">1</span>
+        <div>
+          <p class="text-xs text-sage tracking-widest uppercase font-medium">Your Identity Number</p>
+          <h3 class="font-serif text-2xl">Your Raw Inner Drives</h3>
+        </div>
+      </div>
+
+      <div class="prose prose-warmgray max-w-none">
+        <p class="text-warmgray/80 leading-relaxed text-[15px]">
+          If your birth date includes a single 1, you may notice that expressing your deeper feelings doesn't always come naturally. It's not that you don't feel — you feel deeply. But translating those inner experiences into words or actions can feel like speaking a second language. This can create a gap between how you experience life internally and how others perceive you.
+        </p>
+        <p class="text-warmgray/80 leading-relaxed text-[15px] mt-4">
+          The Identity Number 1 represents the most instinctive part of you — the layer beneath your social persona and your higher ideals. It's the raw engine. With a single 1, that engine is precise but quiet. You don't broadcast your needs; you internalize them. This makes you self-reliant, but it can also leave those closest to you guessing about what's really going on inside.
+        </p>
+      </div>
+
+      <!-- ACTION TIP BOX -->
+      <div class="mt-8 bg-sagelight border border-sage/20 rounded-2xl p-6">
+        <div class="flex items-center gap-2 mb-3">
+          <svg class="w-5 h-5 text-sage" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+          <p class="font-medium text-sage text-sm tracking-wide">YOUR ACTION INSIGHT</p>
+        </div>
+        <p class="text-warmgray/80 leading-relaxed">
+          A single 1 means expressing deep emotions doesn't come naturally — but that doesn't mean they aren't there. The gap between what you feel and what you show can create distance in your closest relationships.
+        </p>
+        <div class="mt-4 pt-4 border-t border-sage/15">
+          <p class="text-sage font-medium text-sm mb-1">Try this:</p>
+          <p class="text-warmgray/70 text-sm">This week, tell one person something you appreciate about them that you'd normally keep to yourself.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="border-t border-warmgray/10 my-4"></div>
+
+    <!-- ===== ISOLATED NUMBER ===== -->
+    <section id="isolated" class="py-12 scroll-mt-32">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-14 h-14 rounded-full bg-warmgray/10 text-warmgray/40 flex items-center justify-center font-serif text-2xl">—</span>
+        <div>
+          <p class="text-xs text-sage tracking-widest uppercase font-medium">Your Isolated Number</p>
+          <h3 class="font-serif text-2xl">The Missing Piece</h3>
+        </div>
+      </div>
+
+      <div class="prose prose-warmgray max-w-none">
+        <p class="text-warmgray/80 leading-relaxed text-[15px]">
+          In charts where every number connects to another — and you have no isolated digits standing alone — you carry a rare kind of internal coherence. There are no "orphan" energies pulling in random directions. Every part of your inner design is woven into the larger pattern, which means your strengths and challenges don't exist in isolation; they speak to each other.
+        </p>
+        <p class="text-warmgray/80 leading-relaxed text-[15px] mt-4">
+          This doesn't mean life is easier — it means your growth happens as a whole system. When one part shifts, everything else adjusts. This is a chart that benefits deeply from self-awareness, because understanding any one number helps you understand them all.
+        </p>
+      </div>
+
+      <!-- ACTION TIP BOX -->
+      <div class="mt-8 bg-sagelight border border-sage/20 rounded-2xl p-6">
+        <div class="flex items-center gap-2 mb-3">
+          <svg class="w-5 h-5 text-sage" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+          <p class="font-medium text-sage text-sm tracking-wide">YOUR ACTION INSIGHT</p>
+        </div>
+        <p class="text-warmgray/80 leading-relaxed">
+          Having no isolated numbers is a gift — your inner world is interconnected. But that also means stress in one area tends to ripple everywhere. The fastest way to restore balance is to address the one thing that feels most "off."
+        </p>
+        <div class="mt-4 pt-4 border-t border-sage/15">
+          <p class="text-sage font-medium text-sm mb-1">Try this:</p>
+          <p class="text-warmgray/70 text-sm">When you feel overwhelmed, ask: "What's the one thread that, if I pulled it, would untangle the rest?" Start there.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STRENGTHS & CONNECTIONS ===== -->
+    <section class="py-12">
+      <div class="border-t border-warmgray/10 mb-12"></div>
+      <div class="text-center mb-12">
+        <p class="text-sage text-sm tracking-widest uppercase font-medium mb-2">Part Two</p>
+        <h2 class="font-serif text-3xl md:text-4xl">Strengths & Connections</h2>
+        <p class="text-warmgray/50 mt-3 max-w-xl mx-auto">The lines between your numbers reveal deeper patterns — where your energy concentrates and where friction hides.</p>
+      </div>
+
+      <!-- Connection 1: ENQUIRER -->
+      <div class="bg-white rounded-2xl border border-warmgray/10 p-8 mb-8">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="bg-gold/20 text-gold px-3 py-1 rounded-full text-xs font-medium tracking-wide uppercase">Connection Pattern</span>
+        </div>
+        <h3 class="font-serif text-2xl mb-4">The Enquirer Connection</h3>
+        <p class="text-warmgray/80 leading-relaxed text-[15px]">
+          When this Connection appears in your Birth Chart, it's often labeled as a weakness — but that's only part of the picture. The Enquirer pattern means you naturally question everything: systems, relationships, your own assumptions. This makes you a powerful learner and a sharp thinker, but it can also create inner loops of doubt when turned inward.
+        </p>
+        <p class="text-warmgray/80 leading-relaxed text-[15px] mt-4">
+          The strength of this connection is discernment. You don't accept things at face value, which protects you from poor decisions. The challenge is knowing when to stop investigating and start trusting — especially trusting yourself.
+        </p>
+
+        <!-- ACTION TIP -->
+        <div class="mt-6 bg-sagelight border border-sage/20 rounded-xl p-5">
+          <div class="flex items-center gap-2 mb-2">
+            <svg class="w-4 h-4 text-sage" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            <p class="font-medium text-sage text-xs tracking-wide">YOUR ACTION INSIGHT</p>
+          </div>
+          <p class="text-warmgray/70 text-sm">Next time you catch yourself in a loop of self-doubt, redirect it: instead of <em>"Why can't I...?"</em> ask <em>"What would happen if I...?"</em></p>
+        </div>
+      </div>
+
+      <!-- Connection 2: FRUSTRATION -->
+      <div class="bg-white rounded-2xl border border-warmgray/10 p-8">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="bg-rose text-rosedark px-3 py-1 rounded-full text-xs font-medium tracking-wide uppercase">Connection Pattern</span>
+        </div>
+        <h3 class="font-serif text-2xl mb-4">The Frustration Connection</h3>
+        <p class="text-warmgray/80 leading-relaxed text-[15px]">
+          When this Connection shows up in your Birth Chart, it often points to frustration rooted in unmet expectations — not of others, but of yourself. You hold a high internal standard, and when reality doesn't match the vision in your head, the gap creates a slow-burn frustration that can affect your mood, energy, and relationships.
+        </p>
+        <p class="text-warmgray/80 leading-relaxed text-[15px] mt-4">
+          The gift buried in this pattern is drive. Frustration, when channeled well, becomes fuel for meaningful change. The trap is letting it fester into resentment or withdrawal. The key is recognizing when frustration is a signal to adjust your approach — not a sign that something is wrong with you.
+        </p>
+
+        <!-- ACTION TIP -->
+        <div class="mt-6 bg-sagelight border border-sage/20 rounded-xl p-5">
+          <div class="flex items-center gap-2 mb-2">
+            <svg class="w-4 h-4 text-sage" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            <p class="font-medium text-sage text-xs tracking-wide">YOUR ACTION INSIGHT</p>
+          </div>
+          <p class="text-warmgray/70 text-sm">When frustration hits, ask: <em>"Am I frustrated because this isn't working, or because it isn't matching the picture in my head?"</em> Often, the approach just needs adjusting — not abandoning.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- TAB 2: OUTER PATH -->
+  <!-- ============================================ -->
+  <div id="content-outer" class="max-w-5xl mx-auto px-6 hidden">
+
+    <!-- Section: Life Mission -->
+    <section class="py-12">
+      <div class="text-center mb-12">
+        <p class="text-sage text-sm tracking-widest uppercase font-medium mb-2">Part One</p>
+        <h2 class="font-serif text-3xl md:text-4xl">Your Life Mission</h2>
+        <p class="text-warmgray/50 mt-3 max-w-xl mx-auto">Where purpose meets direction — the numbers that shape your outward path through life.</p>
+      </div>
+
+      <!-- Life Path Number 10 -->
+      <div class="bg-white rounded-2xl border border-warmgray/10 p-8 mb-8">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <p class="text-xs text-sage tracking-widest uppercase font-medium">Your Life Path Number</p>
+            <h3 class="font-serif text-2xl mt-1">The core life lessons you are here to learn</h3>
+          </div>
+          <span class="w-14 h-14 rounded-full border-2 border-sage/30 flex items-center justify-center font-serif text-2xl text-sage flex-shrink-0">10</span>
+        </div>
+        <p class="text-warmgray/80 leading-relaxed text-[15px]">
+          When your Life Path Number is 10, adaptability is your superpower. You're naturally flexible, quick to adjust, and comfortable stepping into new situations that would overwhelm others. When you're aligned, your confidence, charm, and optimism make life feel exciting — and people are drawn to your energy.
+        </p>
+        <p class="text-warmgray/80 leading-relaxed text-[15px] mt-4">
+          You thrive when you have freedom to explore, experience, and enjoy what life offers. When you feel boxed in or emotionally stuck, frustration can show up as irritability or restlessness. You're a natural doer, more action-driven than introspective, and you often carry yourself with an effortless self-assurance.
+        </p>
+        <p class="text-warmgray/80 leading-relaxed text-[15px] mt-4">
+          Your challenge is focus. Without direction, it's easy to settle for comfort or distraction instead of growth. When you build self-discipline, stay balanced, and connect with your inner strength, your adaptability turns into real momentum. Careers that involve creativity, leadership, sales, entertainment, or public engagement are natural fits.
+        </p>
+
+        <!-- ACTION TIP -->
+        <div class="mt-6 bg-sagelight border border-sage/20 rounded-xl p-5">
+          <div class="flex items-center gap-2 mb-2">
+            <svg class="w-4 h-4 text-sage" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            <p class="font-medium text-sage text-xs tracking-wide">YOUR ACTION INSIGHT</p>
+          </div>
+          <p class="text-warmgray/70 text-sm">Set one non-negotiable goal for this month. Not five. Just one. Protect it from everything else that tries to pull your attention. Your adaptability is a superpower — but only when it has a direction.</p>
+        </div>
+      </div>
+
+      <!-- Attitude Number -->
+      <div class="bg-white rounded-2xl border border-warmgray/10 p-8 mb-8">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <p class="text-xs text-sage tracking-widest uppercase font-medium">Your Attitude Number</p>
+            <h3 class="font-serif text-2xl mt-1">The first impression you give</h3>
+          </div>
+          <span class="w-14 h-14 rounded-full border-2 border-sage/30 flex items-center justify-center font-serif text-2xl text-sage flex-shrink-0">1</span>
+        </div>
+        <p class="text-warmgray/80 leading-relaxed text-[15px]">
+          Your Attitude Number shapes how you show up to the world before people get to know you deeply. With a 1, you project independence, confidence, and initiative. People sense a natural leader when they meet you — someone who seems to know where they're going, even when you're not entirely sure yourself.
+        </p>
+        <div class="mt-6 bg-sagelight border border-sage/20 rounded-xl p-5">
+          <div class="flex items-center gap-2 mb-2">
+            <svg class="w-4 h-4 text-sage" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            <p class="font-medium text-sage text-xs tracking-wide">YOUR ACTION INSIGHT</p>
+          </div>
+          <p class="text-warmgray/70 text-sm">Your 1 Attitude means people expect you to lead — even in casual situations. Lean into this: next time you're in a group and no one is taking initiative, step in. It costs you less energy than you think.</p>
+        </div>
+      </div>
+
+      <!-- Day of Birth Number -->
+      <div class="bg-white rounded-2xl border border-warmgray/10 p-8">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <p class="text-xs text-sage tracking-widest uppercase font-medium">Day of Birth Number</p>
+            <h3 class="font-serif text-2xl mt-1">Your natural talents and abilities</h3>
+          </div>
+          <span class="w-14 h-14 rounded-full border-2 border-sage/30 flex items-center justify-center font-serif text-2xl text-sage flex-shrink-0">20</span>
+        </div>
+        <p class="text-warmgray/80 leading-relaxed text-[15px]">
+          This number reveals the abilities you're naturally gifted with — the skills that feel instinctive to you. Born on the 20th, you possess a natural sensitivity to cooperation, harmony, and the needs of others. You're often the person who holds groups together without anyone realizing you're doing it.
+        </p>
+        <div class="mt-6 bg-sagelight border border-sage/20 rounded-xl p-5">
+          <div class="flex items-center gap-2 mb-2">
+            <svg class="w-4 h-4 text-sage" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            <p class="font-medium text-sage text-xs tracking-wide">YOUR ACTION INSIGHT</p>
+          </div>
+          <p class="text-warmgray/70 text-sm">Your talent for holding groups together is real — but make sure you're not always the one accommodating. This week, practice saying "I'd prefer..." at least once when someone asks what you want.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="border-t border-warmgray/10 my-4"></div>
+
+    <!-- Section: Key Life Ages & Pyramids -->
+    <section class="py-12">
+      <div class="text-center mb-12">
+        <p class="text-sage text-sm tracking-widest uppercase font-medium mb-2">Part Two</p>
+        <h2 class="font-serif text-3xl md:text-4xl">Your Key Life Ages</h2>
+        <p class="text-warmgray/50 mt-3 max-w-xl mx-auto">The turning points in your life timeline, and the energy that defines each chapter.</p>
+      </div>
+
+      <!-- Key Ages Visual -->
+      <div class="bg-white rounded-2xl border border-warmgray/10 p-8 mb-8">
+        <div class="flex items-center justify-center gap-3 mb-8 flex-wrap">
+          <span class="w-16 h-16 rounded-full bg-sage text-white flex items-center justify-center font-serif text-2xl">26</span>
+          <span class="text-warmgray/20 text-2xl">→</span>
+          <span class="w-16 h-16 rounded-full bg-sage text-white flex items-center justify-center font-serif text-2xl">35</span>
+          <span class="text-warmgray/20 text-2xl">→</span>
+          <span class="w-16 h-16 rounded-full bg-sage text-white flex items-center justify-center font-serif text-2xl">44</span>
+          <span class="text-warmgray/20 text-2xl">→</span>
+          <span class="w-16 h-16 rounded-full bg-sage text-white flex items-center justify-center font-serif text-2xl">53</span>
+        </div>
+        <p class="text-center text-warmgray/60 text-sm">These are the peak points of your life pyramid cycle — ages where major energy shifts occur.</p>
+      </div>
+
+      <!-- Peak Pyramids -->
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-2xl border border-warmgray/10 p-6">
+          <p class="text-xs text-sage tracking-widest uppercase font-medium mb-1">First Pyramid · Age ~26</p>
+          <h4 class="font-serif text-xl mb-3">Peak Number 1</h4>
+          <p class="text-warmgray/70 text-sm leading-relaxed">When Peak Number 1 shows up in your chart, it marks a turning point where you're meant to step into independence and self-leadership. This is the phase where you learn to trust your own judgment, take initiative, and build the foundation of who you're becoming.</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-warmgray/10 p-6">
+          <p class="text-xs text-sage tracking-widest uppercase font-medium mb-1">Second Pyramid · Age ~35</p>
+          <h4 class="font-serif text-xl mb-3">Peak Number 2</h4>
+          <p class="text-warmgray/70 text-sm leading-relaxed">When you enter a Peak Number 2 cycle, your inner world starts getting louder. This is a time when spiritual sensitivity, intuition, and emotional depth take center stage. Partnerships and collaboration become more important than solo achievement.</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-warmgray/10 p-6">
+          <p class="text-xs text-sage tracking-widest uppercase font-medium mb-1">Third Pyramid · Age ~44</p>
+          <h4 class="font-serif text-xl mb-3">Peak Number 3</h4>
+          <p class="text-warmgray/70 text-sm leading-relaxed">A Peak Number 3 cycle is your cue to feed your mind. This is a high-mental-energy phase where learning, creativity, and intellectual expansion are the primary themes. Your curiosity becomes your compass.</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-warmgray/10 p-6">
+          <p class="text-xs text-sage tracking-widest uppercase font-medium mb-1">Fourth Pyramid · Age ~53</p>
+          <h4 class="font-serif text-xl mb-3">Peak Number 8</h4>
+          <p class="text-warmgray/70 text-sm leading-relaxed">A Peak Number 8 cycle is all about owning your independence. This is a high-power phase where you're meant to step fully into your authority, make bold decisions, and build something lasting.</p>
+        </div>
+      </div>
+
+      <!-- ACTION TIP for Life Ages -->
+      <div class="mt-8 bg-sagelight border border-sage/20 rounded-2xl p-6">
+        <div class="flex items-center gap-2 mb-3">
+          <svg class="w-5 h-5 text-sage" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+          <p class="font-medium text-sage text-sm tracking-wide">YOUR ACTION INSIGHT</p>
+        </div>
+        <p class="text-warmgray/80 leading-relaxed">
+          At 45, you're in the heart of your Third Pyramid — a Peak 3 cycle of mental expansion and creativity. This isn't the time to play it safe with what you already know. Feed your mind: take a course, read outside your comfort zone, or start a creative project you've been putting off.
+        </p>
+        <div class="mt-4 pt-4 border-t border-sage/15">
+          <p class="text-sage font-medium text-sm mb-1">Try this:</p>
+          <p class="text-warmgray/70 text-sm">Pick one subject that fascinates you but you've never explored. Spend 30 minutes on it this week. That curiosity is your compass right now.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="border-t border-warmgray/10 my-4"></div>
+
+    <!-- Section: Monthly Energy Forecast -->
+    <section class="py-12">
+      <div class="text-center mb-12">
+        <p class="text-sage text-sm tracking-widest uppercase font-medium mb-2">Part Three</p>
+        <h2 class="font-serif text-3xl md:text-4xl">Your Next 12 Months</h2>
+        <p class="text-warmgray/50 mt-3 max-w-xl mx-auto">Month-by-month energy forecast based on your Personal Year Number.</p>
+      </div>
+
+      <!-- Yearly Overview -->
+      <div class="bg-white rounded-2xl border border-warmgray/10 p-8 mb-8">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="bg-sage text-white px-4 py-2 rounded-full text-sm font-medium">2026 · Personal Year 2</span>
+        </div>
+        <p class="text-warmgray/80 leading-relaxed text-[15px]">
+          Personal Year Number 2 invites you to slow down and tune in. While it's not about big external moves, it's a profoundly important year for inner development. Relationships deepen, intuition sharpens, and the patterns you've been ignoring become impossible to avoid. Trust the process — the growth you build this year becomes the foundation for the action that follows.
+        </p>
+      </div>
+
+      <!-- Monthly Cards Grid -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+        <div class="month-card bg-white rounded-xl border border-warmgray/10 p-5">
+          <p class="text-sage font-medium text-sm mb-2">April 2026</p>
+          <p class="text-warmgray/70 text-sm leading-relaxed">Growth needs action. Apply what you've learned in practical, positive ways.</p>
+        </div>
+        <div class="month-card bg-white rounded-xl border border-warmgray/10 p-5">
+          <p class="text-sage font-medium text-sm mb-2">May 2026</p>
+          <p class="text-warmgray/70 text-sm leading-relaxed">Used well, this year brings freedom and confidence. If frustration appears, it's a cue to refocus.</p>
+        </div>
+        <div class="month-card bg-white rounded-xl border border-warmgray/10 p-5">
+          <p class="text-sage font-medium text-sm mb-2">June 2026</p>
+          <p class="text-warmgray/70 text-sm leading-relaxed">Creative energy expands. Great time to start or grow a creative outlet — balance keeps stress low.</p>
+        </div>
+        <div class="month-card bg-white rounded-xl border border-warmgray/10 p-5">
+          <p class="text-sage font-medium text-sm mb-2">July 2026</p>
+          <p class="text-warmgray/70 text-sm leading-relaxed">Opportunities continue. Progress comes from steady participation, not waiting.</p>
+        </div>
+        <div class="month-card bg-white rounded-xl border border-warmgray/10 p-5">
+          <p class="text-sage font-medium text-sm mb-2">August 2026</p>
+          <p class="text-warmgray/70 text-sm leading-relaxed">Wisdom and self-understanding deepen. Conscious choices help you step into your potential.</p>
+        </div>
+        <div class="month-card bg-white rounded-xl border border-warmgray/10 p-5">
+          <p class="text-sage font-medium text-sm mb-2">September 2026</p>
+          <p class="text-warmgray/70 text-sm leading-relaxed">As next year's energy approaches, aim for quality and integrity. There's still time to grow.</p>
+        </div>
+        <div class="month-card bg-white rounded-xl border border-warmgray/10 p-5">
+          <p class="text-sage font-medium text-sm mb-2">October 2026</p>
+          <p class="text-warmgray/70 text-sm leading-relaxed">Financial decisions work best when guided by intuition, not pressure.</p>
+        </div>
+        <div class="month-card bg-white rounded-xl border border-warmgray/10 p-5">
+          <p class="text-sage font-medium text-sm mb-2">November 2026</p>
+          <p class="text-warmgray/70 text-sm leading-relaxed">Strengthen important partnerships and prioritize rest.</p>
+        </div>
+        <div class="month-card bg-white rounded-xl border border-warmgray/10 p-5">
+          <p class="text-sage font-medium text-sm mb-2">December 2026</p>
+          <p class="text-warmgray/70 text-sm leading-relaxed">Transition energy builds. Reflection and awareness bring a strong sense of integration.</p>
+        </div>
+      </div>
+
+      <!-- 2027 -->
+      <div class="bg-white rounded-2xl border border-warmgray/10 p-8 mb-8">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="bg-warmgray text-white px-4 py-2 rounded-full text-sm font-medium">2027 · Personal Year 3</span>
+        </div>
+        <p class="text-warmgray/80 leading-relaxed text-[15px]">
+          Personal Year Number 3 is where your mind comes alive. After the inner work of last year, this phase opens the door to intellectual expansion, creative expression, and social connection. Ideas flow faster, learning feels effortless, and communication becomes a superpower.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="month-card bg-white rounded-xl border border-warmgray/10 p-5">
+          <p class="text-warmgray font-medium text-sm mb-2">January 2027</p>
+          <p class="text-warmgray/70 text-sm leading-relaxed">Ideas want expression. New plans emerge quickly — take initiative and act on what resonates.</p>
+        </div>
+        <div class="month-card bg-white rounded-xl border border-warmgray/10 p-5">
+          <p class="text-warmgray font-medium text-sm mb-2">February 2027</p>
+          <p class="text-warmgray/70 text-sm leading-relaxed">Intuition and logic work best together. Insight helps you solve problems with ease.</p>
+        </div>
+        <div class="month-card bg-white rounded-xl border border-warmgray/10 p-5">
+          <p class="text-warmgray font-medium text-sm mb-2">March 2027</p>
+          <p class="text-warmgray/70 text-sm leading-relaxed">Your memory and focus peak. Great time to start studying, training, or learning something new.</p>
+        </div>
+      </div>
+
+      <!-- Month Action Tip -->
+      <div class="mt-8 bg-sagelight border border-sage/20 rounded-2xl p-6">
+        <div class="flex items-center gap-2 mb-3">
+          <svg class="w-5 h-5 text-sage" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+          <p class="font-medium text-sage text-sm tracking-wide">THIS MONTH'S FOCUS · APRIL 2026</p>
+        </div>
+        <p class="text-warmgray/80 leading-relaxed">
+          April is asking you to take what you've been learning and put it into practice. Not perfectly — just actively. The energy this month rewards doing over planning.
+        </p>
+        <div class="mt-4 pt-4 border-t border-sage/15">
+          <p class="text-sage font-medium text-sm mb-1">Your one thing for April:</p>
+          <p class="text-warmgray/70 text-sm">Pick one insight from this report that resonated most and apply it in one real situation this week.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- FOOTER -->
+  <!-- ============================================ -->
+  <footer class="mt-16 py-8 border-t border-warmgray/10">
+    <div class="max-w-5xl mx-auto px-6 text-center text-warmgray/40 text-sm">
+      <p>
+        <a href="/terms" class="hover:text-warmgray/60">Terms</a>
+        <span class="mx-2">·</span>
+        Contact us: <a href="mailto:service@numerologywithin.net" class="hover:text-warmgray/60">service@numerologywithin.net</a>
+        <span class="mx-2">·</span>
+        &copy; 2026 Numerology Within. All Rights Reserved.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Tab Switch Script -->
+  <script>
+    function switchTab(tab) {
+      const innerContent = document.getElementById('content-inner');
+      const outerContent = document.getElementById('content-outer');
+      const innerTab = document.getElementById('tab-inner');
+      const outerTab = document.getElementById('tab-outer');
+
+      if (tab === 'inner') {
+        innerContent.classList.remove('hidden');
+        outerContent.classList.add('hidden');
+        innerTab.className = innerTab.className.replace('tab-inactive', 'tab-active');
+        outerTab.className = outerTab.className.replace('tab-active', 'tab-inactive');
+      } else {
+        innerContent.classList.add('hidden');
+        outerContent.classList.remove('hidden');
+        outerTab.className = outerTab.className.replace('tab-inactive', 'tab-active');
+        innerTab.className = innerTab.className.replace('tab-active', 'tab-inactive');
+      }
+
+      // Scroll to top of content
+      window.scrollTo({ top: 200, behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>
