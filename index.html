@@ -93,15 +93,68 @@
       .no-print { display: none; }
       body { background: white; }
     }
+    /* Progress bar */
+    .reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: #3A6B5E;
+      z-index: 100;
+      transition: width 0.15s ease-out;
+    }
+    /* PDF download button animation */
+    .download-pulse {
+      animation: dl-pulse 2s infinite;
+    }
+    @keyframes dl-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(58,107,94,0.2); }
+      50% { box-shadow: 0 0 0 8px rgba(58,107,94,0); }
+    }
+    /* Share tooltip */
+    .share-toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(120%);
+      background: #2C3345;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      z-index: 100;
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+      pointer-events: none;
+    }
+    .share-toast.show { transform: translateX(-50%) translateY(0); }
+    /* Section progress dots */
+    .progress-dot { transition: all 0.3s; }
+    .progress-dot.active { background: #3A6B5E; transform: scale(1.3); }
+    .progress-dot.completed { background: #3A6B5E; }
   </style>
 </head>
 <body class="bg-cream text-warmgray">
+
+  <!-- Reading Progress Bar -->
+  <div id="reading-progress" class="reading-progress" style="width:0%"></div>
+
+  <!-- Share Toast -->
+  <div id="share-toast" class="share-toast">Link copied to clipboard!</div>
 
   <!-- Navigation -->
   <nav class="sticky top-0 z-50 bg-cream/90 backdrop-blur-md border-b border-warmgray/10">
     <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
       <a href="/" class="text-lg font-serif tracking-wide">Numerology Within</a>
-      <div class="flex items-center gap-6 text-sm">
+      <div class="flex items-center gap-4 text-sm">
+        <!-- PDF Download -->
+        <button onclick="downloadPDF()" class="download-pulse hidden md:inline-flex items-center gap-1.5 bg-sage/10 text-sage px-4 py-1.5 rounded-full text-sm font-medium hover:bg-sage/20 transition-all">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+          Save PDF
+        </button>
+        <!-- Share -->
+        <button onclick="shareReport()" class="inline-flex items-center gap-1.5 text-warmgray/60 hover:text-warmgray transition-all">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z"/></svg>
+        </button>
         <a href="/history" class="hover:opacity-70">My report</a>
         <a href="/attributes" class="hover:opacity-70">Attributes</a>
         <button class="bg-warmgray text-white px-4 py-1.5 rounded-full text-sm hover:opacity-90">Logout</button>
@@ -115,6 +168,18 @@
     <h1 class="font-serif text-4xl md:text-5xl text-warmgray leading-tight mb-4">Hi, Terrel.</h1>
     <p class="text-warmgray/60 text-lg mb-2">Based on your date of birth</p>
     <p class="font-serif text-2xl text-warmgray mb-3">August 20, 1980</p>
+
+    <!-- Mobile Download Bar -->
+    <div class="flex md:hidden items-center justify-center gap-3 mt-6 no-print">
+      <button onclick="downloadPDF()" class="inline-flex items-center gap-1.5 bg-sage/10 text-sage px-4 py-2 rounded-full text-sm font-medium">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+        Save PDF
+      </button>
+      <button onclick="shareReport()" class="inline-flex items-center gap-1.5 bg-warmgray/5 text-warmgray/60 px-4 py-2 rounded-full text-sm font-medium border border-warmgray/10">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z"/></svg>
+        Share
+      </button>
+    </div>
 
     <!-- Personalized Summary — NEW -->
     <div class="max-w-2xl mx-auto mt-8 bg-white/60 rounded-2xl p-6 border border-warmgray/10">
@@ -705,9 +770,55 @@
   </div>
 
   <!-- ============================================ -->
+  <!-- BOTTOM ACTION BAR -->
+  <!-- ============================================ -->
+  <div class="max-w-5xl mx-auto px-6 py-12">
+    <div class="bg-white rounded-2xl border border-warmgray/10 p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div>
+        <h3 class="font-serif text-2xl mb-2">Save Your Report</h3>
+        <p class="text-warmgray/50 text-sm">Download a beautifully formatted PDF to keep, print, or share with someone you trust.</p>
+      </div>
+      <div class="flex items-center gap-3 flex-shrink-0">
+        <button onclick="downloadPDF()" class="inline-flex items-center gap-2 bg-sage text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-sage/90 transition-all">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+          Download PDF
+        </button>
+        <button onclick="shareReport()" class="inline-flex items-center gap-2 bg-warmgray/5 text-warmgray px-6 py-3 rounded-full text-sm font-medium hover:bg-warmgray/10 transition-all border border-warmgray/10">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z"/></svg>
+          Share
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- REPORT COMPLETION SECTION -->
+  <!-- ============================================ -->
+  <div class="max-w-5xl mx-auto px-6 pb-12">
+    <div class="text-center py-12">
+      <div class="w-16 h-16 mx-auto rounded-full bg-sagelight flex items-center justify-center mb-4">
+        <svg class="w-8 h-8 text-sage" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      </div>
+      <h3 class="font-serif text-2xl mb-2">You've Read Your Full Report</h3>
+      <p class="text-warmgray/50 text-sm max-w-md mx-auto mb-6">Come back anytime — your numbers don't change, but your understanding of them deepens.</p>
+      <div class="flex items-center justify-center gap-3 flex-wrap">
+        <a href="/history" class="inline-flex items-center gap-2 text-sage text-sm font-medium hover:underline">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          View Past Reports
+        </a>
+        <span class="text-warmgray/20">·</span>
+        <a href="/" class="inline-flex items-center gap-2 text-sage text-sm font-medium hover:underline">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182"/></svg>
+          Generate Another Report
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
   <!-- FOOTER -->
   <!-- ============================================ -->
-  <footer class="mt-16 py-8 border-t border-warmgray/10">
+  <footer class="py-8 border-t border-warmgray/10">
     <div class="max-w-5xl mx-auto px-6 text-center text-warmgray/40 text-sm">
       <p>
         <a href="/terms" class="hover:text-warmgray/60">Terms</a>
@@ -719,8 +830,9 @@
     </div>
   </footer>
 
-  <!-- Tab Switch Script -->
+  <!-- Tab Switch + Features Script -->
   <script>
+    // Tab switching
     function switchTab(tab) {
       const innerContent = document.getElementById('content-inner');
       const outerContent = document.getElementById('content-outer');
@@ -738,9 +850,50 @@
         outerTab.className = outerTab.className.replace('tab-inactive', 'tab-active');
         innerTab.className = innerTab.className.replace('tab-active', 'tab-inactive');
       }
-
-      // Scroll to top of content
       window.scrollTo({ top: 200, behavior: 'smooth' });
+    }
+
+    // Reading progress bar
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = Math.min((scrollTop / docHeight) * 100, 100);
+      document.getElementById('reading-progress').style.width = progress + '%';
+    });
+
+    // PDF download (uses browser print-to-PDF)
+    function downloadPDF() {
+      // In production, this would call a server-side PDF generator
+      // For the prototype, we use the browser's print dialog
+      const originalTitle = document.title;
+      document.title = 'Numerology Within — Terrel — Full Report';
+      window.print();
+      document.title = originalTitle;
+    }
+
+    // Share report link
+    function shareReport() {
+      const url = window.location.href;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(() => {
+          showToast();
+        });
+      } else {
+        // Fallback
+        const input = document.createElement('input');
+        input.value = url;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand('copy');
+        document.body.removeChild(input);
+        showToast();
+      }
+    }
+
+    function showToast() {
+      const toast = document.getElementById('share-toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
     }
   </script>
 
