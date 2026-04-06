@@ -195,14 +195,14 @@
             </thead>
             <tbody class="text-warmgray/70">
               <tr class="border-b border-warmgray/5">
-                <td class="py-3 pr-4 font-medium text-warmgray">滾動動畫渲染失敗</td>
-                <td class="py-3 pr-4"><span class="badge-p0 px-2 py-0.5 rounded text-xs font-medium">嚴重</span></td>
-                <td class="py-3">內容區塊在 DOM 中但 opacity 未觸發，使用者看到空白</td>
+                <td class="py-3 pr-4 font-medium text-warmgray/40 line-through">滾動動畫渲染失敗</td>
+                <td class="py-3 pr-4"><span class="bg-sagelight text-sage px-2 py-0.5 rounded text-xs font-medium">已排除</span></td>
+                <td class="py-3 text-warmgray/40">經複測確認為自動化工具截圖問題，實際瀏覽器中所有 section opacity 均為 1，內容正常顯示</td>
               </tr>
               <tr class="border-b border-warmgray/5">
-                <td class="py-3 pr-4 font-medium text-warmgray">z-index 覆蓋層</td>
-                <td class="py-3 pr-4"><span class="badge-p0 px-2 py-0.5 rounded text-xs font-medium">嚴重</span></td>
-                <td class="py-3"><code class="bg-gray-100 px-1 rounded text-xs">z-index: 2147483646</code> 的元素阻擋所有互動</td>
+                <td class="py-3 pr-4 font-medium text-warmgray/40 line-through">z-index 覆蓋層</td>
+                <td class="py-3 pr-4"><span class="bg-sagelight text-sage px-2 py-0.5 rounded text-xs font-medium">已排除</span></td>
+                <td class="py-3 text-warmgray/40">該元素為 Chrome 擴充套件（<code class="bg-gray-100 px-1 rounded text-xs">#claude-agent-glow-border</code>）注入，非網站本身問題，且 pointerEvents: none 不影響互動</td>
               </tr>
               <tr class="border-b border-warmgray/5">
                 <td class="py-3 pr-4 font-medium text-warmgray">標題截斷</td>
@@ -312,41 +312,27 @@
           </div>
         </div>
 
-        <!-- 3.2 Scroll -->
-        <div id="ux-scroll" class="mb-12">
+        <!-- 3.2 Scroll — FALSE POSITIVE -->
+        <div id="ux-scroll" class="mb-12 opacity-60">
           <div class="flex items-center gap-3 mb-4">
-            <span class="badge-p0 px-2.5 py-1 rounded-lg text-xs font-bold">P0</span>
-            <h3 class="text-lg font-bold">3.2 頁面滾動動畫問題</h3>
+            <span class="bg-sagelight text-sage px-2.5 py-1 rounded-lg text-xs font-bold">已排除</span>
+            <h3 class="text-lg font-bold line-through">3.2 頁面滾動動畫問題</h3>
           </div>
-          <p class="text-warmgray/70 text-sm leading-relaxed mb-4">
-            現有網站使用滾動觸發的 CSS 動畫，但觸發機制 bug：內容區塊已在 DOM 中，但 <code class="bg-gray-100 px-1 rounded text-xs">opacity</code> 初始值為 0 且觸發條件從未被滿足。使用者滾動時看到大片空白。
-          </p>
-          <div class="bg-gray-50 rounded-xl p-5">
-            <p class="font-medium text-sm mb-2">修正建議：</p>
-            <ol class="text-sm text-warmgray/70 space-y-1.5 list-decimal list-inside">
-              <li>檢查 Intersection Observer 或 scroll event listener 的觸發邏輯</li>
-              <li>設 fallback：動畫 2 秒內未觸發則自動設 <code class="bg-gray-100 px-1 rounded text-xs">opacity: 1</code></li>
-              <li>考慮移除滾動動畫或改用更可靠的方案</li>
-            </ol>
+          <div class="callout-success rounded-xl p-5">
+            <p class="text-sage text-sm"><strong>複測結果（2026-04-06）：</strong>經重新以真實 Chrome 瀏覽器檢測，所有 8 個 section 的 opacity 均為 1、visibility 為 visible，頁面內容正常渲染（總高度 3675px）。無任何 opacity: 0 的隱藏元素。</p>
+            <p class="text-warmgray/50 text-xs mt-2">原始偵測結果為自動化截圖工具的渲染限制所致，非網站本身問題。</p>
           </div>
         </div>
 
-        <!-- 3.3 z-index -->
-        <div id="ux-zindex" class="mb-12">
+        <!-- 3.3 z-index — FALSE POSITIVE -->
+        <div id="ux-zindex" class="mb-12 opacity-60">
           <div class="flex items-center gap-3 mb-4">
-            <span class="badge-p0 px-2.5 py-1 rounded-lg text-xs font-bold">P0</span>
-            <h3 class="text-lg font-bold">3.3 Z-index 覆蓋層問題</h3>
+            <span class="bg-sagelight text-sage px-2.5 py-1 rounded-lg text-xs font-bold">已排除</span>
+            <h3 class="text-lg font-bold line-through">3.3 Z-index 覆蓋層問題</h3>
           </div>
-          <p class="text-warmgray/70 text-sm leading-relaxed mb-4">
-            偵測到固定定位元素 <code class="bg-gray-100 px-1 rounded text-xs">z-index: 2147483646</code>（接近 32-bit 整數最大值）覆蓋整個頁面，阻擋所有按鈕點擊（含 CTA）。可能是第三方腳本注入。
-          </p>
-          <div class="bg-gray-50 rounded-xl p-5">
-            <p class="font-medium text-sm mb-2">修正步驟：</p>
-            <ol class="text-sm text-warmgray/70 space-y-1.5 list-decimal list-inside">
-              <li>DevTools 搜尋 <code class="bg-gray-100 px-1 rounded text-xs">z-index: 2147483646</code>，定位來源</li>
-              <li>檢查第三方腳本（analytics、chat widget、cookie banner）</li>
-              <li>移除或調整 z-index</li>
-            </ol>
+          <div class="callout-success rounded-xl p-5">
+            <p class="text-sage text-sm"><strong>複測結果（2026-04-06）：</strong>該 <code class="bg-white/60 px-1 rounded text-xs">z-index: 2147483646</code> 元素實為 Chrome 擴充套件「Claude in Chrome」注入的發光邊框（<code class="bg-white/60 px-1 rounded text-xs">#claude-agent-glow-border</code>），並非網站本身的元素。且該元素 <code class="bg-white/60 px-1 rounded text-xs">pointerEvents: none; opacity: 0</code>，不影響任何使用者互動。</p>
+            <p class="text-warmgray/50 text-xs mt-2">非網站問題，無需修復。</p>
           </div>
         </div>
 
@@ -713,8 +699,8 @@
               </tr>
             </thead>
             <tbody class="text-warmgray/70">
-              <tr class="border-b border-warmgray/5"><td class="py-2.5 pr-4 font-medium text-warmgray">移除 z-index 覆蓋層</td><td class="py-2.5 pr-4"><span class="badge-p0 px-2 py-0.5 rounded text-xs">P0</span></td><td class="py-2.5 pr-4">1h</td><td class="py-2.5">找到並移除 z-index: 2147483646</td></tr>
-              <tr class="border-b border-warmgray/5"><td class="py-2.5 pr-4 font-medium text-warmgray">修復滾動動畫</td><td class="py-2.5 pr-4"><span class="badge-p0 px-2 py-0.5 rounded text-xs">P0</span></td><td class="py-2.5 pr-4">2-4h</td><td class="py-2.5">重寫 Observer 或移除動畫</td></tr>
+              <tr class="border-b border-warmgray/5 opacity-40"><td class="py-2.5 pr-4 font-medium text-warmgray line-through">移除 z-index 覆蓋層</td><td class="py-2.5 pr-4"><span class="bg-sagelight text-sage px-2 py-0.5 rounded text-xs">已排除</span></td><td class="py-2.5 pr-4">—</td><td class="py-2.5">Chrome 擴充套件造成，非網站問題</td></tr>
+              <tr class="border-b border-warmgray/5 opacity-40"><td class="py-2.5 pr-4 font-medium text-warmgray line-through">修復滾動動畫</td><td class="py-2.5 pr-4"><span class="bg-sagelight text-sage px-2 py-0.5 rounded text-xs">已排除</span></td><td class="py-2.5 pr-4">—</td><td class="py-2.5">複測正常，為自動化工具問題</td></tr>
               <tr class="border-b border-warmgray/5"><td class="py-2.5 pr-4 font-medium text-warmgray">修正截斷 / 拼字 / 重複</td><td class="py-2.5 pr-4"><span class="badge-p0 px-2 py-0.5 rounded text-xs">P0</span></td><td class="py-2.5 pr-4">1h</td><td class="py-2.5">三個內容 bug 一次修完</td></tr>
               <tr class="border-b border-warmgray/5"><td class="py-2.5 pr-4 font-medium text-warmgray">新版免費頁面</td><td class="py-2.5 pr-4"><span class="badge-p1 px-2 py-0.5 rounded text-xs">P1</span></td><td class="py-2.5 pr-4">2-3 天</td><td class="py-2.5">依 free.html 原型實作</td></tr>
               <tr class="border-b border-warmgray/5"><td class="py-2.5 pr-4 font-medium text-warmgray">Action Insight 區塊</td><td class="py-2.5 pr-4"><span class="badge-p1 px-2 py-0.5 rounded text-xs">P1</span></td><td class="py-2.5 pr-4">1-2 天</td><td class="py-2.5">每個解讀末尾新增</td></tr>
@@ -781,8 +767,8 @@
           </div>
           <div class="space-y-2 pl-2">
             <label class="flex items-start gap-3 text-sm"><input type="checkbox" class="mt-1 accent-red"><span>移除 Email 驗證碼流程（改為付款時收集）</span></label>
-            <label class="flex items-start gap-3 text-sm"><input type="checkbox" class="mt-1 accent-red"><span>修復滾動動畫 bug（確保所有內容區塊可見）</span></label>
-            <label class="flex items-start gap-3 text-sm"><input type="checkbox" class="mt-1 accent-red"><span>修復 z-index 覆蓋層（移除阻擋互動的固定元素）</span></label>
+            <label class="flex items-start gap-3 text-sm text-warmgray/30 line-through"><input type="checkbox" class="mt-1" checked disabled><span>修復滾動動畫 bug → 已排除（非網站問題）</span></label>
+            <label class="flex items-start gap-3 text-sm text-warmgray/30 line-through"><input type="checkbox" class="mt-1" checked disabled><span>修復 z-index 覆蓋層 → 已排除（Chrome 擴充套件造成）</span></label>
             <label class="flex items-start gap-3 text-sm"><input type="checkbox" class="mt-1 accent-red"><span>修正「FRUSTRATI」截斷 / 「engery」拼字 / S.L. 重複</span></label>
           </div>
         </div>
